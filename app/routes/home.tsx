@@ -9,8 +9,8 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <>
-      <h1>This is the Home Page</h1>
-    </>
+    <div>
+      <div className="bg-[url('https://kitchengurus.imgix.net/kitchen-remodeling.png')] bg-cover bg-no-repeat bg-center h-[60vh]" />
+    </div>
   );
 }
