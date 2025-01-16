@@ -1,44 +1,29 @@
+import { useState } from "react";
 import { Link, Outlet } from "react-router";
-
-const navLinks = [
-  {
-    route: '/',
-    text: 'Home'
-  },
-  {
-    route: '/about',
-    text: 'About Us'
-  },
-  {
-    route: '/contact',
-    text: 'Contact Us'
-  }
-];
+import { FaTimes, FaBars } from "react-icons/fa"
+import Header from "~/components/Header";
 
 export default function MainLayout() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsOpen(prev => !prev)
+  }
+
   return (
     <div className="h-full min-h-full flex flex-col">
-      <header className="flex items-center justify-around bg-[#51A655]">
-        <div className="w-10/12 flex justify-around items-center">
-          <div className="p-2 min-w-28 max-w-60 max-h-32">
-            <Link to="/">
-            {/* TODO: replace with kitchen gurus logo */}
-              <img
-                src="/kitchen-gurus-logo.png"
-                alt="Placeholder image"
-                className="block w-full dark:block"
-              />
-            </Link>
+      <header  className=" flex items-center justify-between md:px-10 relative bg-[#51A655] text-white"
+      >
+        <div className="w-full flex justify-around items-center">
+          <Header 
+            isOpen={isOpen} 
+            toggleMenu={toggleMenu} 
+          />
+          <div className="flex items-center gap-4 md:hidden">
+            <button onClick={toggleMenu}>
+              {isOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
+            </button>
           </div>
-          <nav className="[&>*]:font-['Manrope'] [&>*]:px-6 font-semibold flex grow">
-            <ul className="flex justify-evenly grow">
-              {navLinks.map(({ route, text }) => (
-                <li>
-                  <Link to={route} className="text-white">{text}</Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
         </div>
       </header>
       <main className="flex-[1]">
@@ -48,10 +33,9 @@ export default function MainLayout() {
         <div className="w-10/12 text-white m-auto">
           <div className="p-6 flex min-w-28 max-w-60 max-h-32">
             <Link to="/">
-              {/* TODO: replace with kitchen gurus logo */}
               <img
                 src="/kitchen-gurus-logo.png"
-                alt="Placeholder image"
+                alt="Kitchen Gurus logo"
                 className="block w-full dark:block"
               />
             </Link>
