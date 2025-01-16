@@ -9,10 +9,10 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <div>
+    <section>
       <div className="bg-[url('https://kitchengurus.imgix.net/kitchen-remodeling.png')] bg-cover bg-no-repeat bg-center h-[60vh] relative overflow-hidden">
         <div className="bg-[#F98500] w-7/12 h-full absolute -right-[14%] skew-x-[20deg] opacity-50 content=['']" />
       </div>
-    </div>
+    </section>
   );
 }
