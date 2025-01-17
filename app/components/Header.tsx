@@ -39,7 +39,7 @@ export default function Header({ clickRef, isOpen, toggleMenu }: Props) {
         </Link>
       </div>
       <nav
-        className={`absolute left-0 top-24 w-full bg-[#51A655] px-4 py-6 font-semibold md:static md:w-1/2 md:justify-end md:px-0 [&>*]:font-['Manrope'] ${isOpen ? 'flex' : 'hidden'} z-10 md:flex`}
+        className={`absolute left-0 top-24 w-full bg-[#51A655] px-4 py-2 font-semibold md:static md:w-1/2 md:justify-end md:px-0 [&>*]:font-['Manrope'] ${isOpen ? 'flex' : 'hidden'} z-10 md:flex`}
         ref={clickRef}
       >
         <ul
