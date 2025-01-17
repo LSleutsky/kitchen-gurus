@@ -5,22 +5,26 @@ interface Props {
   toggleMenu?: () => void;
 }
 
-export default function Header({ isOpen, toggleMenu }: Props) {
-  const navLinks = [
-    {
-      route: '/',
-      text: 'Home'
-    },
-    {
-      route: '/about',
-      text: 'About Us'
-    },
-    {
-      route: '/contact',
-      text: 'Contact Us'
-    }
-  ];
+const navLinks = [
+  {
+    route: '/',
+    text: 'Home'
+  },
+  {
+    route: '/gallery',
+    text: 'Gallery'
+  },
+  {
+    route: '/about',
+    text: 'About Us'
+  },
+  {
+    route: '/contact',
+    text: 'Contact Us'
+  }
+];
 
+export default function Header({ isOpen, toggleMenu }: Props) {
   return (
     <>
       <div className="p-2 min-w-28 max-w-60 max-h-32">
