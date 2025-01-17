@@ -4,11 +4,8 @@ import { FaTimes, FaBars } from "react-icons/fa"
 import Header from "~/components/Header";
 
 export default function MainLayout() {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const toggleMenu = () => {
-    setIsOpen(prev => !prev)
-  }
+  const [isNavBarOpen, setIsNavBarOpen] = useState(false);
+  const toggleMenu = () => setIsNavBarOpen(prev => !prev);
 
   return (
     <div className="h-full min-h-full flex flex-col">
@@ -16,12 +13,12 @@ export default function MainLayout() {
       >
         <div className="w-full flex justify-around items-center">
           <Header 
-            isOpen={isOpen} 
+            isOpen={isNavBarOpen} 
             toggleMenu={toggleMenu} 
           />
           <div className="flex items-center gap-4 md:hidden">
             <button onClick={toggleMenu}>
-              {isOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
+              {isNavBarOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
             </button>
           </div>
         </div>
