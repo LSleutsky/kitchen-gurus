@@ -1,9 +1,9 @@
-import type { Route } from "./+types/home";
+import type { Route } from './+types/home';
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Contact Us | Kitchen Gurus" },
-    { name: "description", content: "Contact Kitchen Gurus" },
+    { title: 'Contact Us | Kitchen Gurus' },
+    { name: 'description', content: 'Contact Kitchen Gurus' },
   ];
 }
 
