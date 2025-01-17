@@ -9,18 +9,22 @@ export function meta({}: Route.MetaArgs) {
 
 const imageSources = [
   {
+    id: 1,
     src: '/public/some-image-1',
     alt: 'Some alt text placeholder',
   },
   {
+    id: 2,
     src: '/public/some-image-2',
     alt: 'Some alt text placeholder',
   },
   {
+    id: 3,
     src: '/public/some-image-3',
     alt: 'Some alt text placeholder',
   },
   {
+    id: 4,
     src: '/public/some-image-4',
     alt: 'Some alt text placeholder',
   },
@@ -33,8 +37,8 @@ export default function Gallery() {
         Explore our Gallery for a taste of our remodeling excellence
       </h1>
       <section className='grid gap-4 p-5 md:grid-cols-2 lg:grid-cols-4'>
-        {imageSources.map(({ alt, src }) => (
-          <figure className='h-[200px] bg-[#F98500]'>
+        {imageSources.map(({ alt, id, src }) => (
+          <figure key={id} className='h-[200px] bg-[#F98500]'>
             <img alt={alt} src={src} />
           </figure>
         ))}
