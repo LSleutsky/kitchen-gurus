@@ -8,9 +8,9 @@ export default function MainLayout() {
   const toggleMenu = () => setIsNavBarOpen(prev => !prev);
 
   return (
-    <div className='h-full min-h-full flex flex-col'>
-      <header className=' flex items-center justify-between md:px-10 relative bg-[#51A655] text-white'>
-        <div className='w-full flex justify-around items-center'>
+    <div className='flex h-full min-h-full flex-col'>
+      <header className='relative flex items-center justify-between bg-[#51A655] text-white md:px-10'>
+        <div className='flex w-full items-center justify-around'>
           <Header isOpen={isNavBarOpen} toggleMenu={toggleMenu} />
           <div className='flex items-center gap-4 md:hidden'>
             <button onClick={toggleMenu}>
@@ -22,9 +22,9 @@ export default function MainLayout() {
       <main className='flex-[1]'>
         <Outlet />
       </main>
-      <footer className='bg-[#51A655] w-full'>
-        <div className='w-10/12 text-white m-auto'>
-          <div className='p-6 flex min-w-28 max-w-60 max-h-32'>
+      <footer className='w-full bg-[#51A655]'>
+        <div className='m-auto w-10/12 text-white'>
+          <div className='flex max-h-32 min-w-28 max-w-60 p-6'>
             <Link to='/'>
               <img
                 src='/kitchen-gurus-logo.png'

@@ -29,12 +29,12 @@ const imageSources = [
 export default function Gallery() {
   return (
     <>
-      <h1 className='text-center pt-5 text-2xl font-semibold'>
+      <h1 className='pt-5 text-center text-2xl font-semibold'>
         Explore our Gallery for a taste of our remodeling excellence
       </h1>
-      <section className='grid gap-4 md:grid-cols-2 lg:grid-cols-4 p-5'>
+      <section className='grid gap-4 p-5 md:grid-cols-2 lg:grid-cols-4'>
         {imageSources.map(({ alt, src }) => (
-          <figure className='bg-[#F98500] h-[200px]'>
+          <figure className='h-[200px] bg-[#F98500]'>
             <img alt={alt} src={src} />
           </figure>
         ))}

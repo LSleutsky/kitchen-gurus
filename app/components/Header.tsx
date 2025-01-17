@@ -27,7 +27,7 @@ const navLinks = [
 export default function Header({ isOpen, toggleMenu }: Props) {
   return (
     <>
-      <div className='p-2 min-w-28 max-w-60 max-h-32'>
+      <div className='max-h-32 min-w-28 max-w-60 p-2'>
         <Link to='/'>
           <img
             src='/kitchen-gurus-logo.png'
@@ -37,25 +37,19 @@ export default function Header({ isOpen, toggleMenu }: Props) {
         </Link>
       </div>
       <nav
-        className={`
-          [&>*]:font-['Manrope'] font-semibold bg-[#51A655] w-full md:w-1/2 px-4 py-6 md:px-0 md:justify-end absolute md:static top-24 left-0
-          ${isOpen ? 'flex' : 'hidden'} md:flex z-10`}
+        className={`absolute left-0 top-24 w-full bg-[#51A655] px-4 py-6 font-semibold md:static md:w-1/2 md:justify-end md:px-0 [&>*]:font-['Manrope'] ${isOpen ? 'flex' : 'hidden'} z-10 md:flex`}
       >
         <ul
           aria-labelledby='nav-links'
-          className='flex flex-col md:flex-row gap-6 w-full pt-2.5 border-t border-solid border-[#F98500] md:border-0 justify-around'
+          className='flex w-full flex-col justify-around gap-6 border-t border-solid border-[#F98500] pt-2.5 md:flex-row md:border-0'
           role='menu'
         >
           {navLinks.map(({ route, text }) => (
             <li
-              className='w-full text-center py-1.5 hover:bg-[#F98500] md:hover:bg-[transparent]'
+              className='w-full py-1.5 text-center hover:bg-[#F98500] md:hover:bg-[transparent]'
               role='menuitem'
             >
-              <NavLink
-                className='text-white inline-block w-full'
-                onClick={toggleMenu}
-                to={route}
-              >
+              <NavLink className='inline-block w-full text-white' onClick={toggleMenu} to={route}>
                 {text}
               </NavLink>
             </li>
