@@ -1,7 +1,8 @@
 import { Link, NavLink } from 'react-router';
+import Logo from './Logo';
 
 interface Props {
-  clickRef: any,
+  clickRef: any;
   isOpen: boolean;
   toggleMenu: () => void;
 }
@@ -28,23 +29,14 @@ const navLinks = [
 export default function Header({ clickRef, isOpen, toggleMenu }: Props) {
   return (
     <>
-      <div className='max-h-32 min-w-28 max-w-60 p-2'>
-        <Link onClick={toggleMenu} to='/'>
-          <img
-            src='/kitchen-gurus-logo.png'
-            alt='Kitchen Gurus logo'
-            className='block w-full dark:block'
-            onClick={toggleMenu}
-          />
-        </Link>
-      </div>
+      <Logo action={toggleMenu} alt='Kitchen Gurus logo' src='/kitchen-gurus-logo.png' />
       <nav
         className={`absolute left-0 top-24 w-full bg-[#51A655] px-4 py-2 font-semibold md:static md:w-1/2 md:justify-end md:px-0 [&>*]:font-['Manrope'] ${isOpen ? 'flex' : 'hidden'} z-10 md:flex`}
         ref={clickRef}
       >
         <ul
           aria-labelledby='nav-links'
-          className='flex w-full flex-col justify-around gap-6 border-t border-solid border-[#F98500] pt-2.5 md:flex-row md:border-0'
+          className='flex w-full flex-col justify-around gap-4 border-t border-solid border-[#F98500] pt-2.5 md:flex-row md:border-0'
           role='menu'
         >
           {navLinks.map(({ route, text }) => (
