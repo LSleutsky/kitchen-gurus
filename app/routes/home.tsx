@@ -22,7 +22,7 @@ export default function Home() {
         <div className="content=[''] absolute h-full w-full bg-black opacity-60" />
         <div className="content=[''] absolute -right-[24%] h-full w-7/12 skew-x-[20deg] bg-[#F98500] opacity-50 md:-right-[14%]" />
       </div>
-      <section className="">
+      <section>
         <h1 className="py-4 text-center text-2xl font-semibold bg-[#F7F7F7]">A Unique Kitchen Remodeling Experience</h1>
         <article className="flex flex-col md:flex-row justify-end items-center">
           <div className="flex flex-col flex-1 justify-evenly py-4">
@@ -42,7 +42,7 @@ export default function Home() {
               </p>
               <p className="leading-8 px-6 font-['Open_Sans'] font-light text-lg mt-6">
                 {/* TODO: Update with actual Kitchen Gurus phone number */}
-                Feel free to give us a call at <a className="text-[#F98500]" href="tel:1-800-555-6666">1-800-555-6666</a> and
+                Feel free to give us a call at <Link className="text-[#F98500]" to="tel:1-800-555-6666">1-800-555-6666</Link> and
                 tell us your ideas, or visit our <Link className="text-[#F98500]" to="/gallery"> gallery</Link> to get your own
                 inspiration from some awesome projects!
               </p>
