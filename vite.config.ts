@@ -5,10 +5,13 @@ import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+  build: {
+    sourcemap: true
+  },
   css: {
     postcss: {
-      plugins: [tailwindcss, autoprefixer],
-    },
+      plugins: [tailwindcss, autoprefixer]
+    }
   },
-  plugins: [reactRouter(), tsconfigPaths()],
+  plugins: [reactRouter(), tsconfigPaths()]
 });

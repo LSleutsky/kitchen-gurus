@@ -10,22 +10,22 @@ export function meta({}: Route.MetaArgs) {
 const imageSources = [
   {
     id: 1,
-    src: '/public/some-image-1',
+    src: '/some-image-1',
     alt: 'Some alt text placeholder',
   },
   {
     id: 2,
-    src: '/public/some-image-2',
+    src: '/some-image-2',
     alt: 'Some alt text placeholder',
   },
   {
     id: 3,
-    src: '/public/some-image-3',
+    src: '/some-image-3',
     alt: 'Some alt text placeholder',
   },
   {
     id: 4,
-    src: '/public/some-image-4',
+    src: '/some-image-4',
     alt: 'Some alt text placeholder',
   },
 ];

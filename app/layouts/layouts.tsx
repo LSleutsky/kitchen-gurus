@@ -1,14 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
 import { FaTimes, FaBars } from 'react-icons/fa';
 import Header from '~/components/Header';
 import Logo from '~/components/Logo';
 import { useClickOutside } from '~/hooks/useClickOutside';
+import { getUserLocation } from '~/utils';
 
 export default function MainLayout() {
-  const [isNavBarOpen, setIsNavBarOpen] = useState(false);
+  const [isNavBarOpen, setIsNavBarOpen] = useState<boolean>(false);
+  const [userLocationData, setUserLocationData] = useState<any>({});
   const toggleMenu = () => setIsNavBarOpen(prev => !prev);
   const clickRef = useClickOutside(() => setIsNavBarOpen(false));
+
+  useEffect(() => {
+    (async () => {
+      const userLocation = await getUserLocation();
+
+      setUserLocationData(userLocation)
+    })();
+  }, []);
 
   return (
     <div className='flex h-full min-h-full flex-col'>
@@ -23,7 +33,7 @@ export default function MainLayout() {
         </div>
       </header>
       <main className='flex-[1]'>
-        <Outlet />
+        <Outlet context={userLocationData} />
       </main>
       <footer className='w-full bg-[#51A655]'>
         <div className='m-auto text-white'>
