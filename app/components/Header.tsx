@@ -17,6 +17,10 @@ const navLinks = [
     text: 'Gallery',
   },
   {
+    route: '/',
+    text: 'Other Services',
+  },
+  {
     route: '/about',
     text: 'About Us',
   },
@@ -31,7 +35,7 @@ export default function Header({ clickRef, isOpen, toggleMenu }: Props) {
     <>
       <Logo action={toggleMenu} alt='Kitchen Gurus logo' src='/kitchen-gurus-logo.png' />
       <nav
-        className={`absolute left-0 top-24 w-full bg-[#51A655] px-4 py-2 font-semibold md:static md:w-1/2 md:justify-end md:px-0 [&>*]:font-['Manrope'] ${isOpen ? 'flex' : 'hidden'} z-10 md:flex`}
+        className={`absolute left-0 top-24 w-full bg-[#51A655] mr-3 px-4 py-2 font-semibold md:static md:w-1/2 md:justify-end md:px-0 [&>*]:font-['Manrope'] ${isOpen ? 'flex' : 'hidden'} z-10 md:flex`}
         ref={clickRef}
       >
         <ul

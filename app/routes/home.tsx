@@ -1,5 +1,6 @@
 import type { Route } from './+types/home';
 import { Link } from 'react-router';
+import Button from '~/components/Button';
 import { displayLocation, getImageParameters } from '~/utils';
 
 export function meta({}: Route.MetaArgs) {
@@ -16,12 +17,12 @@ export default function Home() {
     <section>
       <article className="flex flex-col md:flex-row justify-end items-center">
         <div className="flex flex-col flex-1 justify-evenly py-4">
-          <div className="flex flex-col px-8 py-4 [&>*]:text-center [&>*]:md:text-left">
-            <h1 className="px-6 pb-12 text-4xl font-['Open_Sans'] font-semibold">Dream Kitchens</h1>
+          <div className="flex flex-col [&>*]:text-center [&>*]:md:text-left">
+            <h1 className="px-6 pt-4 pb-8 text-4xl font-['Open_Sans'] font-semibold">Dream Kitchens</h1>
             <p className="leading-8 px-6 font-['Open_Sans'] font-light text-lg">
-              {`Kitchen Gurus is one of the leading companies for kitchen remodeling needs in ${displayLocation()}. We will
-              professionally and responsibly complete all your kitchen makeover alterations, and be there every step of the
-              way in providing you with stunning and affordable results. From cabinets to marble, granite, and/or quartz
+              {`Kitchen Gurus is one of the leading companies for kitchen remodeling needs in ${displayLocation(true)}. We will
+              professionally and responsibly complete all of your kitchen makeover alterations, and be there every step of
+              the way in providing you with stunning and affordable results. From cabinets to marble, granite, and/or quartz
               countertops, to flooring and lighting, our experts will precisely craft a beautiful and functional room that
               you'll never want to leave!`}
             </p>
@@ -32,13 +33,11 @@ export default function Home() {
             </p>
             <p className="leading-8 px-6 font-['Open_Sans'] font-light text-lg mt-6">
               {/* TODO: Update with actual Kitchen Gurus phone number */}
-              Feel free to give us a call at <Link className="text-[#F98500]" to="tel:1-800-555-6666">1-800-555-6666</Link> and
-              tell us your ideas, or visit our <Link className="text-[#F98500]" to="/gallery"> gallery</Link> to get your own
-              inspiration from some awesome projects!
+              Feel free to give us a call at <Link className="text-[#F98500]" to="tel:1-800-555-6666">1-800-555-6666</Link> for
+              a 100% free consultation, or visit our <Link className="text-[#F98500]" to="/gallery"> gallery</Link> first to
+              get inspiration from some awesome projects which can quickly become a reality!
             </p>
-            <button className="mx-6 mt-10 p-4 self-center md:self-start border-2 border-[#F98500] w-max bg-[#F98500] hover:bg-transparent">
-              Get Free Estimate
-            </button>
+            <Button className="self-center md:self-start" text="Get Free Estimate" />
           </div>
         </div>
         <figure className="flex flex-1 self-stretch">

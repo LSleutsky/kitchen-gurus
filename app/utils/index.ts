@@ -2,13 +2,15 @@ import { useOutletContext } from 'react-router';
 
 /**
  * Gets a user's city and state location data, or uses a default
+ * 
+ * @param {boolean} showState Show current location state
  *
  * @returns {string} The current user's location details
  * 
  * @example
  *    'Philadelphia, Pennsylvania'
  */
-export const displayLocation = () => {
+export const displayLocation = (showState?: boolean) => {
   interface UserLocationData {
     city: string;
     stateProv: string;
@@ -26,7 +28,7 @@ export const displayLocation = () => {
     case 'MD':
     case 'NJ':
     case 'PA':
-      return `${formattedCity}, ${stateProv}`;
+      return `${formattedCity}${showState ? `, ${stateProv}` : ''}`;
     default:
       return 'your area';
   }
