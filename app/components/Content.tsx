@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { useWindowSize } from '~/hooks/useWindowSize';
+import { useWindowSize } from "~/hooks/useWindowSize";
 
 interface Props {
   contentReverse?: boolean;
@@ -8,7 +8,7 @@ interface Props {
   heading: string;
   imageAlt: string;
   imageUrl: string;
-  mainContent: any;
+  mainContent: Array<any>;
 }
 
 export default function Content({ contentReverse, cta, ctaText, heading, imageAlt, imageUrl, mainContent }: Props) {

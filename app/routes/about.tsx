@@ -12,7 +12,9 @@ export function meta({}: Route.MetaArgs) {
 export default function About() {
   return (
     <>
-      <h1>This is the About Page</h1>
+      <section className="p-4 font-['Open_Sans']">
+        <h1>This is the About Page</h1>
+      </section>
       <section className="flex flex-col items-center bg-[#F7F7F7] p-8">
         <span className="pb-5">
           {Array.from({ length: 5 }).map((_, index: number) => (

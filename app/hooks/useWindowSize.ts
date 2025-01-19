@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface WindowSize {
   width: number;
@@ -12,12 +12,10 @@ export const useWindowSize = (): WindowSize => {
   });
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
+    const handleResize = () => setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
 
     window.addEventListener('resize', handleResize);
 

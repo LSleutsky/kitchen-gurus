@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
-import { FaTimes, FaBars } from 'react-icons/fa';
+import { FaBars, FaRegCopyright, FaTimes } from 'react-icons/fa';
 import Banner from '~/components/Banner';
 import Header from '~/components/Header';
 import Logo from '~/components/Logo';
@@ -38,8 +38,12 @@ export default function MainLayout() {
         <Outlet context={userLocationData} />
       </main>
       <footer className='w-full bg-[#51A655]'>
-        <div className='m-auto text-white'>
+        <div className="flex justify-center md:justify-start text-white">
           <Logo alt='Kitchen Gurus logo' src='/kitchen-gurus-logo.png' />
+        </div>
+        <div className="flex justify-center md:justify-start items-center bg-black p-4 text-sm">
+          <FaRegCopyright className="inline-block text-white mr-1" size={12} />
+          <span className="text-white font-['Open_Sans']">{new Date().getFullYear()} Kitchen Gurus | All Rights Reserved</span>
         </div>
       </footer>
     </div>

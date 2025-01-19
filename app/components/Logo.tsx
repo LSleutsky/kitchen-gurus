@@ -8,7 +8,7 @@ interface Props {
 
 export default function Logo({ action, alt, src }: Props) {
   return (
-    <div className='max-h-32 min-w-28 max-w-60 p-2'>
+    <div className='max-h-32 min-w-28 max-w-60 py-2'>
       <Link onClick={action} to='/'>
         <img
           className='block w-full dark:block'
