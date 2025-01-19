@@ -1,5 +1,5 @@
 import type { Route } from './+types/home';
-import { FaStar } from "react-icons/fa";
+import StarIcon from '@mui/icons-material/Star';
 import Button from '~/components/Button';
 
 export function meta({}: Route.MetaArgs) {
@@ -18,7 +18,7 @@ export default function About() {
       <section className="flex flex-col items-center bg-[#F7F7F7] p-8">
         <span className="pb-5">
           {Array.from({ length: 5 }).map((_, index: number) => (
-            <FaStar key={index} className="inline-block m-auto ml-2 text-[#F7C400]" size={22} />
+            <StarIcon className="inline-block m-auto ml-2 text-[#F7C400]" fontSize="large" />
           ))}
         </span>
         <h1 className="text-center text-4xl font-['Open_Sans'] font-semibold">Trusted By Many</h1>

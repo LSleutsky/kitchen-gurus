@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
-import { FaBars, FaRegCopyright, FaTimes } from 'react-icons/fa';
+import CloseIcon from '@mui/icons-material/Close';
+import CopyrightIcon from '@mui/icons-material/Copyright';
+import MenuIcon from '@mui/icons-material/Menu';
 import Banner from '~/components/Banner';
 import Header from '~/components/Header';
 import Logo from '~/components/Logo';
@@ -28,7 +30,7 @@ export default function MainLayout() {
           <Header clickRef={clickRef} isOpen={isNavBarOpen} toggleMenu={toggleMenu} />
           <div className='flex items-center gap-4 md:hidden pr-8'>
             <button onClick={toggleMenu}>
-              {isNavBarOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
+              {isNavBarOpen ? <CloseIcon fontSize="large" /> : <MenuIcon fontSize="large" />}
             </button>
           </div>
         </div>
@@ -42,8 +44,9 @@ export default function MainLayout() {
           <Logo alt='Kitchen Gurus logo' src='/kitchen-gurus-logo.png' />
         </div>
         <div className="flex justify-center md:justify-start items-center bg-black p-6 text-sm">
-          <FaRegCopyright className="inline-block text-white mr-1" size={12} />
-          <span className="text-white font-['Open_Sans']">{new Date().getFullYear()} Kitchen Gurus | All Rights Reserved</span>
+          {/* <FaRegCopyright className="inline-block text-white mr-1" size={12} /> */}
+          <CopyrightIcon fontSize="small" />
+          <span className="text-white font-['Open_Sans'] ml-0.5">{new Date().getFullYear()} Kitchen Gurus | All Rights Reserved</span>
         </div>
       </footer>
     </div>
