@@ -41,7 +41,7 @@ export default function MainLayout() {
         <div className="flex justify-center md:justify-start text-white">
           <Logo alt='Kitchen Gurus logo' src='/kitchen-gurus-logo.png' />
         </div>
-        <div className="flex justify-center md:justify-start items-center bg-black p-4 text-sm">
+        <div className="flex justify-center md:justify-start items-center bg-black p-6 text-sm">
           <FaRegCopyright className="inline-block text-white mr-1" size={12} />
           <span className="text-white font-['Open_Sans']">{new Date().getFullYear()} Kitchen Gurus | All Rights Reserved</span>
         </div>
