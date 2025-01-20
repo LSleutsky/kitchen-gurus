@@ -57,7 +57,7 @@ export default function Banner() {
             url="https://www.yelp.com/biz/basement-gurus-philadelphia#reviews"
           />
           <Reviews
-            className="pt-3.5"
+            className="pt-5"
             imgAlt="Angi Reviews logo"
             imgSrc="/angi-reviews.png"
             review="Great! We are very happy with Phil Thistle and his team at Basement Gurus. They were very professional and
