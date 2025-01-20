@@ -1,12 +1,9 @@
-import type { Route } from './+types/home';
-import StarIcon from '@mui/icons-material/Star';
-import Button from '~/components/Button';
+import type { Route } from "./+types/home";
+import StarIcon from "@mui/icons-material/Star";
+import Button from "~/components/Button";
 
 export function meta({}: Route.MetaArgs) {
-  return [
-    { title: 'About Us | Kitchen Gurus' },
-    { name: 'description', content: 'About Kitchen Gurus' },
-  ];
+  return [{ title: "About Us | Kitchen Gurus" }, { name: "description", content: "About Kitchen Gurus" }];
 }
 
 export default function About() {
@@ -18,14 +15,14 @@ export default function About() {
       <section className="flex flex-col items-center bg-[#F7F7F7] p-8">
         <span className="pb-5">
           {Array.from({ length: 5 }).map((_, index: number) => (
-            <StarIcon className="inline-block m-auto ml-2 text-[#F7C400]" fontSize="large" />
+            <StarIcon className="m-auto ml-2 inline-block text-[#F7C400]" fontSize="large" />
           ))}
         </span>
-        <h1 className="text-center text-4xl font-['Open_Sans'] font-semibold">Trusted By Many</h1>
-        <p className="leading-8 font-['Open_Sans'] text-lg text-center font-light mt-5">
+        <h1 className="text-center font-['Open_Sans'] text-4xl font-semibold">Trusted By Many</h1>
+        <p className="mt-5 text-center font-['Open_Sans'] text-lg font-light leading-8">
           Our expert technicians have successfully and seamlessly completed thousands of renovations on time and within
-          budgets. We guarantee 100% customer satisfaction by going above and beyond in ensuring that each project exceeds
-          our client's expectations.
+          budgets. We guarantee 100% customer satisfaction by going above and beyond in ensuring that each project
+          exceeds our client's expectations.
         </p>
         <Button className="mt-6 p-4" text="Get a Free Consultation" />
       </section>

@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { startCase, upperFirst } from 'es-toolkit/string';
-import Button from './Button';
-import Container from '@mui/material/Container';
-import FormControl from '@mui/material/FormControl';
+import { useState } from "react";
+import { startCase, upperFirst } from "es-toolkit/string";
+import Button from "./Button";
+import Container from "@mui/material/Container";
+import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 
 interface ContactDetails {
@@ -19,16 +19,33 @@ export default function Contact() {
     targetSpouseName: false,
     targetLastName: false,
     targetEmail: false,
-    targetComments: false
-  })
+    targetComments: false,
+  });
 
   const [contactDetails, setContactDetails] = useState<ContactDetails>({
-    firstName: '',
-    spouseName: '',
-    lastName: '',
-    email: '',
-    comments: ''
+    firstName: "",
+    spouseName: "",
+    lastName: "",
+    email: "",
+    comments: "",
   });
+
+  const clearFormValues = () =>
+    setContactDetails({
+      firstName: "",
+      spouseName: "",
+      lastName: "",
+      email: "",
+      comments: "",
+    });
+
+  const formattedInputTargetLiteral = (name: string) => `target${upperFirst(`'${name}'`)}`;
+
+  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setContactDetails({
+      ...contactDetails,
+      [event.target.name]: event.target.value,
+    });
 
   const textfieldLabelBlur = (event: React.FocusEvent<HTMLInputElement>) =>
     setShrinkOnInputEventTarget(
@@ -37,51 +54,40 @@ export default function Contact() {
 
   const textfieldLabelFocus = (event: React.FocusEvent<HTMLInputElement>) =>
     setShrinkOnInputEventTarget(
-      Object.keys(shrinkOnInputEventTarget).map((target: string) => ({ target: event.target.name === target }))
+      Object.keys(shrinkOnInputEventTarget).map((inputTarget: string) => event.target.name === inputTarget)
     );
-
-  const clearFormValues = () =>
-    setContactDetails({
-      firstName: '',
-      spouseName: '',
-      lastName: '',
-      email: '',
-      comments: ''
-    })
-
-  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setContactDetails({
-      ...contactDetails,
-      [event.target.name]: event.target.value
-    });
-
-  const formattedInputTargetLiteral = (name: string) =>`target${upperFirst(`'${name}'`)}`
 
   return (
     <Container>
       <FormControl fullWidth className="[&>*]:my-2" component="form">
-        {Object.keys(contactDetails).map(key => 
+        {Object.keys(contactDetails).map(key => (
           <TextField
             key={key}
             fullWidth
-            required={key === 'firstName' || key === 'lastName'}
+            required={key === "firstName" || key === "lastName"}
             label={startCase(key)}
-            multiline={key === 'comments'}
-            minRows="3" // if multiline attribute is true (for comments textarea)
+            multiline={key === "comments"}
+            minRows="3" // for comments textarea - doesn't affect other non-multiline text fields
             name={key}
             onBlur={textfieldLabelBlur}
             onChange={setFormValues}
             onFocus={textfieldLabelFocus}
             slotProps={{
               inputLabel: {
-                shrink: !!contactDetails[key] || shrinkOnInputEventTarget[formattedInputTargetLiteral(key)]
-              }
+                shrink: !!contactDetails[key] || shrinkOnInputEventTarget[formattedInputTargetLiteral(key)],
+              },
+            }}
+            sx={{
+              "& .MuiInputBase-root": {
+                "border-radius": "0",
+                "font-family": "Open Sans",
+              },
             }}
             value={contactDetails[key]}
             variant="outlined"
           />
-        )}
-        <Button className="p-4 px-10" text="Reset" onClick={clearFormValues}/>
+        ))}
+        <Button className="p-4 px-10" text="Reset" onClick={clearFormValues} />
       </FormControl>
     </Container>
   );
