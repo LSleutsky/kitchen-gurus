@@ -29,7 +29,7 @@ export default function Content({ contentReverse, cta, ctaText, heading, imageAl
               {content}
             </p>
           ))}
-          {cta && <Button className="self-center md:self-start" text={ctaText} />}
+          {cta && <Button className="mx-4 mt-10 p-4 self-center md:self-start" text={ctaText} />}
         </div>
       </div>
       <figure className="flex flex-1 self-stretch">

@@ -27,7 +27,7 @@ export default function About() {
           budgets. We guarantee 100% customer satisfaction by going above and beyond in ensuring that each project exceeds
           our client's expectations.
         </p>
-        <Button text="Get a Free Consultation" />
+        <Button className="mt-6 p-4" text="Get a Free Consultation" />
       </section>
     </>
   );

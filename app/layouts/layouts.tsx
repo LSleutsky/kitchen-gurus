@@ -11,7 +11,7 @@ import { getUserLocation } from '~/utils';
 
 export default function MainLayout() {
   const [isNavBarOpen, setIsNavBarOpen] = useState<boolean>(false);
-  const [userLocationData, setUserLocationData] = useState<any>({});
+  const [userLocationData, setUserLocationData] = useState<Object>({});
   const toggleMenu = () => setIsNavBarOpen(prev => !prev);
   const clickRef = useClickOutside(() => setIsNavBarOpen(false));
 
@@ -45,7 +45,7 @@ export default function MainLayout() {
         </div>
         <div className="flex justify-center md:justify-start items-center bg-black p-6 text-sm">
           {/* <FaRegCopyright className="inline-block text-white mr-1" size={12} /> */}
-          <CopyrightIcon fontSize="small" />
+          <CopyrightIcon className="text-white" fontSize="small" />
           <span className="text-white font-['Open_Sans'] ml-0.5">{new Date().getFullYear()} Kitchen Gurus | All Rights Reserved</span>
         </div>
       </footer>
