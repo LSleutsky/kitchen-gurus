@@ -1,23 +1,16 @@
 import { useState } from 'react';
+import { startCase, upperFirst } from 'es-toolkit/string';
 import Button from './Button';
 import Container from '@mui/material/Container';
 import FormControl from '@mui/material/FormControl';
 import TextField from "@mui/material/TextField";
 
 interface ContactDetails {
-  firstName: string;
-  spouseName?: string;
-  lastName: string;
-  email?: string;
-  comments?: string;
+  [key: string]: any;
 }
 
 interface InputEventTarget {
-  targetFirstName: boolean;
-  targetSpouseName: boolean;
-  targetLastName: boolean;
-  targetEmail: boolean;
-  targetComments: boolean;
+  [key: string]: any;
 }
 
 export default function Contact() {
@@ -38,22 +31,14 @@ export default function Contact() {
   });
 
   const textfieldLabelBlur = (event: React.FocusEvent<HTMLInputElement>) =>
-    setShrinkOnInputEventTarget({
-      targetFirstName: !event.target.name,
-      targetSpouseName: !event.target.name,
-      targetLastName: !event.target.name,
-      targetEmail: !event.target.name,
-      targetComments: !event.target.name
-    });
+    setShrinkOnInputEventTarget(
+      Object.keys(shrinkOnInputEventTarget).map((target: string) => ({ [target]: !event.target.name }))
+    );
 
   const textfieldLabelFocus = (event: React.FocusEvent<HTMLInputElement>) =>
-    setShrinkOnInputEventTarget({
-      targetFirstName: event.target.name === 'firstName',
-      targetSpouseName: event.target.name === 'spouseName',
-      targetLastName: event.target.name === 'lastName',
-      targetEmail: event.target.name === 'email',
-      targetComments: event.target.name === 'comments'
-    });
+    setShrinkOnInputEventTarget(
+      Object.keys(shrinkOnInputEventTarget).map((target: string) => ({ target: event.target.name === target }))
+    );
 
   const clearFormValues = () =>
     setContactDetails({
@@ -70,76 +55,32 @@ export default function Contact() {
       [event.target.name]: event.target.value
     });
 
-  const { firstName, spouseName, lastName, email, comments } = contactDetails;
-  const { targetFirstName, targetSpouseName, targetLastName, targetEmail, targetComments } = shrinkOnInputEventTarget;
+  const formattedInputTargetLiteral = (name: string) =>`target${upperFirst(`'${name}'`)}`
 
   return (
     <Container>
       <FormControl fullWidth className="[&>*]:my-2" component="form">
-        <TextField 
-          fullWidth
-          required
-          id="first-name"
-          label="First Name"
-          name="firstName"
-          onBlur={textfieldLabelBlur}
-          onChange={setFormValues}
-          onFocus={textfieldLabelFocus}
-          slotProps={{ inputLabel: { shrink: !!firstName || targetFirstName } }}
-          value={contactDetails.firstName}
-          variant="outlined"
-        />
-        <TextField 
-          fullWidth
-          id="spouse-name"
-          label="Spouse Name"
-          name="spouseName"
-          onBlur={textfieldLabelBlur}
-          onChange={setFormValues}
-          onFocus={textfieldLabelFocus}
-          slotProps={{ inputLabel: { shrink: !!spouseName || targetSpouseName } }}
-          value={contactDetails.spouseName}
-          variant="outlined"
-        />
-        <TextField 
-          fullWidth
-          required
-          id="last-name"
-          label="Last Name"
-          name="lastName"
-          onBlur={textfieldLabelBlur}
-          onChange={setFormValues}
-          onFocus={textfieldLabelFocus}
-          slotProps={{ inputLabel: { shrink: !!lastName || targetLastName } }}
-          value={contactDetails.lastName}
-          variant="outlined"
-        />
-        <TextField 
-          fullWidth
-          id="email"
-          label="Email"
-          name="email"
-          onBlur={textfieldLabelBlur}
-          onChange={setFormValues}
-          onFocus={textfieldLabelFocus}
-          slotProps={{ inputLabel: { shrink: !!email || targetEmail } }}
-          value={contactDetails.email}
-          variant="outlined"
-        />
-        <TextField 
-          fullWidth
-          multiline
-          id="comments"
-          label="Additional Comments"
-          minRows="3"
-          name="comments"
-          onBlur={textfieldLabelBlur}
-          onChange={setFormValues}
-          onFocus={textfieldLabelFocus}
-          slotProps={{ inputLabel: { shrink: !!comments || targetComments } }}
-          value={contactDetails.comments}
-          variant="outlined"
-        />
+        {Object.keys(contactDetails).map(key => 
+          <TextField
+            key={key}
+            fullWidth
+            required={key === 'firstName' || key === 'lastName'}
+            label={startCase(key)}
+            multiline={key === 'comments'}
+            minRows="3" // if multiline attribute is true (for comments textarea)
+            name={key}
+            onBlur={textfieldLabelBlur}
+            onChange={setFormValues}
+            onFocus={textfieldLabelFocus}
+            slotProps={{
+              inputLabel: {
+                shrink: !!contactDetails[key] || shrinkOnInputEventTarget[formattedInputTargetLiteral(key)]
+              }
+            }}
+            value={contactDetails[key]}
+            variant="outlined"
+          />
+        )}
         <Button className="p-4 px-10" text="Reset" onClick={clearFormValues}/>
       </FormControl>
     </Container>
