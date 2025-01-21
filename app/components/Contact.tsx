@@ -12,6 +12,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import TextField from "@mui/material/TextField";
 import type { SelectChangeEvent } from "@mui/material/Select";
+import { phoneNumberAutoFormat } from "~/utils";
 
 interface ContactDetails {
   [key: string]: string;
@@ -61,20 +62,22 @@ export default function Contact() {
 
   const [serviceName, setServiceName] = useState<string[]>([]);
 
-  const [shrinkOnInputEventTarget, setShrinkOnInputEventTarget] = useState<InputEventTarget>({
-    targetFirstName: false,
-    targetSpouseName: false,
-    targetLastName: false,
-    targetEmail: false,
-    targetComments: false,
-  });
-
   const [contactDetails, setContactDetails] = useState<ContactDetails>({
     firstName: "",
     spouseName: "",
     lastName: "",
+    phoneNumber: "",
     email: "",
     comments: "",
+  });
+
+  const [shrinkOnInputEventTarget, setShrinkOnInputEventTarget] = useState<InputEventTarget>({
+    targetFirstName: false,
+    targetSpouseName: false,
+    targetLastName: false,
+    targetPhoneNumber: false,
+    targetEmail: false,
+    targetComments: false,
   });
 
   const clearFormValues = () =>
@@ -82,6 +85,7 @@ export default function Contact() {
       firstName: "",
       spouseName: "",
       lastName: "",
+      phoneNumber: "",
       email: "",
       comments: "",
     });
@@ -92,11 +96,18 @@ export default function Contact() {
   const handleServiceSelection = (event: SelectChangeEvent<typeof serviceName>) =>
     setServiceName(typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value);
 
-  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.name === 'phoneNumber')
+      return setContactDetails({
+        ...contactDetails,
+        phoneNumber: phoneNumberAutoFormat(event.target.value),
+      });
+
     setContactDetails({
       ...contactDetails,
       [event.target.name]: event.target.value,
     });
+  }
 
   const textfieldLabelBlur = (event: React.FocusEvent<HTMLInputElement>) =>
     setShrinkOnInputEventTarget(
@@ -115,17 +126,27 @@ export default function Contact() {
         {Object.keys(contactDetails).slice(0, -1).map(key => (
           <TextField
             key={key}
-            required={key === "firstName" || key === "lastName"}
             label={startCase(key)}
             name={key}
             onBlur={textfieldLabelBlur}
             onChange={setFormValues}
             onFocus={textfieldLabelFocus}
+            required={key === 'firstName' || key === 'lastName' || key === 'phoneNumber'}
             slotProps={{
+              htmlInput: {
+                maxLength: key === 'phoneNumber' ? 12 : null
+              },
               inputLabel: {
                 shrink: !!contactDetails[key] || shrinkOnInputEventTarget[formattedInputTargetLiteral(key)]
               }
             }}
+            type={
+              key === 'email'
+                ? 'email'
+                : key === 'phoneNumber'
+                  ? 'tel'
+                  : 'text'
+            }
             value={key !== 'email' ? capitalize(contactDetails[key]) : contactDetails[key]}
             variant="outlined"
           />

@@ -8,7 +8,7 @@ import { useOutletContext } from "react-router";
  * @returns {string} The current user's location details
  *
  * @example
- *    'Philadelphia, Pennsylvania'
+ * 'Philadelphia, Pennsylvania'
  */
 export const displayLocation = (showState?: boolean) => {
   interface UserLocationData {
@@ -42,7 +42,7 @@ export const displayLocation = (showState?: boolean) => {
  * @returns {string} The full path to the stored image
  *
  * @example
- *    'https://ucarecdn.com/abc-123-def-456/-/preview/1200x600/-/format/auto/-/quality/smart/'
+ * 'https://ucarecdn.com/abc-123-def-456/-/preview/1200x600/-/format/auto/-/quality/smart/'
  */
 export const getImageParameters = (id: string, size: string = "1000x560") =>
   `https://ucarecdn.com/${id}/-/preview/${size}/-/format/auto/-/quality/smart/`;
@@ -53,11 +53,11 @@ export const getImageParameters = (id: string, size: string = "1000x560") =>
  * @returns {Object} JSON object for current user's location data
  *
  * @example
- *    {
- *      city: 'Philadelphia',
- *      stateProv: 'PA',
- *      stateProvCode: 'Pennsylvania'
- *    }
+ * {
+ *   city: 'Philadelphia',
+ *   stateProv: 'PA',
+ *   stateProvCode: 'Pennsylvania'
+ * }
  */
 export const getUserLocation = async () => {
   try {
@@ -73,4 +73,22 @@ export const getUserLocation = async () => {
   } catch (error: any) {
     console.error("Error fetching data:", error);
   }
+};
+
+/**
+ * Returns a formatted phone number string
+ *
+ * @param phoneNumber The phone number string
+ * @returns {string} The formatted phone number string
+ * 
+ * @example
+ * '215-555-6666'
+ */
+export const phoneNumberAutoFormat = (phoneNumber: string) => {
+  const number = phoneNumber.trim().replace(/[^0-9]/g, "");
+
+  if (number.length < 4) return number;
+  if (number.length < 7) return number.replace(/(\d{3})(\d{1})/, "$1-$2");
+  if (number.length < 11) return number.replace(/(\d{3})(\d{3})(\d{1})/, "$1-$2-$3");
+  return number.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
 };

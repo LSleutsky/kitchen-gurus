@@ -24,15 +24,14 @@ export default function Home() {
 
     const paragraphThree = (
       <>
-        Feel free to give us a call at{" "}
+        Feel free to give us a call at
         <Link className="text-[#F98500]" to="tel:1-800-555-6666">
-          1-800-555-6666
-        </Link>{" "}
+          {` 1-800-555-6666 `}
+        </Link>
         for a <span className="italic">100% free consultation</span>, or check out our
         <Link className="text-[#F98500]" to="/gallery">
-          {" "}
-          gallery
-        </Link>{" "}
+          {` gallery `}
+        </Link>
         first to get inspiration from some awesome projects which can quickly become a reality!
       </>
     );
