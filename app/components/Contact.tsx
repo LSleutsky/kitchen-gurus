@@ -11,14 +11,10 @@ import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import TextField from "@mui/material/TextField";
-import type { SelectChangeEvent } from "@mui/material/Select";
 import { phoneNumberAutoFormat } from "~/utils";
+import type { SelectChangeEvent } from "@mui/material/Select";
 
-interface ContactDetails {
-  [key: string]: string;
-}
-
-interface InputEventTarget {
+interface Target {
   [key: string]: any;
 }
 
@@ -62,7 +58,7 @@ export default function Contact() {
 
   const [serviceName, setServiceName] = useState<string[]>([]);
 
-  const [contactDetails, setContactDetails] = useState<ContactDetails>({
+  const [contactDetails, setContactDetails] = useState<Target>({
     firstName: "",
     spouseName: "",
     lastName: "",
@@ -71,7 +67,7 @@ export default function Contact() {
     comments: "",
   });
 
-  const [shrinkOnInputEventTarget, setShrinkOnInputEventTarget] = useState<InputEventTarget>({
+  const [shrinkOnInputEventTarget, setShrinkOnInputEventTarget] = useState<Target>({
     targetFirstName: false,
     targetSpouseName: false,
     targetLastName: false,
@@ -98,10 +94,10 @@ export default function Contact() {
 
   const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.name === 'phoneNumber')
-      return setContactDetails({
+      return setContactDetails((prev: Target) => ({
         ...contactDetails,
-        phoneNumber: phoneNumberAutoFormat(event.target.value),
-      });
+        phoneNumber: phoneNumberAutoFormat(event.target.value, prev.phoneNumber),
+      }));
 
     setContactDetails({
       ...contactDetails,
@@ -144,7 +140,7 @@ export default function Contact() {
                   ? 'tel'
                   : 'text'
             }
-            value={key !== 'email' ? capitalize(contactDetails[key]) : contactDetails[key]}
+            value={key !== 'email' && key !== 'phoneNumber' ? capitalize(contactDetails[key]) : contactDetails[key]}
             variant="outlined"
           />
         ))}

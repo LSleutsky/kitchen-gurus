@@ -39,6 +39,7 @@ export const displayLocation = (showState?: boolean): string | undefined => {
  *
  * @param {string} id The unique image id
  * @param {string} size An optional string to represent rendered image size
+ * 
  * @returns {string} The full path to the stored image
  *
  * @example
@@ -76,22 +77,25 @@ export const getUserLocation = async () => {
 };
 
 /**
- * Returns a formatted phone number string
+ * Takes in a raw string value - digits only - of a phone number, and formats accordingly
  *
- * @param phoneNumber The phone number string
+ * @param phoneNumberValue The current phone number value
+ * @param previousPhoneNumberValue The previous phone number value
+ * 
  * @returns {string} The formatted phone number string
  * 
  * @example
  * '(123) 456-7890'
  */
-export const phoneNumberAutoFormat = (phoneNumber: string): string => {
-  phoneNumber = phoneNumber.replace(/\D/g,'');
+export const phoneNumberAutoFormat = (phoneNumberValue: string, previousPhoneNumberValue: string): string | undefined => {
+  if (!phoneNumberValue) return phoneNumberValue;
 
-  const currentPhoneNumberLength = phoneNumber.length;
+  const phoneNumber = phoneNumberValue.replace(/[^\d]/g, '');
+  
+  if (!previousPhoneNumberValue || phoneNumberValue.length > previousPhoneNumberValue.length) {
+    if (phoneNumber.length < 4) return phoneNumber;
+    if (phoneNumber.length < 7) return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
 
-  if (currentPhoneNumberLength > 0) phoneNumber = "(" + phoneNumber;
-  if (currentPhoneNumberLength > 3) phoneNumber = phoneNumber.slice(0, 4) + ") " + phoneNumber.slice(4,11);
-  if (currentPhoneNumberLength > 6) phoneNumber = phoneNumber.slice(0, 9) + "-" + phoneNumber.slice(9);
-
-  return phoneNumber;
-}
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+  }
+};
