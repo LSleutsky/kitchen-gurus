@@ -14,17 +14,30 @@ import TextField from "@mui/material/TextField";
 import type { SelectChangeEvent } from "@mui/material/Select";
 
 interface ContactDetails {
-  [key: string]: any;
+  [key: string]: string;
 }
 
 interface InputEventTarget {
   [key: string]: any;
 }
 
+interface ServiceOptions {
+  value: string;
+  label: string;
+}
+
 export default function Contact() {
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
-  const serviceOptions = ['Cabinets', 'Lighting', 'Flooring', 'Fixtures', 'Appliances', 'Custom'];
+
+  const serviceOptions: ServiceOptions[] = [
+    { value: 'cabinets', label: 'Cabinets' },
+    { value: 'lighting', label: 'Lighting' },
+    { value: 'flooring', label: 'Flooring' },
+    { value: 'fixtures', label: 'Fixtures' },
+    { value: 'appliances', label: 'Appliances' },
+    { value: 'custom', label: 'Custom' },
+  ];
 
   const MenuProps = {
     PaperProps: {
@@ -37,9 +50,13 @@ export default function Contact() {
 
   const baseMaterialInputStyles = {
     '& .MuiInputBase-root': {
-      'border-radius': '0',
-      'font-family': 'Open Sans'
+      borderRadius: '0',
+      fontFamily: 'Open Sans'
     },
+    '&.MuiSelect-root': {
+      borderRadius: '0',
+      fontFamily: 'Open Sans'
+    }
   };
 
   const [serviceName, setServiceName] = useState<string[]>([]);
@@ -92,9 +109,9 @@ export default function Contact() {
     );
 
   return (
-    <Container component="form">
+    <Container component="form" sx={baseMaterialInputStyles}>
       <FormGroup className="[&>*]:my-2">
-        {/* Filter out comments from map, which will be its own text field after select dropdown */}
+        {/* Filter out last key-value pair from map, which will be its own comments text field after select dropdown */}
         {Object.keys(contactDetails).slice(0, -1).map(key => (
           <TextField
             key={key}
@@ -109,7 +126,6 @@ export default function Contact() {
                 shrink: !!contactDetails[key] || shrinkOnInputEventTarget[formattedInputTargetLiteral(key)]
               }
             }}
-            sx={baseMaterialInputStyles}
             value={key !== 'email' ? capitalize(contactDetails[key]) : contactDetails[key]}
             variant="outlined"
           />
@@ -125,18 +141,12 @@ export default function Contact() {
             MenuProps={MenuProps}
             onChange={handleServiceSelection}
             renderValue={selected => selected.join(', ')}
-            sx={{
-              '&.MuiSelect-root': {
-                'border-radius': '0',
-                'font-family': 'Open Sans'
-              }
-            }}
             value={serviceName}
           >
-            {serviceOptions.map((type: string) => (
-              <MenuItem key={type} value={type}>
-                <Checkbox checked={serviceName.includes(type)} />
-                <ListItemText primary={type} />
+            {serviceOptions.map(option => (
+              <MenuItem key={option.value} value={option.label}>
+                <Checkbox checked={serviceName.includes(option.label)} />
+                <ListItemText primary={option.label} />
               </MenuItem>
             ))}
           </Select>
@@ -154,7 +164,6 @@ export default function Contact() {
               shrink: !!contactDetails.comments || shrinkOnInputEventTarget.targetComments
             }
           }}
-          sx={baseMaterialInputStyles}
           value={capitalize(contactDetails.comments)}
         />
       </FormGroup>
