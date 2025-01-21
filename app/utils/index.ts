@@ -10,7 +10,7 @@ import { useOutletContext } from "react-router";
  * @example
  * 'Philadelphia, Pennsylvania'
  */
-export const displayLocation = (showState?: boolean) => {
+export const displayLocation = (showState?: boolean): string | undefined => {
   interface UserLocationData {
     city: string;
     stateProv: string;
@@ -82,13 +82,16 @@ export const getUserLocation = async () => {
  * @returns {string} The formatted phone number string
  * 
  * @example
- * '215-555-6666'
+ * '(123) 456-7890'
  */
-export const phoneNumberAutoFormat = (phoneNumber: string) => {
-  const number = phoneNumber.trim().replace(/[^0-9]/g, "");
+export const phoneNumberAutoFormat = (phoneNumber: string): string => {
+  phoneNumber = phoneNumber.replace(/\D/g,'');
 
-  if (number.length < 4) return number;
-  if (number.length < 7) return number.replace(/(\d{3})(\d{1})/, "$1-$2");
-  if (number.length < 11) return number.replace(/(\d{3})(\d{3})(\d{1})/, "$1-$2-$3");
-  return number.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
-};
+  const currentPhoneNumberLength = phoneNumber.length;
+
+  if (currentPhoneNumberLength > 0) phoneNumber = "(" + phoneNumber;
+  if (currentPhoneNumberLength > 3) phoneNumber = phoneNumber.slice(0, 4) + ") " + phoneNumber.slice(4,11);
+  if (currentPhoneNumberLength > 6) phoneNumber = phoneNumber.slice(0, 9) + "-" + phoneNumber.slice(9);
+
+  return phoneNumber;
+}

@@ -133,9 +133,6 @@ export default function Contact() {
             onFocus={textfieldLabelFocus}
             required={key === 'firstName' || key === 'lastName' || key === 'phoneNumber'}
             slotProps={{
-              htmlInput: {
-                maxLength: key === 'phoneNumber' ? 12 : null
-              },
               inputLabel: {
                 shrink: !!contactDetails[key] || shrinkOnInputEventTarget[formattedInputTargetLiteral(key)]
               }
