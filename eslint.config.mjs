@@ -61,6 +61,7 @@ export default [
     },
     rules: {
       camelcase: 2,
+      'eol-last': ['error', 'always'],
       'no-console': [
         'error',
         {
