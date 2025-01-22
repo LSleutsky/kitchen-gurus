@@ -2,6 +2,7 @@ import globals from 'globals';
 import js from '@eslint/js';
 import path from 'node:path';
 import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import tailwind from 'eslint-plugin-tailwindcss';
 import tsParser from '@typescript-eslint/parser';
@@ -22,6 +23,7 @@ export default [
     .extends(
       'eslint:recommended',
       'plugin:react/recommended',
+      'plugin:react-hooks/recommended',
       'plugin:@typescript-eslint/recommended',
       'prettier'
     )
@@ -34,12 +36,14 @@ export default [
     files: ['app/**/*.ts', 'app/**/*.tsx'],
     plugins: {
       react,
+      'react-hooks': reactHooks,
       'simple-import-sort': simpleImportSort,
       '@typescript-eslint': typescriptEslint
     },
     languageOptions: {
       globals: {
-        ...globals.browser
+        ...globals.browser,
+        ...globals.node
       },
       parser: tsParser,
       ecmaVersion: 12,
@@ -66,16 +70,22 @@ export default [
       'no-duplicate-case': 'error',
       'no-dupe-keys': 'error',
       'no-empty': 'error',
+      'no-irregular-whitespace': [
+        'error',
+        {
+          skipComments: true,
+          skipJSXText: true,
+          skipRegExps: true,
+          skipStrings: true,
+          skipTemplates: true
+        }
+      ],
       'no-mixed-operators': 'off',
       'no-nested-ternary': 'off',
       'no-var': 'error',
       'no-plusplus': 'off',
-      'no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_'
-        }
-      ],
+      'no-trailing-spaces': ['error', { ignoreComments: true }],
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'object-curly-spacing': ['error', 'always'],
       'padding-line-between-statements': [
         'error',

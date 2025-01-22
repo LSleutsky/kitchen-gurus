@@ -2,10 +2,10 @@ import { useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Fade from '@mui/material/Fade';
-import Modal from '@mui/material/Modal';
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Fade from "@mui/material/Fade";
+import Modal from "@mui/material/Modal";
 
 import Button from "./Button";
 import ContactForm from "./ContactForm";
