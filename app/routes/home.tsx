@@ -42,7 +42,7 @@ export default function Home() {
     <section>
       <Content
         cta
-        ctaText="Get Free Estimate"
+        ctaText="Get a Free Estimate"
         heading="Dream Kitchens"
         imageAlt="Kitchen remodeling"
         imageUrl={kitchenRemodelUrl}

@@ -1,4 +1,4 @@
-import Contact from "./Contact";
+import ContactModal from "./ContactModal";
 import useWindowSize from "~/hooks/useWindowSize";
 
 interface Props {
@@ -24,7 +24,7 @@ export default function Content({ contentReverse, cta, ctaText, heading, imageAl
               {content}
             </p>
           ))}
-          {cta && <Contact ctaText={ctaText} />}
+          {cta && <ContactModal ctaText={ctaText} />}
         </div>
       </div>
       <figure className="flex flex-1 self-stretch">
