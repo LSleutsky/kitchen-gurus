@@ -70,6 +70,7 @@ export default [
       'no-duplicate-case': 'error',
       'no-dupe-keys': 'error',
       'no-empty': 'error',
+      'no-empty-pattern': 'off',
       'no-irregular-whitespace': [
         'error',
         {
@@ -213,14 +214,18 @@ export default [
             ['^@', '^\\w'],
             ['^@mui/icons-material'],
             ['^@mui/material'],
-            ['^(layouts)(/.*|$)'],
-            ['^(components)(/.*|$)'],
-            ['^(hooks)(/.*|$)'],
-            ['^(utils)(/.*|$)'],
-            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+            ['^(./layouts)(/.*|$)'],
+            ['^(~/components)(/.*|$)'],
+            ['^(~/hooks)(/.*|$)'],
+            ['^(~/utils)(/.*|$)'],
+            ['^\\./'],
+            ['^\\./\\+'],
+            ['^\\./app.(s?css)'],
+            [('^\\.\\.(?!/?$)', '^\\.\\./?$')],
             ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
             ['^.+\\.?(s?css)$'],
-            ['^\\u0000']
+            ['^\\u0000'],
+            ['^']
           ]
         }
       ]

@@ -1,9 +1,11 @@
-import type { Route } from "./+types/home";
 import StarIcon from "@mui/icons-material/Star";
+
 import ContactModal from "~/components/ContactModal";
 
+import type { Route } from "./+types/home";
+
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "About Us | Kitchen Gurus" }, { name: "description", content: "About Kitchen Gurus" }];
+  return [{ title: `About Us | Kitchen Gurus` }, { name: `description`, content: `About Kitchen Gurus` }];
 }
 
 export default function About() {
