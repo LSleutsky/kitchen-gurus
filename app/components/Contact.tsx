@@ -59,6 +59,24 @@ const baseMaterialInputStyles = {
   '&.MuiSelect-root': {
     borderRadius: '0',
     fontFamily: 'Open Sans'
+  },
+  '& .MuiInputLabel-root': {
+    fontFamily: 'Open Sans'
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'rgb(81,166,85)',
+    },
+    '&:hover fieldset': {
+      borderColor: 'rgba(81,166,85, 0.7)',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'rgb(81,166,85)',
+    }
+  },
+  '& label.Mui-focused': {
+    color: 'rgb(81,166,85)',
+    fontWeight: 600
   }
 };
 
@@ -69,9 +87,8 @@ const baseMaterialModalStyles = {
   transform: 'translate(-50%, -50%)',
   width: '80%',
   bgcolor: 'background.paper',
-  border: '2px solid #F98500',
   boxShadow: 24,
-  py: 2
+  pb: 2
 };
 
 export default function Contact({ className, ctaText }: Props) {
@@ -154,13 +171,13 @@ export default function Contact({ className, ctaText }: Props) {
       >
         <Fade in={openModal}>
           <Box sx={baseMaterialModalStyles}>
-            <Box component="div" className="flex flex-col-reverse justify-between items-center px-6 pb-2 md:flex-row">
-              <Box component="h2" className="text-2xl font-['Open_Sans'] sm:text-3xl">Get a Free Estimate</Box>
+            <Box component="div" className="flex flex-col-reverse justify-between items-center bg-[#51A655] px-6 py-4 md:flex-row">
+              <Box component="h2" className="text-2xl text-white font-['Open_Sans'] sm:text-3xl">Get a Free Estimate</Box>
               <Box component="span" className="self-end">
-                <CloseIcon className="cursor-pointer" fontSize="large" onClick={handleCloseModal} />
+                <CloseIcon className="cursor-pointer text-white" fontSize="large" onClick={handleCloseModal} />
               </Box>
             </Box>
-            <Container component="form" sx={baseMaterialInputStyles}>
+            <Container component="form" sx={baseMaterialInputStyles} className="pt-2">
               <FormGroup className="[&>*]:my-2">
                 {/* Filter out last key-value pair from map, which will be its own comments text field after select dropdown */}
                 {Object.keys(contactDetails).slice(0, -1).map(key => (
