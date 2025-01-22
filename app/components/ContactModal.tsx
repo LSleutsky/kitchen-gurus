@@ -1,11 +1,14 @@
 import { useState } from "react";
-import Button from "./Button";
-import ContactForm from "./ContactForm";
+
 import CloseIcon from "@mui/icons-material/Close";
+
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import Modal from '@mui/material/Modal';
+
+import Button from "./Button";
+import ContactForm from "./ContactForm";
 
 interface Props {
   className?: string;
@@ -13,12 +16,12 @@ interface Props {
 }
 
 const baseMaterialModalStyles = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '80%',
-  bgcolor: 'background.paper',
+  position: `absolute`,
+  top: `50%`,
+  left: `50%`,
+  transform: `translate(-50%, -50%)`,
+  width: `80%`,
+  bgcolor: `background.paper`,
   boxShadow: 24,
   pb: 2
 };
@@ -29,25 +32,25 @@ export default function ContactModal({ className, ctaText }: Props) {
   const handleCloseModal = () => setOpenModal(false);
 
   return (
-    <Box component="div" className={className}>
+    <Box className={className} component="div">
       <Modal
-        aria-labelledby="Kitchen Gurus Contact Modal"
-        aria-describedby="Contact Kitchen Gurus for a 100% Free Estimate"
-        open={openModal}
-        onClose={handleCloseModal}
         closeAfterTransition
-        slots={{ backdrop: Backdrop }}
+        aria-describedby="Contact Kitchen Gurus for a 100% Free Estimate"
+        aria-labelledby="Kitchen Gurus Contact Modal"
+        open={openModal}
         slotProps={{
           backdrop: {
             timeout: 500,
           },
         }}
+        slots={{ backdrop: Backdrop }}
+        onClose={handleCloseModal}
       >
         <Fade in={openModal}>
           <Box sx={baseMaterialModalStyles}>
-            <Box component="div" className="flex flex-col-reverse justify-between items-center bg-[#51A655] px-6 py-4 md:flex-row">
-              <Box component="h2" className="text-2xl text-white font-['Open_Sans'] sm:text-3xl">{ctaText}</Box>
-              <Box component="span" className="self-end">
+            <Box className="flex flex-col-reverse justify-between items-center bg-[#51A655] px-6 py-4 md:flex-row" component="div">
+              <Box className="text-2xl text-white font-['Open_Sans'] sm:text-3xl" component="h2">{ctaText}</Box>
+              <Box className="self-end" component="span">
                 <CloseIcon className="cursor-pointer text-white" fontSize="large" onClick={handleCloseModal} />
               </Box>
             </Box>
