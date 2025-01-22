@@ -48,8 +48,8 @@ export default function ContactModal({ className, ctaText }: Props) {
       >
         <Fade in={openModal}>
           <Box sx={baseMaterialModalStyles}>
-            <Box className="flex flex-col-reverse justify-between items-center bg-[#51A655] px-6 py-4 md:flex-row" component="div">
-              <Box className="text-2xl text-white font-['Open_Sans'] sm:text-3xl" component="h2">{ctaText}</Box>
+            <Box className="flex flex-col-reverse items-center justify-between bg-[#51A655] px-6 py-4 md:flex-row" component="div">
+              <Box className="font-['Open_Sans'] text-2xl text-white sm:text-3xl" component="h2">{ctaText}</Box>
               <Box className="self-end" component="span">
                 <CloseIcon className="cursor-pointer text-white" fontSize="large" onClick={handleCloseModal} />
               </Box>
