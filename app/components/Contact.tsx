@@ -24,9 +24,6 @@ interface ServiceOptions {
 }
 
 export default function Contact() {
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
-
   const serviceOptions: ServiceOptions[] = [
     { value: 'cabinets', label: 'Cabinets' },
     { value: 'lighting', label: 'Lighting' },
@@ -39,7 +36,7 @@ export default function Contact() {
   const MenuProps = {
     PaperProps: {
       style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        maxHeight: 300,
         width: 250,
       },
     },
@@ -59,12 +56,12 @@ export default function Contact() {
   const [serviceName, setServiceName] = useState<string[]>([]);
 
   const [contactDetails, setContactDetails] = useState<Target>({
-    firstName: "",
-    spouseName: "",
-    lastName: "",
-    phoneNumber: "",
-    email: "",
-    comments: "",
+    firstName: '',
+    spouseName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    comments: '',
   });
 
   const [shrinkOnInputEventTarget, setShrinkOnInputEventTarget] = useState<Target>({
@@ -78,12 +75,12 @@ export default function Contact() {
 
   const clearFormValues = () =>
     setContactDetails({
-      firstName: "",
-      spouseName: "",
-      lastName: "",
-      phoneNumber: "",
-      email: "",
-      comments: "",
+      firstName: '',
+      spouseName: '',
+      lastName: '',
+      phoneNumber: '',
+      email: '',
+      comments: '',
     });
 
   const clearSelectValues = () => setServiceName([]);
@@ -141,7 +138,6 @@ export default function Contact() {
                   : 'text'
             }
             value={key !== 'email' && key !== 'phoneNumber' ? capitalize(contactDetails[key]) : contactDetails[key]}
-            variant="outlined"
           />
         ))}
         <FormControl>
@@ -181,7 +177,7 @@ export default function Contact() {
           value={capitalize(contactDetails.comments)}
         />
       </FormGroup>
-      <Button className="p-4 px-10" text="Reset" onClick={() => {
+      <Button className="mt-4 p-4 px-10" text="Reset" onClick={() => {
         clearFormValues();
         clearSelectValues();
       }} />

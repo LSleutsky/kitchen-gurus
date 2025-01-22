@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { useWindowSize } from "~/hooks/useWindowSize";
+import useWindowSize from "~/hooks/useWindowSize";
 
 interface Props {
   contentReverse?: boolean;
