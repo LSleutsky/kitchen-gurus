@@ -21,18 +21,18 @@ interface SocialMediOptions {
   url: string;
 }
 
+const socialMediaActions: SocialMediOptions[] = [
+  { icon: <FacebookIcon />, name: 'Facebook', url: 'https://www.facebook.com/basementgurus/' },
+  { icon: <InstagramIcon />, name: 'Instagram', url: 'https://www.instagram.com/basementguruu/' },
+  { icon: <XIcon />, name: 'X', url: 'https://x.com/basement_gurus' },
+  { icon: <YouTubeIcon />, name: 'YouTube', url: 'https://www.youtube.com/@basementgurus' }
+];
+
 export default function MainLayout() {
   const [isNavBarOpen, setIsNavBarOpen] = useState<boolean>(false);
   const [userLocationData, setUserLocationData] = useState<Object>({});
   const toggleMenu = () => setIsNavBarOpen(prev => !prev);
   const clickRef = useClickOutside(() => setIsNavBarOpen(false));
-
-  const socialMediaActions: SocialMediOptions[] = [
-    { icon: <FacebookIcon />, name: 'Facebook', url: 'https://www.facebook.com/basementgurus/' },
-    { icon: <InstagramIcon />, name: 'Instagram', url: 'https://www.instagram.com/basementguruu/' },
-    { icon: <XIcon />, name: 'X', url: 'https://x.com/basement_gurus' },
-    { icon: <YouTubeIcon />, name: 'YouTube', url: 'https://www.youtube.com/@basementgurus' }
-  ];
 
   useEffect(() => {
     (async () => {
@@ -79,6 +79,7 @@ export default function MainLayout() {
           }}>
             {socialMediaActions.map((socialMedia: SocialMediOptions) =>
               <Link
+                key={socialMedia.name}
                 title={socialMedia.name}
                 to={socialMedia.url}
                 target="_blank"

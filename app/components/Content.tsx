@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Contact from "./Contact";
 import useWindowSize from "~/hooks/useWindowSize";
 
 interface Props {
@@ -15,9 +15,7 @@ export default function Content({ contentReverse, cta, ctaText, heading, imageAl
   const { width } = useWindowSize();
 
   return (
-    <article
-      className={`flex ${width < 768 ? "flex-col-reverse" : "flex-col"} ${contentReverse ? "md:flex-row-reverse" : "md:flex-row"} `}
-    >
+    <article className={`flex ${width < 768 ? "flex-col-reverse" : "flex-col"} ${contentReverse ? "md:flex-row-reverse" : "md:flex-row"} `}>
       <div className="flex flex-1 flex-col justify-evenly py-4 pb-8">
         <div className="flex flex-col [&>*]:text-center [&>*]:md:text-left">
           <h1 className="px-4 pb-8 pt-4 font-['Open_Sans'] text-4xl font-semibold">{heading}</h1>
@@ -26,7 +24,7 @@ export default function Content({ contentReverse, cta, ctaText, heading, imageAl
               {content}
             </p>
           ))}
-          {cta && <Button className="mx-4 mt-10 self-center p-4 md:self-start" text={ctaText} />}
+          {cta && <Contact ctaText={ctaText} />}
         </div>
       </div>
       <figure className="flex flex-1 self-stretch">

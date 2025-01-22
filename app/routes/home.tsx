@@ -1,6 +1,5 @@
 import type { Route } from "./+types/home";
 import { Link } from "react-router";
-import Contact from "~/components/Contact";
 import Content from "~/components/Content";
 import { displayLocation, getImageParameters } from "~/utils";
 
@@ -41,7 +40,6 @@ export default function Home() {
 
   return (
     <section>
-      <Contact />
       <Content
         cta
         ctaText="Get Free Estimate"
