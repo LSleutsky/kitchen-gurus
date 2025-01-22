@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router";
+
 import CloseIcon from "@mui/icons-material/Close";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import MenuIcon from "@mui/icons-material/Menu";
 import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import MenuIcon from "@mui/icons-material/Menu";
+
 import Box from '@mui/material/Box';
+
 import Banner from "~/components/Banner";
 import Header from "~/components/Header";
 import Logo from "~/components/Logo";
-import useClickOutside from "~/hooks/useClickOutside";
-import { getUserLocation } from "~/utils";
 
+import useClickOutside from "~/hooks/useClickOutside";
+
+import { getUserLocation } from "~/utils";
 
 interface SocialMediOptions {
   icon: React.JSX.Element;
@@ -22,15 +26,15 @@ interface SocialMediOptions {
 }
 
 const socialMediaActions: SocialMediOptions[] = [
-  { icon: <FacebookIcon />, name: 'Facebook', url: 'https://www.facebook.com/basementgurus/' },
-  { icon: <InstagramIcon />, name: 'Instagram', url: 'https://www.instagram.com/basementguruu/' },
-  { icon: <XIcon />, name: 'X', url: 'https://x.com/basement_gurus' },
-  { icon: <YouTubeIcon />, name: 'YouTube', url: 'https://www.youtube.com/@basementgurus' }
+  { icon: <FacebookIcon />, name: `Facebook`, url: `https://www.facebook.com/basementgurus/` },
+  { icon: <InstagramIcon />, name: `Instagram`, url: `https://www.instagram.com/basementguruu/` },
+  { icon: <XIcon />, name: `X`, url: `https://x.com/basement_gurus` },
+  { icon: <YouTubeIcon />, name: `YouTube`, url: `https://www.youtube.com/@basementgurus` }
 ];
 
 export default function MainLayout() {
   const [isNavBarOpen, setIsNavBarOpen] = useState<boolean>(false);
-  const [userLocationData, setUserLocationData] = useState<Object>({});
+  const [userLocationData, setUserLocationData] = useState<object>({});
   const toggleMenu = () => setIsNavBarOpen(prev => !prev);
   const clickRef = useClickOutside(() => setIsNavBarOpen(false));
 
@@ -59,30 +63,30 @@ export default function MainLayout() {
         <Outlet context={userLocationData} />
       </main>
       <footer className="w-full bg-[#51A655]">
-        <div className="flex justify-center text-white relative md:justify-start">
+        <div className="relative flex justify-center text-white md:justify-start">
           <Logo alt="Kitchen Gurus logo" src="/kitchen-gurus-logo.png" />
         </div>
         <div className="flex flex-col items-center justify-between bg-black px-4 py-6 text-sm md:flex-row">
           <Box component="span">
-            <CopyrightIcon className="text-white -mt-0.5" fontSize="small" />
+            <CopyrightIcon className="-mt-0.5 text-white" fontSize="small" />
             <span className="ml-0.5 font-['Open_Sans'] text-white">
               {new Date().getFullYear()} Kitchen Gurus | All Rights Reserved
             </span>
           </Box>
-          <Box className="[&>*]:text-white [&>*]:mx-2 mt-3 md:mt-0" component="span" sx={{
+          <Box className="mt-3 md:mt-0 [&>*]:mx-2 [&>*]:text-white" component="span" sx={{
             '& .MuiSvgIcon-root': {
-              fontSize: '30px',
+              fontSize: `30px`,
               '&[data-testid="YouTubeIcon"]': {
-                fontSize: '40px'
-              } 
+                fontSize: `40px`
+              }
             }
           }}>
             {socialMediaActions.map((socialMedia: SocialMediOptions) =>
               <Link
                 key={socialMedia.name}
+                target="_blank"
                 title={socialMedia.name}
                 to={socialMedia.url}
-                target="_blank"
               >
                 {socialMedia.icon}
               </Link>

@@ -1,6 +1,6 @@
-import ContactModal from "./ContactModal";
-
 import useWindowSize from "~/hooks/useWindowSize";
+
+import ContactModal from "./ContactModal";
 
 interface Props {
   contentReverse?: boolean;

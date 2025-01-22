@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import Reviews from "./Reviews";
+
 import { getImageParameters } from "~/utils";
 
+import Reviews from "./Reviews";
+
 export default function Banner() {
-  const [bannerImageUrl, setBannerImageUrl] = useState<string>("");
+  const [bannerImageUrl, setBannerImageUrl] = useState<string>(``);
   const location = useLocation();
 
   useEffect(() => {
     const random = Math.floor(Math.random() * 4);
 
     const bannerImages = [
-      { id: 1, slug: "abfb8500-2160-4798-ba8f-11e6bf606870" },
-      { id: 2, slug: "6d99280e-439d-40ab-9513-142d9aa0b6e0" },
-      { id: 3, slug: "a1099375-2c11-4824-9c13-28b22de109cf" },
-      { id: 4, slug: "79c7168d-a17f-462f-81b8-e5d53a9ba6d2" },
+      { id: 1, slug: `abfb8500-2160-4798-ba8f-11e6bf606870` },
+      { id: 2, slug: `6d99280e-439d-40ab-9513-142d9aa0b6e0` },
+      { id: 3, slug: `a1099375-2c11-4824-9c13-28b22de109cf` },
+      { id: 4, slug: `79c7168d-a17f-462f-81b8-e5d53a9ba6d2` },
     ];
 
     const url = getImageParameters(bannerImages[random].slug);
@@ -28,8 +30,8 @@ export default function Banner() {
         className={`relative h-[60vh] overflow-hidden bg-cover bg-center bg-no-repeat`}
         style={{ backgroundImage: `url(${bannerImageUrl})` }}
       >
-        <div className="content=[''] absolute h-full w-full bg-black opacity-60" />
-        <div className="content=[''] absolute -right-[24%] h-full w-7/12 skew-x-[20deg] bg-[#F98500] opacity-50 md:-right-[14%]" />
+        <div className="absolute size-full bg-black opacity-60 content-['']" />
+        <div className="absolute right-[-24%] h-full w-7/12 skew-x-[20deg] bg-[#F98500] opacity-50 content-[''] md:right-[-14%]" />
       </div>
       <section className="bg-[#F7F7F7] py-4">
         <h1 className="text-center font-['Open_Sans'] text-4xl font-semibold">

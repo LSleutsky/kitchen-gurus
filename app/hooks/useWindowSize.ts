@@ -5,7 +5,7 @@ interface WindowSize {
   height: number;
 }
 
-const useWindowSize = (): WindowSize => {
+export default function useWindowSize(): WindowSize {
   const [windowSize, setWindowSize] = useState<WindowSize>({
     width: 0,
     height: 0,
@@ -18,12 +18,10 @@ const useWindowSize = (): WindowSize => {
         height: window.innerHeight,
       });
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener(`resize`, handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener(`resize`, handleResize);
   }, []);
 
   return windowSize;
-};
-
-export default useWindowSize;
+}

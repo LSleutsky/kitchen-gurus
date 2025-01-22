@@ -183,8 +183,6 @@ export default [
       ],
       'react/no-unused-state': 'error',
       'react/react-in-jsx-scope': 'off',
-      'simple-import-sort/exports': 'error',
-      'simple-import-sort/imports': 'error',
       'spaced-comment': [
         'error',
         'always',

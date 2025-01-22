@@ -1,29 +1,29 @@
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "Gallery | Kitchen Gurus" }, { name: "description", content: "Kitchen Gurus Gallery" }];
+  return [{ title: `Gallery | Kitchen Gurus` }, { name: `description`, content: `Kitchen Gurus Gallery` }];
 }
 
 const imageSources = [
   {
     id: 1,
-    src: "/some-image-1",
-    alt: "Some alt text placeholder",
+    src: `/some-image-1`,
+    alt: `Some alt text placeholder`,
   },
   {
     id: 2,
-    src: "/some-image-2",
-    alt: "Some alt text placeholder",
+    src: `/some-image-2`,
+    alt: `Some alt text placeholder`,
   },
   {
     id: 3,
-    src: "/some-image-3",
-    alt: "Some alt text placeholder",
+    src: `/some-image-3`,
+    alt: `Some alt text placeholder`,
   },
   {
     id: 4,
-    src: "/some-image-4",
-    alt: "Some alt text placeholder",
+    src: `/some-image-4`,
+    alt: `Some alt text placeholder`,
   },
 ];
 

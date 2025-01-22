@@ -1,14 +1,17 @@
-import type { Route } from "./+types/home";
 import { Link } from "react-router";
+
 import Content from "~/components/Content";
+
 import { displayLocation, getImageParameters } from "~/utils";
 
+import type { Route } from "./+types/home";
+
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "Kitchen Gurus" }, { name: "description", content: "Welcome to Kitchen Gurus!" }];
+  return [{ title: `Kitchen Gurus` }, { name: `description`, content: `Welcome to Kitchen Gurus!` }];
 }
 
 export default function Home() {
-  const kitchenRemodelUrl = getImageParameters("bcfe92d3-dbf2-4fe7-b383-45a3cf74e4f0", "1200x760");
+  const kitchenRemodelUrl = getImageParameters(`bcfe92d3-dbf2-4fe7-b383-45a3cf74e4f0`, `1200x760`);
 
   const mainContent = () => {
     const paragraphOne = `Kitchen Gurus is one of the leading companies for kitchen remodeling needs in

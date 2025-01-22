@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+
 import Logo from "./Logo";
 
 interface Props {
@@ -9,24 +10,24 @@ interface Props {
 
 const navLinks = [
   {
-    route: "/",
-    text: "Home",
+    route: `/`,
+    text: `Home`,
   },
   {
-    route: "/gallery",
-    text: "Gallery",
+    route: `/gallery`,
+    text: `Gallery`,
   },
   {
-    route: "/",
-    text: "Other Services",
+    route: `/`,
+    text: `Other Services`,
   },
   {
-    route: "/about",
-    text: "About Us",
+    route: `/about`,
+    text: `About Us`,
   },
   {
-    route: "/contact",
-    text: "Contact Us",
+    route: `/contact`,
+    text: `Contact Us`,
   },
 ];
 
@@ -35,8 +36,11 @@ export default function Header({ clickRef, isOpen, toggleMenu }: Props) {
     <>
       <Logo action={toggleMenu} alt="Kitchen Gurus logo" src="/kitchen-gurus-logo.png" />
       <nav
-        className={`absolute left-0 top-24 mr-3 w-full bg-[#51A655] px-4 py-2 font-semibold md:static md:w-1/2 md:justify-end md:px-0 [&>*]:font-['Manrope'] ${isOpen ? "flex" : "hidden"} z-10 md:flex`}
         ref={clickRef}
+        className={`
+          absolute left-0 top-24 mr-3 w-full bg-[#51A655] px-4 py-2 font-semibold md:static md:w-1/2 md:justify-end md:px-0 [&>*]:font-['Manrope']
+          ${isOpen ? `flex` : `hidden`} z-10 md:flex`
+        }
       >
         <ul
           aria-labelledby="nav-links"
@@ -46,10 +50,10 @@ export default function Header({ clickRef, isOpen, toggleMenu }: Props) {
           {navLinks.map(({ route, text }) => (
             <li
               key={text}
-              className="w-full py-1.5 text-center hover:bg-[#F98500] md:hover:bg-[transparent]"
+              className="w-full py-1.5 text-center hover:bg-[#F98500] md:hover:bg-transparent"
               role="menuitem"
             >
-              <NavLink className="inline-block w-full text-white" onClick={toggleMenu} to={route}>
+              <NavLink className="inline-block w-full text-white" to={route} onClick={toggleMenu}>
                 {text}
               </NavLink>
             </li>

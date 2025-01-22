@@ -22,9 +22,9 @@ export default function About() {
         </span>
         <h1 className="text-center font-['Open_Sans'] text-4xl font-semibold">Trusted By Many</h1>
         <p className="mt-5 text-center font-['Open_Sans'] text-lg font-light leading-8">
-          Our expert technicians have successfully and seamlessly completed thousands of renovations on time and within
+          {`Our expert technicians have successfully and seamlessly completed thousands of renovations on time and within
           budgets. We guarantee 100% customer satisfaction by going above and beyond in ensuring that each project
-          exceeds our client's expectations.
+          exceeds our client's expectations.`}
         </p>
         <ContactModal ctaText="Get a Free Consultation" />
       </section>
