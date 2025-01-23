@@ -203,7 +203,7 @@ export default [
     }
   },
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['app/**/*.ts', 'app/**/*.tsx'],
     rules: {
       'simple-import-sort/imports': [
         'error',
