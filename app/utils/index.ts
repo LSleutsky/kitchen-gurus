@@ -18,18 +18,15 @@ export const displayLocation = (showState?: boolean): string | undefined => {
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { city, stateProv, stateProvCode } = useOutletContext<UserLocationData>();
+  const locationData = useOutletContext<UserLocationData>();
+  const formattedCity = locationData?.city?.split(`(`)[0].trim();
 
-  if (!city) return;
-
-  const formattedCity = city.split(`(`)[0].trim();
-
-  switch (stateProvCode) {
+  switch (locationData?.stateProvCode) {
     case `DE`:
     case `MD`:
     case `NJ`:
     case `PA`:
-      return `${formattedCity}${showState ? `, ${stateProv}` : ``}`;
+      return `${formattedCity}${showState ? `, ${locationData?.stateProv}` : ``}`;
     default:
       return `your area`;
   }
