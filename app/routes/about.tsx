@@ -10,8 +10,6 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function About() {
-
-
   return (
     <>
       <section className="p-4 font-['Open_Sans']">
