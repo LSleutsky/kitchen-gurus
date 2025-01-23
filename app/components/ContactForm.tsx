@@ -135,8 +135,8 @@ export default function ContactForm() {
     );
 
   return (
-    <Container className="pt-2" component="form" sx={baseMaterialInputStyles}>
-      <FormGroup className="[&>*]:my-2">
+    <Container className="pt-6" component="form" sx={baseMaterialInputStyles}>
+      <FormGroup>
         {/* Filter out last key-value pair from map, which will be its own comments text field after select dropdown */}
         {Object.keys(contactDetails).slice(0, -1).map(key => (
           <TextField
@@ -149,6 +149,7 @@ export default function ContactForm() {
                 shrink: !!contactDetails[key] || shrinkOnInputEventTarget[formattedInputTargetLiteral(key)]
               }
             }}
+            sx={{ mb: 2.5 }}
             type={
               key === `email`
                 ? `email`
@@ -193,13 +194,14 @@ export default function ContactForm() {
               shrink: !!contactDetails.comments || shrinkOnInputEventTarget.targetComments
             }
           }}
+          sx={{ mt: 2.5 }}
           value={capitalize(contactDetails.comments)}
           onBlur={textfieldLabelBlur}
           onChange={setFormValues}
           onFocus={textfieldLabelFocus}
         />
       </FormGroup>
-      <Button className="mt-4 p-4 px-10" text="Reset" onClick={() => {
+      <Button className="mt-4 p-4 px-10 cursor-pointer" text="Reset" onClick={() => {
         clearFormValues();
         clearSelectValues();
       }} />

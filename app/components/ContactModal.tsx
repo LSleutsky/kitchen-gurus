@@ -58,7 +58,7 @@ export default function ContactModal({ className, ctaText }: Props) {
           </Box>
         </Fade>
       </Modal>
-      <Button className="mx-4 mt-6 self-center p-4 md:self-start" text={ctaText} onClick={handleOpenModal} />
+      <Button className="mx-4 mt-6 self-center p-4 cursor-pointer md:self-start" text={ctaText} onClick={handleOpenModal} />
     </Box>
   );
 }

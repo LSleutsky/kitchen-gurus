@@ -4,7 +4,6 @@ import path from 'node:path';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import tailwind from 'eslint-plugin-tailwindcss';
 import tsParser from '@typescript-eslint/parser';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import { fileURLToPath } from 'node:url';
@@ -31,7 +30,6 @@ export default [
       ...config,
       files: ['app/**/*.ts', 'app/**/*.tsx']
     })),
-  ...tailwind.configs['flat/recommended'],
   {
     files: ['app/**/*.ts', 'app/**/*.tsx'],
     plugins: {
