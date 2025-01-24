@@ -124,8 +124,8 @@ export default function ContactModal({ className, ctaText }: Props) {
             },
             '& .MuiAlert-message': {
               fontSize: `20px`
-            }
-          }} 
+            } 
+          }}
           variant="filled"
           onClose={handleCloseSnackbar}
         >
