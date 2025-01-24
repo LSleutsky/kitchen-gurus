@@ -52,7 +52,7 @@ export default function MainLayout() {
         <div className="flex w-full items-center justify-between">
           <Header clickRef={clickRef} isOpen={isNavBarOpen} toggleMenu={toggleMenu} />
           <div className="flex items-center gap-4 pr-8 md:hidden">
-            <button onClick={toggleMenu}>
+            <button className="cursor-pointer" onClick={toggleMenu}>
               {isNavBarOpen ? <CloseIcon fontSize="large" /> : <MenuIcon fontSize="large" />}
             </button>
           </div>
@@ -66,7 +66,7 @@ export default function MainLayout() {
         <div className="relative flex justify-center text-white md:justify-start">
           <Logo alt="Kitchen Gurus logo" src="/kitchen-gurus-logo.png" />
         </div>
-        <div className="flex flex-col items-center justify-between bg-black px-4 py-6 text-sm md:flex-row">
+        <div className="flex flex-col items-center justify-between bg-black p-4 text-sm md:flex-row">
           <Box component="span">
             <CopyrightIcon className="-mt-0.5 text-white" fontSize="small" />
             <span className="ml-0.5 font-['Open_Sans'] text-white">

@@ -16,8 +16,8 @@ export default function Content({ contentReverse, cta, ctaText, heading, imageAl
   const { width } = useWindowSize();
 
   return (
-    <article className={`flex ${width < 768 ? `flex-col-reverse` : `flex-col`} ${contentReverse ? `md:flex-row-reverse` : `md:flex-row`} `}>
-      <div className="flex flex-1 flex-col justify-evenly py-4 pb-8">
+    <article className={`flex ${width < 768 ? `flex-col-reverse` : ``} ${contentReverse ? `md:flex-row-reverse` : `md:flex-row`} `}>
+      <div className="flex flex-1 flex-col justify-evenly pb-6">
         <div className="flex flex-col [&>*]:text-center [&>*]:md:text-left">
           <h1 className="px-4 pb-8 pt-4 font-['Open_Sans'] text-4xl font-semibold">{heading}</h1>
           {mainContent.map((content: string, index: number) => (

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 
 import { capitalize, startCase, upperFirst } from "es-toolkit/string";
 
@@ -15,8 +15,6 @@ import Select from '@mui/material/Select';
 import TextField from "@mui/material/TextField";
 
 import { phoneNumberAutoFormat } from "~/utils";
-
-import Button from "./Button";
 
 interface Target {
   [key: string]: any;
@@ -46,6 +44,9 @@ const MenuProps = {
 };
 
 const baseMaterialInputStyles = {
+  '&.MuiContainer-root': {
+    padding: 0
+  },
   '& .MuiInputBase-root': {
     borderRadius: `0`,
     fontFamily: `Open Sans`
@@ -74,7 +75,8 @@ const baseMaterialInputStyles = {
   }
 };
 
-export default function ContactForm() {
+// eslint-disable-next-line react/display-name
+const ContactForm = forwardRef((_, ref) => {
   const [serviceName, setServiceName] = useState<string[]>([]);
 
   const [contactDetails, setContactDetails] = useState<Target>({
@@ -134,8 +136,15 @@ export default function ContactForm() {
       Object.keys(shrinkOnInputEventTarget).map((inputTarget: string) => event.target.name === inputTarget)
     );
 
+  useImperativeHandle(ref, () => {
+    return {
+      clearFormValues,
+      clearSelectValues
+    };
+  });
+
   return (
-    <Container className="pt-6" component="form" sx={baseMaterialInputStyles}>
+    <Container className="px-0 pt-6 pb-6" component="form" sx={baseMaterialInputStyles}>
       <FormGroup>
         {/* Filter out last key-value pair from map, which will be its own comments text field after select dropdown */}
         {Object.keys(contactDetails).slice(0, -1).map(key => (
@@ -201,10 +210,8 @@ export default function ContactForm() {
           onFocus={textfieldLabelFocus}
         />
       </FormGroup>
-      <Button className="mt-4 p-4 px-10 cursor-pointer" text="Reset" onClick={() => {
-        clearFormValues();
-        clearSelectValues();
-      }} />
     </Container>
   );
-}
+});
+
+export default ContactForm;
