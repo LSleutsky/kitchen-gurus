@@ -126,8 +126,8 @@ export default function ContactModal({ className, ctaText }: Props) {
               fontSize: `20px`
             }
           }}
-          variant="filled" 
-          onClose={handleCloseSnackbar}
+          variant="filled"
+          onClose={handleCloseSnackbar} 
         >
           <Box component="p">Thank you for your submission! We will do our best to contact you within 24 hours.</Box>
         </Alert>
