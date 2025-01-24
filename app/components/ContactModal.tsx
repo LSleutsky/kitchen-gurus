@@ -2,10 +2,13 @@ import { useRef, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 
+import Alert from '@mui/material/Alert';
 import Box from "@mui/material/Box";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import type { SnackbarCloseReason, SnackbarOrigin } from '@mui/material/Snackbar';
+import Snackbar from '@mui/material/Snackbar';
 
 import Button from "./Button";
 import ContactForm from "./ContactForm";
@@ -21,11 +24,32 @@ interface Ref {
   clearSelectValues: () => void;
 }
 
+interface SnackbarState extends SnackbarOrigin {
+  open: boolean;
+}
+
 export default function ContactModal({ className, ctaText }: Props) {
   const contactFormRef = useRef<Ref>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
+
+  const [snackbarState, setSnackbarState] = useState<SnackbarState>({
+    open: false,
+    vertical: `top`,
+    horizontal: `center`
+  });
+
+  const { horizontal, open, vertical } = snackbarState;
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
+
+  const handleOpenSnackbar = (newSnackbarState: SnackbarOrigin) =>
+    setSnackbarState({ ...newSnackbarState, open: true });
+
+  const handleCloseSnackbar = (_: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+    if (reason === `clickaway`) return;
+
+    setSnackbarState({ ...snackbarState, open: false });
+  }
 
   return (
     <Box className={className} component="div">
@@ -64,11 +88,50 @@ export default function ContactModal({ className, ctaText }: Props) {
             <Button autoFocus className="mt-3 px-6 py-4 w-full cursor-pointer md:mx-2 md:mt-2" text="Submit" onClick={() => {
               contactFormRef.current?.clearFormValues();
               contactFormRef.current?.clearSelectValues();
+              handleCloseModal();
+              handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
             }} />
           </Box>
         </DialogActions>
       </Dialog>
       <Button className="mx-4 mt-6 self-center p-4 cursor-pointer md:self-start" text={ctaText} onClick={handleOpenModal} />
+      <Snackbar
+        key={vertical + horizontal}
+        anchorOrigin={{ vertical, horizontal }}
+        autoHideDuration={4000}
+        open={open}
+        sx={{
+          textAlign: `center`,
+          '& .MuiPaper-root': {
+            background: `#F98500`,
+            borderRadius: 0
+          },
+          '& .MuiSnackbarContent-message': {
+            fontSize: `20px`
+          },
+          '& .MuiSvgIcon-root': {
+            fontSize: `28px`
+          }
+        }}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          severity="success"
+          sx={{
+            width: `100%`,
+            '& .MuiAlert-icon': {
+              alignItems: `center`
+            },
+            '& .MuiAlert-message': {
+              fontSize: `20px`
+            }
+          }}
+          variant="filled"
+          onClose={handleCloseSnackbar}
+        >
+          <Box component="p">Thank you for your submission! We will do our best to contact you within 24 hours.</Box>
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
