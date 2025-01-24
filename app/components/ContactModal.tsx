@@ -123,8 +123,8 @@ export default function ContactModal({ className, ctaText }: Props) {
               alignItems: `center`
             },
             '& .MuiAlert-message': {
-              fontSize: `20px`
-            } 
+              fontSize: `20px` 
+            }
           }}
           variant="filled"
           onClose={handleCloseSnackbar}
