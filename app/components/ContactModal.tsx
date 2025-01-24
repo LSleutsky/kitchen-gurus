@@ -14,14 +14,14 @@ import Button from "./Button";
 import ContactForm from "./ContactForm";
 import Logo from "./Logo";
 
+interface ContactFormRef {
+  clearFormValues: () => void;
+  clearSelectValues: () => void;
+}
+
 interface Props {
   className?: string;
   ctaText: string;
-}
-
-interface Ref {
-  clearFormValues: () => void;
-  clearSelectValues: () => void;
 }
 
 interface SnackbarState extends SnackbarOrigin {
@@ -29,7 +29,7 @@ interface SnackbarState extends SnackbarOrigin {
 }
 
 export default function ContactModal({ className, ctaText }: Props) {
-  const contactFormRef = useRef<Ref>(null);
+  const contactFormRef = useRef<ContactFormRef>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const [snackbarState, setSnackbarState] = useState<SnackbarState>({
