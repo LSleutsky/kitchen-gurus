@@ -16,6 +16,14 @@ import TextField from "@mui/material/TextField";
 
 import { phoneNumberAutoFormat } from "~/utils";
 
+import Button from "./Button";
+
+interface Props {
+  hasOwnCta?: boolean;
+  hasOwnCtaAction?: () => void;
+  hasOwnCtaText?: string;
+}
+
 interface Target {
   [key: string]: any;
 }
@@ -76,7 +84,7 @@ const baseMaterialInputStyles = {
 };
 
 // eslint-disable-next-line react/display-name
-const ContactForm = forwardRef((_, ref) => {
+const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText }: Props, ref) => {
   const [serviceName, setServiceName] = useState<string[]>([]);
 
   const [contactDetails, setContactDetails] = useState<Target>({
@@ -144,7 +152,7 @@ const ContactForm = forwardRef((_, ref) => {
   });
 
   return (
-    <Container className="px-0 pt-6 pb-6" component="form" sx={baseMaterialInputStyles}>
+    <Container className="pt-6 pb-6" component="form" sx={baseMaterialInputStyles}>
       <FormGroup>
         {/* Filter out last key-value pair from map, which will be its own comments text field after select dropdown */}
         {Object.keys(contactDetails).slice(0, -1).map(key => (
@@ -210,6 +218,7 @@ const ContactForm = forwardRef((_, ref) => {
           onFocus={textfieldLabelFocus}
         />
       </FormGroup>
+      {hasOwnCta && <Button className="mt-4 p-4 px-10 cursor-pointer" text={hasOwnCtaText} onClick={hasOwnCtaAction} />}
     </Container>
   );
 });

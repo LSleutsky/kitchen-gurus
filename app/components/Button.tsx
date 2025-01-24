@@ -2,7 +2,7 @@ interface Props {
   autoFocus?: boolean,
   className?: string;
   onClick?: () => void;
-  text: string;
+  text?: string;
   type?: any;
 }
 

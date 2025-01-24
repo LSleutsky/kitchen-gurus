@@ -22,7 +22,7 @@ interface Ref {
 }
 
 export default function ContactModal({ className, ctaText }: Props) {
-  const ref = useRef<Ref>(null);
+  const contactFormRef = useRef<Ref>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
@@ -52,18 +52,18 @@ export default function ContactModal({ className, ctaText }: Props) {
           }
         }}>
           <Box className={className} component="div">
-            <ContactForm ref={ref} />
+            <ContactForm ref={contactFormRef} />
           </Box>
         </DialogContent>
         <DialogActions>
           <Box className="w-full flex flex-col md:flex-row" component="div">
             <Button autoFocus className="mt-2 px-6 py-4 w-full cursor-pointer md:mx-2" text="Reset" onClick={() => {
-              ref.current?.clearFormValues();
-              ref.current?.clearSelectValues();
+              contactFormRef.current?.clearFormValues();
+              contactFormRef.current?.clearSelectValues();
             }} />
             <Button autoFocus className="mt-3 px-6 py-4 w-full cursor-pointer md:mx-2 md:mt-2" text="Submit" onClick={() => {
-              ref.current?.clearFormValues();
-              ref.current?.clearSelectValues();
+              contactFormRef.current?.clearFormValues();
+              contactFormRef.current?.clearSelectValues();
             }} />
           </Box>
         </DialogActions>
