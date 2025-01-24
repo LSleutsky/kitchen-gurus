@@ -14,7 +14,7 @@
     "*.{ts,tsx}": "eslint --fix"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "npx lint staged"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
