@@ -122,8 +122,8 @@ export default function ContactModal({ className, ctaText }: Props) {
             '& .MuiAlert-icon': {
               alignItems: `center`
             },
-            '& .MuiAlert-message': {
-              fontSize: `20px` 
+            '& .MuiAlert-message': { 
+              fontSize: `20px`
             }
           }}
           variant="filled"
