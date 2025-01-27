@@ -76,7 +76,7 @@ export default function ContactModal({ className, ctaText }: Props) {
           }
         }}>
           <Box className={className} component="div">
-            <ContactForm ref={contactFormRef} />
+            <ContactForm ref={contactFormRef} hasOwnCta hasOwnCtaText="Submit" hasOwnCtaType="submit" />
           </Box>
         </DialogContent>
         <DialogActions>
@@ -86,8 +86,8 @@ export default function ContactModal({ className, ctaText }: Props) {
               contactFormRef.current?.clearSelectValues();
             }} />
             <Button autoFocus className="mt-3 px-6 py-4 w-full cursor-pointer md:mx-2 md:mt-2" text="Submit" onClick={() => {
-              contactFormRef.current?.clearFormValues();
-              contactFormRef.current?.clearSelectValues();
+              // contactFormRef.current?.clearFormValues();
+              // contactFormRef.current?.clearSelectValues();
               handleCloseModal();
               handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
             }} />
@@ -98,16 +98,19 @@ export default function ContactModal({ className, ctaText }: Props) {
       <Snackbar
         key={vertical + horizontal}
         anchorOrigin={{ vertical, horizontal }}
-        autoHideDuration={4000}
+        // autoHideDuration={5000}
         open={open}
         sx={{
           textAlign: `center`,
-          '& .MuiPaper-root': {
-            background: `#F98500`,
-            borderRadius: 0
+          '&.MuiSnackbar-root': {
+            boxShadow: `1px 1px 10px #222`
           },
           '& .MuiSnackbarContent-message': {
             fontSize: `20px`
+          },
+          '& .MuiPaper-root': {
+            background: `#51A655`,
+            borderRadius: 0
           },
           '& .MuiSvgIcon-root': {
             fontSize: `28px`

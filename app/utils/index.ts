@@ -54,8 +54,8 @@ export const getImageParameters = (id: string, size: string = `1000x560`) =>
  * @example
  * {
  *   city: 'Philadelphia',
- *   stateProv: 'PA',
- *   stateProvCode: 'Pennsylvania'
+ *   stateProv: 'Pennsylvania',
+ *   stateProvCode: 'PA'
  * }
  */
 export const getUserLocation = async () => {

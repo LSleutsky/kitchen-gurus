@@ -207,7 +207,7 @@ export default [
         'error',
         {
           groups: [
-            ['^react$', '^react-router'],
+            ['^react$', '^react-router', '^react*'],
             ['^@', '^\\w'],
             ['^@mui/icons-material'],
             ['^@mui/material'],

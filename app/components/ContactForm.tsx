@@ -1,4 +1,6 @@
 import { forwardRef, useImperativeHandle, useState } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
+import { Controller, useForm } from "react-hook-form"
 
 import { capitalize, startCase, upperFirst } from "es-toolkit/string";
 
@@ -18,10 +20,21 @@ import { phoneNumberAutoFormat } from "~/utils";
 
 import Button from "./Button";
 
+interface ContactFormInputs {
+  firstName: string;
+  spouseName?: string;
+  lastName: string;
+  phoneNumber: string;
+  email?: string;
+  serviceOptions: ServiceOptions;
+  comments?: string;
+}
+
 interface Props {
   hasOwnCta?: boolean;
   hasOwnCtaAction?: () => void;
-  hasOwnCtaText?: string;
+  hasOwnCtaText: string;
+  hasOwnCtaType: string;
 }
 
 interface Target {
@@ -84,7 +97,7 @@ const baseMaterialInputStyles = {
 };
 
 // eslint-disable-next-line react/display-name
-const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText }: Props, ref) => {
+const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, hasOwnCtaType = `button` }: Props, ref) => {
   const [serviceName, setServiceName] = useState<string[]>([]);
 
   const [contactDetails, setContactDetails] = useState<Target>({
@@ -105,6 +118,13 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText }: P
     targetComments: false,
   });
 
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<ContactFormInputs>()
+
+  const onSubmit: SubmitHandler<ContactFormInputs> = data => console.info(data)
   const clearSelectValues = () => setServiceName([]);
   const formattedInputTargetLiteral = (name: string) => `target${upperFirst(`'${name}'`)}`;
 
@@ -121,7 +141,7 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText }: P
   const handleServiceSelection = (event: SelectChangeEvent<typeof serviceName>) =>
     setServiceName(typeof event.target.value === `string` ? event.target.value.split(`,`) : event.target.value);
 
-  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const setFormValues = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (event.target.name === `phoneNumber`)
       return setContactDetails((prev: Target) => ({
         ...contactDetails,
@@ -130,7 +150,7 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText }: P
 
     setContactDetails({
       ...contactDetails,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.name === `email` ? event.target.value : capitalize(event.target.value),
     });
   }
 
@@ -144,40 +164,83 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText }: P
       Object.keys(shrinkOnInputEventTarget).map((inputTarget: string) => event.target.name === inputTarget)
     );
 
+  const validationRules = (key: string) => {
+    switch (key) {
+      case `email`:
+        return {
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: `Please enter a valid email address`
+          }
+        };
+      case `firstName`:
+        return { required: `First Name is required` };
+      case `lastName`:
+        return { required: `Last Name is required` }
+      case `phoneNumber`:
+        return {
+          required: `A valid phone number is required`,
+          minLength: {
+            // min length is 14 to account for the phone number format util that masks entered user input for phone number
+            value: 14,
+            message: `A valid 10 digit phone number is required`
+          }
+        };
+    }
+  };
+
   useImperativeHandle(ref, () => {
     return {
       clearFormValues,
-      clearSelectValues
+      clearSelectValues,
+      onSubmit
     };
   });
 
   return (
-    <Container className="pt-6 pb-6" component="form" sx={baseMaterialInputStyles}>
+    <Container className="pt-6 pb-6" component="form" sx={baseMaterialInputStyles} onSubmit={handleSubmit(onSubmit)}>
       <FormGroup>
         {/* Filter out last key-value pair from map, which will be its own comments text field after select dropdown */}
         {Object.keys(contactDetails).slice(0, -1).map(key => (
-          <TextField
+          <Controller
             key={key}
-            label={startCase(key)}
-            name={key}
-            required={key === `firstName` || key === `lastName` || key === `phoneNumber`}
-            slotProps={{
-              inputLabel: {
-                shrink: !!contactDetails[key] || shrinkOnInputEventTarget[formattedInputTargetLiteral(key)]
-              }
-            }}
-            sx={{ mb: 2.5 }}
-            type={
-              key === `email`
-                ? `email`
-                : key === `phoneNumber`
-                  ? `tel`
-                  : `text`
-            }
-            value={key !== `email` && key !== `phoneNumber` ? capitalize(contactDetails[key]) : contactDetails[key]}
-            onBlur={textfieldLabelBlur}
-            onChange={setFormValues}
-            onFocus={textfieldLabelFocus}
+            control={control}
+            name={key as any}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                key={key}
+                error={!!errors[key as keyof ContactFormInputs]}
+                helperText={errors[key as keyof ContactFormInputs]?.message}
+                label={startCase(key)}
+                name={key}
+                slotProps={{
+                  htmlInput: {
+                    // weird bug where one extra number gets appended to end value sent to form data if extra numbers pressed on input
+                    maxLength: key === `phoneNumber` ? 14 : ``
+                  },
+                  inputLabel: {
+                    shrink: !!contactDetails[key] || shrinkOnInputEventTarget[formattedInputTargetLiteral(key)]
+                  }
+                }}
+                sx={{ mb: 2.5 }}
+                type={
+                  key === `email`
+                    ? `email`
+                    : key === `phoneNumber`
+                      ? `tel`
+                      : `text`
+                }
+                value={contactDetails[key]}
+                onBlur={textfieldLabelBlur}
+                onChange={(e) => {
+                  field.onChange(e);
+                  setFormValues(e);
+                }}
+                onFocus={textfieldLabelFocus}
+              />
+            )}
+            rules={validationRules(key)}
           />
         ))}
         <FormControl>
@@ -189,6 +252,7 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText }: P
             input={<OutlinedInput label="Services" />}
             labelId="services-select"
             MenuProps={MenuProps}
+            name="serviceOptions"
             renderValue={selected => selected.join(`, `)}
             value={serviceName}
             onChange={handleServiceSelection}
@@ -218,7 +282,7 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText }: P
           onFocus={textfieldLabelFocus}
         />
       </FormGroup>
-      {hasOwnCta && <Button className="mt-4 p-4 px-10 cursor-pointer" text={hasOwnCtaText} onClick={hasOwnCtaAction} />}
+      {hasOwnCta && <Button className="mt-4 p-4 px-10 cursor-pointer" text={hasOwnCtaText} type={hasOwnCtaType} onClick={hasOwnCtaAction} />}
     </Container>
   );
 });
