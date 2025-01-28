@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -12,11 +12,6 @@ import Button from "./Button";
 import ContactForm from "./ContactForm";
 import Logo from "./Logo";
 
-interface ContactFormRef {
-  clearFormValues: () => void;
-  clearServiceSelection: () => void;
-}
-
 interface Props {
   className?: string;
   ctaText: string;
@@ -27,7 +22,6 @@ interface SnackbarState extends SnackbarOrigin {
 }
 
 export default function ContactModal({ className, ctaText }: Props) {
-  const contactFormRef = useRef<ContactFormRef>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [isContactFormSubmitted, setIsContactFormSubmitted] = useState<boolean>(false);
 
@@ -83,7 +77,7 @@ export default function ContactModal({ className, ctaText }: Props) {
           }
         }}>
           <div className={className}>
-            <ContactForm ref={contactFormRef} isContactFormSubmitted={handleSubmitState as any} />
+            <ContactForm isContactFormSubmitted={handleSubmitState as any} />
           </div>
         </DialogContent>
       </Dialog>
