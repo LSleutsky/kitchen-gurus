@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from "react-hook-form"
 
@@ -20,7 +20,7 @@ import { phoneNumberAutoFormat } from "~/utils";
 
 import Button from "./Button";
 
-interface ContactFormInputs {
+export interface ContactFormInputs {
   firstName: string;
   spouseName?: string;
   lastName: string;
@@ -30,15 +30,12 @@ interface ContactFormInputs {
   comments?: string;
 }
 
-interface Props {
-  hasOwnCta?: boolean;
-  hasOwnCtaAction?: () => void;
-  hasOwnCtaText: string;
-  hasOwnCtaType: string;
-}
-
 interface FormInputTarget {
   [key: string]: any;
+}
+
+interface Props {
+  isContactFormSubmitted: (value: boolean) => typeof value;
 }
 
 interface ServiceOptions {
@@ -82,7 +79,7 @@ const baseMaterialInputStyles = {
 };
 
 // eslint-disable-next-line react/display-name
-const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, hasOwnCtaType = `button` }: Props, ref) => {
+const ContactForm = forwardRef(({ isContactFormSubmitted }: Props, ref) => {
   const [serviceName, setServiceName] = useState<string[]>([]);
 
   const [contactDetails, setContactDetails] = useState<FormInputTarget>({
@@ -97,7 +94,7 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, has
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitted, isValid },
     reset
   } = useForm<ContactFormInputs>({
     mode: `onTouched`
@@ -159,6 +156,10 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, has
         };
     }
   };
+
+  useEffect(() => {
+    isContactFormSubmitted(isSubmitted);
+  }, [isSubmitted, isContactFormSubmitted]);
 
   useImperativeHandle(ref, () => {
     return {
@@ -264,7 +265,22 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, has
           }
         />
       </FormGroup>
-      {hasOwnCta && <Button className="mt-4 p-4 px-10 cursor-pointer" text={hasOwnCtaText} type={hasOwnCtaType} onClick={hasOwnCtaAction} />}
+      <div className="w-full flex flex-col mb-2 md:flex-row">
+        <Button
+          className="w-full mt-4 mr-1 p-4 px-10 cursor-pointer"
+          text="Reset"
+          onClick={() => {
+            clearFormValues();
+            clearServiceSelection();
+          }}
+        />
+        <Button
+          className={`w-full mt-2 ml-0 p-4 px-10 cursor-${isValid ? `pointer` : `not-allowed`} md:mt-4 md:ml-1`}
+          disabled={!isValid}
+          text="Submit"
+          type="submit"
+        />
+      </div>
     </Container>
   );
 });

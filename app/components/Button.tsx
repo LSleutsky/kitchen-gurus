@@ -1,16 +1,23 @@
 interface Props {
-  autoFocus?: boolean,
   className?: string;
+  disabled?: boolean;
   onClick?: () => void;
   text?: string;
   type?: any;
 }
 
-export default function Button({ autoFocus, className, onClick, text, type = `button` }: Props) {
+export default function Button({ className, disabled, onClick, text, type = `button` }: Props) {
   return (
     <button
-      autoFocus={autoFocus}
-      className={`${className} border-2 border-[#F98500] bg-[#F98500] font-['Open_Sans'] hover:bg-transparent`}
+      className={`
+        ${disabled
+          ? `border-2 border-gray-400 bg-gray-300 text-gray-500`
+          : `border-2 border-[#F98500] bg-[#F98500] hover:bg-transparent`
+        }
+        ${className}
+        font-['Open_Sans']
+      `}
+      disabled={disabled}
       type={type}
       onClick={onClick}
     >

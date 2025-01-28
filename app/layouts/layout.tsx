@@ -9,8 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
-import Box from '@mui/material/Box';
-
 import Banner from "~/components/Banner";
 import Header from "~/components/Header";
 import Logo from "~/components/Logo";
@@ -29,7 +27,7 @@ const socialMediaActions: SocialMediOptions[] = [
   { icon: <FacebookIcon />, name: `Facebook`, url: `https://www.facebook.com/basementgurus/` },
   { icon: <InstagramIcon />, name: `Instagram`, url: `https://www.instagram.com/basementguruu/` },
   { icon: <XIcon />, name: `X`, url: `https://x.com/basement_gurus` },
-  { icon: <YouTubeIcon />, name: `YouTube`, url: `https://www.youtube.com/@basementgurus` }
+  { icon: <YouTubeIcon sx={{ fontSize: `32px` }} />, name: `YouTube`, url: `https://www.youtube.com/@basementgurus` }
 ];
 
 export default function MainLayout() {
@@ -67,20 +65,13 @@ export default function MainLayout() {
           <Logo alt="Kitchen Gurus logo" src="/kitchen-gurus-logo.png" />
         </div>
         <div className="flex flex-col items-center justify-between bg-black p-4 text-sm md:flex-row">
-          <Box component="span">
+          <span>
             <CopyrightIcon className="-mt-0.5 text-white" fontSize="small" />
             <span className="ml-0.5 font-['Open_Sans'] text-white">
               {new Date().getFullYear()} Kitchen Gurus | All Rights Reserved
             </span>
-          </Box>
-          <Box className="mt-3 md:mt-0 [&>*]:mx-2 [&>*]:text-white" component="span" sx={{
-            '& .MuiSvgIcon-root': {
-              fontSize: `30px`,
-              '&[data-testid="YouTubeIcon"]': {
-                fontSize: `40px`
-              }
-            }
-          }}>
+          </span>
+          <span className="mt-3 md:mt-0 [&>*]:mx-2 [&>*]:text-white">
             {socialMediaActions.map((socialMedia: SocialMediOptions) =>
               <Link
                 key={socialMedia.name}
@@ -91,7 +82,7 @@ export default function MainLayout() {
                 {socialMedia.icon}
               </Link>
             )}
-          </Box>
+          </span>
         </div>
       </footer>
     </div>
