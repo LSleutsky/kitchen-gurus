@@ -35,7 +35,7 @@ interface FormInputTarget {
 }
 
 interface Props {
-  isContactFormSubmitted: (value: boolean) => typeof value;
+  handleContactFormSubmission: (submitted: boolean) => typeof submitted;
 }
 
 interface ServiceOptions {
@@ -78,7 +78,7 @@ const baseMaterialInputStyles = {
   }
 };
 
-export default function ContactForm({ isContactFormSubmitted }: Props) {
+export default function ContactForm({ handleContactFormSubmission }: Props) {
   const [serviceName, setServiceName] = useState<string[]>([]);
 
   const [contactDetails, setContactDetails] = useState<FormInputTarget>({
@@ -157,8 +157,8 @@ export default function ContactForm({ isContactFormSubmitted }: Props) {
   };
 
   useEffect(() => {
-    isContactFormSubmitted(isSubmitted);
-  }, [isSubmitted, isContactFormSubmitted]);
+    handleContactFormSubmission(isSubmitted);
+  }, [isSubmitted, handleContactFormSubmission]);
 
   return (
     <Container className="pt-6 pb-6" component="form" sx={baseMaterialInputStyles} onSubmit={handleSubmit(onSubmit)}>
