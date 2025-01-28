@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from "react-hook-form"
 
-import { capitalize, startCase, upperFirst } from "es-toolkit/string";
+import { capitalize, startCase } from "es-toolkit/string";
 
 import Checkbox from '@mui/material/Checkbox';
 import Container from "@mui/material/Container";
@@ -37,7 +37,7 @@ interface Props {
   hasOwnCtaType: string;
 }
 
-interface Target {
+interface FormInputTarget {
   [key: string]: any;
 }
 
@@ -59,9 +59,9 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: 250,
-      width: 250,
-    },
-  },
+      width: 250
+    }
+  }
 };
 
 const baseMaterialInputStyles = {
@@ -78,21 +78,6 @@ const baseMaterialInputStyles = {
   },
   '& .MuiInputLabel-root': {
     fontFamily: `Open Sans`
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: `rgb(81,166,85)`,
-    },
-    '&:hover fieldset': {
-      borderColor: `rgba(81,166,85, 0.7)`,
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: `rgb(81,166,85)`,
-    }
-  },
-  '& label.Mui-focused': {
-    color: `rgb(81,166,85)`,
-    fontWeight: 600
   }
 };
 
@@ -100,7 +85,7 @@ const baseMaterialInputStyles = {
 const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, hasOwnCtaType = `button` }: Props, ref) => {
   const [serviceName, setServiceName] = useState<string[]>([]);
 
-  const [contactDetails, setContactDetails] = useState<Target>({
+  const [contactDetails, setContactDetails] = useState<FormInputTarget>({
     firstName: ``,
     spouseName: ``,
     lastName: ``,
@@ -109,41 +94,37 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, has
     comments: ``,
   });
 
-  const [shrinkOnInputEventTarget, setShrinkOnInputEventTarget] = useState<Target>({
-    targetFirstName: false,
-    targetSpouseName: false,
-    targetLastName: false,
-    targetPhoneNumber: false,
-    targetEmail: false,
-    targetComments: false,
-  });
-
   const {
     control,
     handleSubmit,
-    formState: { errors }
-  } = useForm<ContactFormInputs>()
+    formState: { errors },
+    reset
+  } = useForm<ContactFormInputs>({
+    mode: `onTouched`
+  })
 
-  const onSubmit: SubmitHandler<ContactFormInputs> = data => console.info(data)
-  const clearSelectValues = () => setServiceName([]);
-  const formattedInputTargetLiteral = (name: string) => `target${upperFirst(`'${name}'`)}`;
+  const onSubmit: SubmitHandler<ContactFormInputs> = data => console.info(data);
+  const clearServiceSelection = () => setServiceName([]);
 
-  const clearFormValues = () =>
+  const clearFormValues = () => {
     setContactDetails({
       firstName: ``,
       spouseName: ``,
       lastName: ``,
       phoneNumber: ``,
       email: ``,
-      comments: ``,
+      comments: ``
     });
+
+    reset();
+  };
 
   const handleServiceSelection = (event: SelectChangeEvent<typeof serviceName>) =>
     setServiceName(typeof event.target.value === `string` ? event.target.value.split(`,`) : event.target.value);
 
   const setFormValues = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (event.target.name === `phoneNumber`)
-      return setContactDetails((prev: Target) => ({
+      return setContactDetails((prev: FormInputTarget) => ({
         ...contactDetails,
         phoneNumber: phoneNumberAutoFormat(event.target.value, prev.phoneNumber),
       }));
@@ -154,17 +135,7 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, has
     });
   }
 
-  const textfieldLabelBlur = (event: React.FocusEvent<HTMLInputElement>) =>
-    setShrinkOnInputEventTarget(
-      Object.keys(shrinkOnInputEventTarget).map((target: string) => ({ [target]: !event.target.name }))
-    );
-
-  const textfieldLabelFocus = (event: React.FocusEvent<HTMLInputElement>) =>
-    setShrinkOnInputEventTarget(
-      Object.keys(shrinkOnInputEventTarget).map((inputTarget: string) => event.target.name === inputTarget)
-    );
-
-  const validationRules = (key: string) => {
+  const formValidationRules = (key: string) => {
     switch (key) {
       case `email`:
         return {
@@ -179,9 +150,9 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, has
         return { required: `Last Name is required` }
       case `phoneNumber`:
         return {
-          required: `A valid phone number is required`,
+          required: `A valid Phone Number is required`,
           minLength: {
-            // min length is 14 to account for the phone number format util that masks entered user input for phone number
+            // min length is 14 to account for the phone number format util that masks entered user input value
             value: 14,
             message: `A valid 10 digit phone number is required`
           }
@@ -192,7 +163,7 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, has
   useImperativeHandle(ref, () => {
     return {
       clearFormValues,
-      clearSelectValues,
+      clearServiceSelection,
       onSubmit
     };
   });
@@ -206,7 +177,7 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, has
             key={key}
             control={control}
             name={key as any}
-            render={({ field }) => (
+            render={({ field, fieldState }: any) => (
               <TextField
                 {...field}
                 key={key}
@@ -214,14 +185,13 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, has
                 helperText={errors[key as keyof ContactFormInputs]?.message}
                 label={startCase(key)}
                 name={key}
+                required={key === `firstName` || key === `lastName` || key === `phoneNumber`}
                 slotProps={{
                   htmlInput: {
                     // weird bug where one extra number gets appended to end value sent to form data if extra numbers pressed on input
                     maxLength: key === `phoneNumber` ? 14 : ``
                   },
-                  inputLabel: {
-                    shrink: !!contactDetails[key] || shrinkOnInputEventTarget[formattedInputTargetLiteral(key)]
-                  }
+                  inputLabel: { shrink: fieldState.isFocused }
                 }}
                 sx={{ mb: 2.5 }}
                 type={
@@ -232,54 +202,66 @@ const ContactForm = forwardRef(({ hasOwnCta, hasOwnCtaAction, hasOwnCtaText, has
                       : `text`
                 }
                 value={contactDetails[key]}
-                onBlur={textfieldLabelBlur}
-                onChange={(e) => {
-                  field.onChange(e);
-                  setFormValues(e);
+                onChange={event => {
+                  field.onChange(event);
+                  setFormValues(event);
                 }}
-                onFocus={textfieldLabelFocus}
               />
             )}
-            rules={validationRules(key)}
+            rules={formValidationRules(key)}
           />
         ))}
-        <FormControl>
-          <InputLabel id="services-select">Services</InputLabel>
-          <Select
-            fullWidth
-            multiple
-            id="services-select-dropdown"
-            input={<OutlinedInput label="Services" />}
-            labelId="services-select"
-            MenuProps={MenuProps}
-            name="serviceOptions"
-            renderValue={selected => selected.join(`, `)}
-            value={serviceName}
-            onChange={handleServiceSelection}
-          >
-            {serviceOptions.map(option => (
-              <MenuItem key={option.value} value={option.label}>
-                <Checkbox checked={serviceName.includes(option.label)} />
-                <ListItemText primary={option.label} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <TextField
-          multiline
-          label="Comments"
-          minRows="3"
+        <Controller
+          control={control}
+          name="serviceOptions"
+          render={({ field }) =>
+            <FormControl>
+              <InputLabel id="services-select">Services</InputLabel>
+              <Select
+                fullWidth
+                multiple
+                id="services-select-dropdown"
+                input={<OutlinedInput label="Services" />}
+                labelId="services-select"
+                MenuProps={MenuProps}
+                name="serviceOptions"
+                renderValue={selected => selected.join(`, `)}
+                value={serviceName}
+                onChange={event => {
+                  field.onChange(event);
+                  handleServiceSelection(event);
+                }}
+              >
+                {serviceOptions.map(option => (
+                  <MenuItem key={option.value} value={option.label}>
+                    <Checkbox checked={serviceName.includes(option.label)} />
+                    <ListItemText primary={option.label} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          }
+        />
+        <Controller
+          control={control}
           name="comments"
-          slotProps={{
-            inputLabel: {
-              shrink: !!contactDetails.comments || shrinkOnInputEventTarget.targetComments
-            }
-          }}
-          sx={{ mt: 2.5 }}
-          value={capitalize(contactDetails.comments)}
-          onBlur={textfieldLabelBlur}
-          onChange={setFormValues}
-          onFocus={textfieldLabelFocus}
+          render={({ field, fieldState }: any) =>
+            <TextField
+              multiline
+              label="Comments"
+              minRows="3"
+              name="comments"
+              slotProps={{
+                inputLabel: { shrink: fieldState.isFocused }
+              }}
+              sx={{ mt: 2.5 }}
+              value={capitalize(contactDetails.comments)}
+              onChange={event => {
+                field.onChange(event);
+                setFormValues(event);
+              }}
+            />
+          }
         />
       </FormGroup>
       {hasOwnCta && <Button className="mt-4 p-4 px-10 cursor-pointer" text={hasOwnCtaText} type={hasOwnCtaType} onClick={hasOwnCtaAction} />}

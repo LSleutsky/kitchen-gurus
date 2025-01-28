@@ -16,7 +16,7 @@ import Logo from "./Logo";
 
 interface ContactFormRef {
   clearFormValues: () => void;
-  clearSelectValues: () => void;
+  clearServiceSelection: () => void;
 }
 
 interface Props {
@@ -83,11 +83,11 @@ export default function ContactModal({ className, ctaText }: Props) {
           <Box className="w-full flex flex-col md:flex-row" component="div">
             <Button autoFocus className="mt-2 px-6 py-4 w-full cursor-pointer md:mx-2" text="Reset" onClick={() => {
               contactFormRef.current?.clearFormValues();
-              contactFormRef.current?.clearSelectValues();
+              contactFormRef.current?.clearServiceSelection();
             }} />
             <Button autoFocus className="mt-3 px-6 py-4 w-full cursor-pointer md:mx-2 md:mt-2" text="Submit" onClick={() => {
               // contactFormRef.current?.clearFormValues();
-              // contactFormRef.current?.clearSelectValues();
+              // contactFormRef.current?.clearServiceSelection();
               handleCloseModal();
               handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
             }} />
