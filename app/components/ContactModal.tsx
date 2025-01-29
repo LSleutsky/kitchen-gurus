@@ -75,11 +75,7 @@ export default function ContactModal({ className, ctaText }: Props) {
             </span>
           </div>
         </div>
-        <DialogContent sx={{
-          '&.MuiDialogContent-root': {
-            padding: `30px 24px 0 24px`
-          }
-        }}>
+        <DialogContent>
           <ContactForm handleContactFormSubmission={handleContactFormSubmitState as any} />
         </DialogContent>
       </Dialog>

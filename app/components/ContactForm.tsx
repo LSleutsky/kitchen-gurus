@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
+import { Link } from "react-router";
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from "react-hook-form"
 
 import { capitalize, startCase } from "es-toolkit/string";
 
+import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
+import Chip from '@mui/material/Chip';
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from "@mui/material/Container";
 import FormControl from "@mui/material/FormControl";
@@ -22,7 +25,7 @@ import { phoneNumberAutoFormat } from "~/utils";
 
 import Button from "./Button";
 
-export interface ContactFormInputs {
+interface ContactFormInputs {
   firstName: string;
   spouseName?: string;
   lastName: string;
@@ -63,7 +66,7 @@ const MenuProps = {
   }
 };
 
-const baseMaterialInputStyles = {
+const baseContactFormInputStyles = {
   '&.MuiContainer-root': {
     padding: 0
   },
@@ -77,6 +80,32 @@ const baseMaterialInputStyles = {
   },
   '& .MuiInputLabel-root': {
     fontFamily: `Open Sans`
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: `rgb(81,166,85)`,
+    },
+    '&:hover fieldset': {
+      borderColor: `rgba(81,166,85, 0.7)`,
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: `rgb(81,166,85)`,
+    },
+    '&.Mui-error': {
+      '& .MuiOutlinedInput-notchedOutline': {
+        border: `2px solid #D32F2F`
+      },
+    }
+  },
+  '& label': {
+    color: `rgb(81,166,85)`,
+    '&.Mui-focused': {
+      color: `rgb(81,166,85)`,
+      fontWeight: 600
+    },
+    '&.Mui-error': {
+      color: `#D32F2F`
+    }
   }
 };
 
@@ -98,12 +127,6 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
     formState: { errors, isSubmitted, isSubmitting, isValid },
     reset
   } = useForm<ContactFormInputs>({ mode: `onTouched` })
-
-  const onSubmit: SubmitHandler<ContactFormInputs> = async data => {
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    console.info(data);
-  };
 
   const clearServiceSelection = () => setServiceName([]);
 
@@ -133,7 +156,7 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
     setContactDetails({
       ...contactDetails,
       [event.target.name]: event.target.name === `email`
-        ? event.target.value.replace(/[^a-zA-Z]/g, ``)
+        ? event.target.value
         : capitalize(event.target.value.replace(/[^a-zA-Z]/g, ``))
     });
   }
@@ -167,7 +190,7 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
         return {
           required: `A valid Phone Number is required`,
           minLength: {
-            // min length is 14 to account for the phone number format util that masks entered user input value
+            // min length is to account for the phone number format util that masks entered user input value
             value: 14,
             message: `A valid 10 digit phone number is required`
           }
@@ -175,12 +198,18 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
     }
   };
 
+  const onSubmit: SubmitHandler<ContactFormInputs> = async data => {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    console.info(data);
+  };
+
   useEffect(() => {
     handleContactFormSubmission(isSubmitted);
-  }, [isSubmitted, handleContactFormSubmission]);
+  }, [handleContactFormSubmission, isSubmitted]);
 
   return (
-    <Container className="pt-6 pb-6 relative" component="form" sx={baseMaterialInputStyles} onSubmit={handleSubmit(onSubmit)}>
+    <Container className="pt-6 pb-6 relative" component="form" sx={baseContactFormInputStyles} onSubmit={handleSubmit(onSubmit)}>
       {isSubmitting && (
         <div className={`absolute w-full h-full flex justify-center items-center ${isSubmitting ? `z-10` : ``}`}>
           <CircularProgress size="8em" sx={{
@@ -190,6 +219,12 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
           }} />
         </div>
       )}
+      <h4 className="font-['Open_Sans'] text-center mb-4">
+        If you have an emergency or need to speak with someone right away, please call us at
+        <Link className="text-[#F98500]" to="tel:1-800-555-6666">
+          {` 1-800-555-6666`}
+        </Link>
+      </h4>
       <div className={isSubmitting ? `opacity-25` : ``}>
         <FormGroup>
           {/* Filter out last key-value pair from map, which will be its own comments text field after select dropdown */}
@@ -201,7 +236,6 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
               render={({ field, fieldState }: any) => (
                 <TextField
                   {...field}
-                  key={key}
                   error={!!errors[key as keyof ContactFormInputs]}
                   helperText={errors[key as keyof ContactFormInputs]?.message}
                   label={startCase(key)}
@@ -246,7 +280,14 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
                   labelId="services-select"
                   MenuProps={MenuProps}
                   name="serviceOptions"
-                  renderValue={selected => selected.join(`, `)}
+                  // renderValue={selected => selected.join(`, `)}
+                  renderValue={(selected) => (
+                    <Box sx={{ display: `flex`, flexWrap: `wrap`, gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
                   value={serviceName}
                   onChange={event => {
                     field.onChange(event);
@@ -294,7 +335,16 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
               clearServiceSelection();
             }}
           />
-          <Tooltip disableInteractive title="Please fill out the required form fields">
+          <Tooltip
+            disableInteractive
+            followCursor
+            slotProps={{
+              tooltip: {
+                sx: { fontSize: `14px` }
+              }
+            }}
+            title="Please fill out the required form fields"
+          >
             <span className="w-full">
               <Button
                 className={`w-full mt-2 ml-0 p-4 px-10 cursor-${isValid ? `pointer` : `not-allowed`} md:mt-4 md:mr-0`}
