@@ -32,9 +32,13 @@ export default function ContactModal({ className, ctaText }: Props) {
   });
 
   const { horizontal, open, vertical } = snackbarState;
-  const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
   const handleContactFormSubmitState = (state: boolean) => setIsContactFormSubmitted(state);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+    setSnackbarState({ ...snackbarState, open: false });
+  };
 
   const handleOpenSnackbar = (newSnackbarState: SnackbarOrigin) =>
     setSnackbarState({ ...newSnackbarState, open: true });
@@ -76,9 +80,7 @@ export default function ContactModal({ className, ctaText }: Props) {
             padding: `30px 24px 0 24px`
           }
         }}>
-          <div className={className}>
-            <ContactForm handleContactFormSubmission={handleContactFormSubmitState as any} />
-          </div>
+          <ContactForm handleContactFormSubmission={handleContactFormSubmitState as any} />
         </DialogContent>
       </Dialog>
       <Button className="mx-4 mt-6 self-center p-4 cursor-pointer md:self-start" text={ctaText} onClick={handleOpenModal} />

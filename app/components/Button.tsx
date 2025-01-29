@@ -11,7 +11,7 @@ export default function Button({ className, disabled, onClick, text, type = `but
     <button
       className={`
         ${disabled
-          ? `border-2 border-gray-400 bg-gray-300 text-gray-500`
+          ? `border-2 border-gray-300 bg-gray-200 text-gray-400`
           : `border-2 border-[#F98500] bg-[#F98500] hover:bg-transparent`
         }
         ${className}

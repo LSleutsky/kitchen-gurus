@@ -17,13 +17,13 @@ import useClickOutside from "~/hooks/useClickOutside";
 
 import { getUserLocation } from "~/utils";
 
-interface SocialMediOptions {
+interface SocialMediaOptions {
   icon: React.JSX.Element;
   name: string;
   url: string;
 }
 
-const socialMediaActions: SocialMediOptions[] = [
+const socialMediaActions: SocialMediaOptions[] = [
   { icon: <FacebookIcon />, name: `Facebook`, url: `https://www.facebook.com/basementgurus/` },
   { icon: <InstagramIcon />, name: `Instagram`, url: `https://www.instagram.com/basementguruu/` },
   { icon: <XIcon />, name: `X`, url: `https://x.com/basement_gurus` },
@@ -72,7 +72,7 @@ export default function MainLayout() {
             </span>
           </span>
           <span className="mt-3 md:mt-0 [&>*]:mx-2 [&>*]:text-white">
-            {socialMediaActions.map((socialMedia: SocialMediOptions) =>
+            {socialMediaActions.map((socialMedia: SocialMediaOptions) =>
               <Link
                 key={socialMedia.name}
                 target="_blank"
