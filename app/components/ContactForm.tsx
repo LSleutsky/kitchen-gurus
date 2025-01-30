@@ -157,7 +157,7 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
       ...contactDetails,
       [event.target.name]: event.target.name === `email`
         ? event.target.value
-        : capitalize(event.target.value.replace(/[^a-zA-Z]/g, ``))
+        : event.target.value.replace(/[^a-zA-Z\s]+/, ``).split(` `).map(capitalize).join(` `)
     });
   }
 
@@ -167,28 +167,28 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
         return {
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: `Please enter a valid Email Address`
+            message: `Please enter a valid email address`
           }
         };
       case `firstName`:
         return {
-          required: `First Name is required`,
+          required: `First name is required`,
           pattern: {
-            value: /^[A-Za-z]+$/i,
-            message: `First Name is required`
+            value: /^[A-Za-z\s]*$/i,
+            message: `First name is required`
           }
         };
       case `lastName`:
         return {
-          required: `Last Name is required`,
+          required: `Last name is required`,
           pattern: {
-            value: /^[A-Za-z]+$/i,
-            message: `Last Name is required`
+            value: /^[A-Za-z\s]*$/,
+            message: `Last name is required`
           }
         }
       case `phoneNumber`:
         return {
-          required: `A valid Phone Number is required`,
+          required: `Phone number is required`,
           minLength: {
             // min length is to account for the phone number format util that masks entered user input value
             value: 14,
@@ -225,7 +225,7 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
           {` 1-800-555-6666`}
         </Link>
       </h4>
-      <div className={isSubmitting ? `opacity-25` : ``}>
+      <section className={isSubmitting ? `opacity-25` : ``}>
         <FormGroup>
           {/* Filter out last key-value pair from map, which will be its own comments text field after select dropdown */}
           {Object.keys(contactDetails).slice(0, -1).map(key => (
@@ -273,18 +273,25 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
               <FormControl>
                 <InputLabel id="services-select">Services</InputLabel>
                 <Select
-                  fullWidth
                   multiple
                   id="services-select-dropdown"
                   input={<OutlinedInput label="Services" />}
                   labelId="services-select"
                   MenuProps={MenuProps}
                   name="serviceOptions"
-                  // renderValue={selected => selected.join(`, `)}
-                  renderValue={(selected) => (
+                  renderValue={selected => (
                     <Box sx={{ display: `flex`, flexWrap: `wrap`, gap: 0.5 }}>
-                      {selected.map((value) => (
-                        <Chip key={value} label={value} />
+                      {selected.map(value => (
+                        <Chip
+                          key={value}
+                          label={value}
+                          sx={{
+                            '&.MuiChip-root': {
+                              backgroundColor: `#51A655`,
+                              color: `white`
+                            }
+                          }}
+                        />
                       ))}
                     </Box>
                   )}
@@ -326,7 +333,7 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
             }
           />
         </FormGroup>
-        <div className="w-full flex flex-col mb-2 md:flex-row">
+        <footer className="w-full flex flex-col mb-2 md:flex-row">
           <Button
             className="w-full mt-4 mr-2 p-4 px-10 cursor-pointer"
             text="Reset"
@@ -354,8 +361,8 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
               />
             </span>
           </Tooltip>
-        </div>
-      </div>
+        </footer>
+      </section>
     </Container>
   )
 }

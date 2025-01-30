@@ -57,14 +57,14 @@ export default function ContactModal({ className, ctaText }: Props) {
   }, [isContactFormSubmitted]);
 
   return (
-    <div className={className}>
+    <main className={className}>
       <Dialog
         fullScreen
         aria-labelledby="responsive-dialog-title"
         open={openModal}
         onClose={handleCloseModal}
       >
-        <div id="responsive-dialog-title">
+        <header id="responsive-dialog-title">
           <div className="flex flex-col-reverse items-center justify-between bg-[#51A655] px-6 py-4 md:flex-row">
             <div className="flex flex-col items-center md:flex-row">
               <Logo action={handleCloseModal} alt="Kitchen Gurus logo" className="w-32 md:w-24" src="/kitchen-gurus-logo.png" />
@@ -74,7 +74,7 @@ export default function ContactModal({ className, ctaText }: Props) {
               <CloseIcon className="cursor-pointer text-white" fontSize="large" onClick={handleCloseModal} />
             </span>
           </div>
-        </div>
+        </header>
         <DialogContent>
           <ContactForm handleContactFormSubmission={handleContactFormSubmitState as any} />
         </DialogContent>
@@ -120,6 +120,6 @@ export default function ContactModal({ className, ctaText }: Props) {
           <p>Thank you for your submission! We will do our best to contact you within 24 hours.</p>
         </Alert>
       </Snackbar>
-    </div>
+    </main>
   );
 }

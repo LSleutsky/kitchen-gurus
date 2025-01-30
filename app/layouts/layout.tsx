@@ -6,6 +6,7 @@ import CopyrightIcon from "@mui/icons-material/Copyright";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import MenuIcon from "@mui/icons-material/Menu";
+import PhoneIcon from '@mui/icons-material/Phone';
 import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
@@ -61,13 +62,17 @@ export default function MainLayout() {
         <Outlet context={userLocationData} />
       </main>
       <footer className="w-full bg-[#51A655]">
-        <div className="relative flex justify-center text-white md:justify-start">
+        <div className="flex justify-center text-white md:justify-start">
           <Logo alt="Kitchen Gurus logo" src="/kitchen-gurus-logo.png" />
         </div>
         <div className="flex flex-col items-center justify-between bg-black p-4 text-sm md:flex-row">
+          <Link className="text-white text-base mb-2 md:mb-0" to="tel:1-800-555-6666">
+            <PhoneIcon />
+            {` 1-800-555-6666`}
+          </Link>
           <span>
-            <CopyrightIcon className="-mt-0.5 text-white" fontSize="small" />
-            <span className="ml-0.5 font-['Open_Sans'] text-white">
+            <CopyrightIcon className="-mt-0.5 text-white translate-[-1.5px]" fontSize="small" />
+            <span className="ml-0.5 font-['Open_Sans'] text-white text-base">
               {new Date().getFullYear()} Kitchen Gurus | All Rights Reserved
             </span>
           </span>
