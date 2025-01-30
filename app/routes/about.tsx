@@ -1,7 +1,7 @@
 import StarIcon from "@mui/icons-material/Star";
 
 import ContactModal from "~/components/ContactModal";
-import Bullseye from '~/components/svg/BullsEye';
+import Bullseye from '~/components/svg/Bullseye';
 import HandShake from '~/components/svg/Handshake';
 import Ribbon from "~/components/svg/Ribbon";
 import StarUser from "~/components/svg/StarUser";
