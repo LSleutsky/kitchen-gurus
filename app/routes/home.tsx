@@ -12,8 +12,9 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   const kitchenRemodelUrl = getImageParameters(`bcfe92d3-dbf2-4fe7-b383-45a3cf74e4f0`, `1200x760`);
+  const kitchenRemodelUrl2 = getImageParameters(`7615789b-aba6-4cbc-be53-f7632a052cd3`, `1200x760`);
 
-  const mainContent = () => {
+  const dreamKitchensContent = () => {
     const paragraphOne = `Kitchen Gurus is one of the leading companies for kitchen remodeling needs in
       ${displayLocation(true)}. We will professionally and responsibly complete all of your kitchen makeover alterations,
       and be there every step of the way in providing you with stunning and affordable results. From cabinets to marble,
@@ -42,15 +43,29 @@ export default function Home() {
   };
 
   return (
-    <section>
-      <Content
-        cta
-        ctaText="Get a Free Estimate"
-        heading="Dream Kitchens"
-        imageAlt="Kitchen remodeling"
-        imageUrl={kitchenRemodelUrl}
-        mainContent={mainContent()}
-      />
-    </section>
+    <>
+      <section>
+        <Content
+          cta
+          ctaText="Get a Free Estimate"
+          heading="Dream Kitchens"
+          imageAlt="Kitchen remodeling"
+          imageUrl={kitchenRemodelUrl}
+          mainContent={dreamKitchensContent()}
+        />
+      </section>
+      <section>
+        <Content
+          contentReverse
+          cta
+          contentClass="pt-6"
+          ctaText="Schedule an Appointment"
+          heading="Years of Experience"
+          imageAlt="Kitchen remodeling"
+          imageUrl={kitchenRemodelUrl2}
+          mainContent={dreamKitchensContent()}
+        />
+      </section>
+    </>
   );
 }

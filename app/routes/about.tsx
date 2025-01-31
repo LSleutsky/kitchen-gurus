@@ -1,3 +1,6 @@
+import { Link } from 'react-router';
+
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import StarIcon from "@mui/icons-material/Star";
 
 import ContactModal from "~/components/ContactModal";
@@ -12,6 +15,15 @@ interface AboutUsData {
   title: string;
   content: string;
   icon: React.JSX.Element;
+}
+
+interface LocationData {
+  backgroundColor: string;
+  cityStateZip: string;
+  iconColor: string;
+  location: string;
+  streetAddress: string;
+  url: string;
 }
 
 const aboutUsData: AboutUsData[] = [
@@ -38,6 +50,41 @@ const aboutUsData: AboutUsData[] = [
     title: `Notable Quality`,
     content: `We never overlook the quality of our work, and only utilize the finest materials and modern methods to
       guarantee a stellar remodeling job for you.`
+  }
+];
+
+const locationData: LocationData[] = [
+  {
+    backgroundColor: `#475B48`,
+    cityStateZip: `Lancaster, PA 17601`,
+    iconColor: `#C13E33`,
+    location: `LANCASTER, PA`,
+    streetAddress: `2384 Harrisburg Pike`,
+    url: `https://www.google.com/localservices/prolist?spp=Cg0vZy8xMXEyN2R6cnJq&scp=CgAaEkJhc2VtZW50IEd1cnVzIExMQyoSQmFzZW1lbnQgR3VydXMgTExD&q=Basement+Gurus+LLC&src=2&slp=UhUIARIREg8iDS9nLzExcTI3ZHpycmo`
+  },
+  {
+    backgroundColor: `#51A655`,
+    cityStateZip: `Southampton, PA 18966`,
+    iconColor: `#E0AA25`,
+    location: `SOUTHAMPTON, PA`,
+    streetAddress: `55 2nd Street Pike`,
+    url: `https://www.google.com/maps/place/Basement+Gurus/@40.0770267,-75.0837746,759m/data=!3m2!1e3!4b1!4m6!3m5!1s0x89c6b1d00267f5b7:0xc3c464130b250006!8m2!3d40.0770267!4d-75.0837746!16s%2Fg%2F11j8t98r79?entry=ttu&g_ep=EgoyMDI1MDEyOC4wIKXMDSoASAFQAw%3D%3D`
+  },
+  {
+    backgroundColor: `#83A885`,
+    cityStateZip: `Philadelphia, PA 19111`,
+    iconColor: `#19242D`,
+    location: `GREATER PHILADELPHIA`,
+    streetAddress: `431 Rhawn St.`,
+    url: `https://www.google.com/localservices/prolist?spp=Cg0vZy8xMWo4dDk4cjc5&scp=CgAaDkJhc2VtZW50IEd1cnVzKg5CYXNlbWVudCBHdXJ1cw%3D%3D&q=Basement+Gurus&src=2&slp=UhUIARIREg8iDS9nLzExajh0OThyNzk`
+  },
+  {
+    backgroundColor: `#475B48`,
+    cityStateZip: `Wilmington, DE 19804`,
+    iconColor: `#C13E33`,
+    location: `WILMINGTON, DE`,
+    streetAddress: `244 W Champlain Ave`,
+    url: `https://www.google.com/localservices/prolist?spp=Cg0vZy8xMWZ2NnBtc3l4&scp=CgAaEkJhc2VtZW50IEd1cnVzIExMQyoSQmFzZW1lbnQgR3VydXMgTExD&q=Basement+Gurus+LLC&src=2&slp=UhUIARIREg8iDS9nLzExZnY2cG1zeXg%3D`
   }
 ];
 
@@ -75,6 +122,36 @@ export default function About() {
           exceeds our client's expectations.`}
         </p>
         <ContactModal ctaText="Get a Free Consultation" />
+      </section>
+      <section className="flex flex-col justify-center items-center p-8 pb-0">
+        <h1 className="text-center font-['Open_Sans'] text-4xl font-semibold pb-6">
+          Our Locations
+        </h1>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {locationData.map((data: LocationData, index: number) => (
+            <Link key={index} target="_blank" to={data.url}>
+              <div
+                className="flex flex-col justify-evenly mx-2 text-white text-center font-['Open_Sans'] min-h-80 p-6"
+                style={{ backgroundColor: `${data.backgroundColor}` }}
+              >
+                <span>
+                  <LocationOnIcon sx={{
+                    '&.MuiSvgIcon-root': {
+                      color: `${data.iconColor}`,
+                      fontSize: `80px`
+                    }
+                  }} />
+                </span>
+                <h3 className="text-xl p-2">{data.location}</h3>
+                <p>
+                  {data.streetAddress}
+                  <br />
+                  {data.cityStateZip}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
     </>
   );

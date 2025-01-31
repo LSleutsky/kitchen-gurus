@@ -71,7 +71,16 @@ export default function ContactModal({ className, ctaText }: Props) {
               <h2 className="font-['Open_Sans'] text-2xl text-white text-center sm:text-3xl md:pl-2">{ctaText}</h2>
             </div>
             <span className="self-end md:self-center">
-              <CloseIcon className="cursor-pointer text-white" fontSize="large" onClick={handleCloseModal} />
+              <CloseIcon
+                className="cursor-pointer text-white"
+                fontSize="large"
+                sx={{
+                  '& .MuiSvgIcon-root': {
+                    fontSize: `28px`
+                  }
+                }}
+                onClick={handleCloseModal}
+              />
             </span>
           </div>
         </header>

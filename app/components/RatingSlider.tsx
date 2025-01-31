@@ -144,10 +144,10 @@ export default function RatingSlider() {
       }}
     >
       <SliderComponent {...settings}>
-        {ratingData.map((item, index) => (
-          <Link key={index} target="_blank" to={item.url}>
+        {ratingData.map((data, index) => (
+          <Link key={index} target="_blank" to={data.url}>
             <figure className="figure-container">
-              <img alt={item.alt} className="w-24 h-22" src={item.src} />
+              <img alt={data.alt} className="w-24 h-22" src={data.src} />
             </figure>
           </Link>
         ))}
