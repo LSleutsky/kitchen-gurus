@@ -66,7 +66,8 @@ export default function MainLayout() {
       <footer className="w-full">
         <div className="flex flex-col justify-center items-center">
           <Strip />
-          <h2 className="text-2xl font-['Open_Sans'] py-4">LICENSED & INSURED</h2>
+          <h2 className="text-3xl font-['Open_Sans'] py-8">LICENSED & INSURED</h2>
+          <hr className="border-2 border-[#51A655] w-16" />
           <RatingSlider />
         </div>
         <div className="bg-[#51A655]">

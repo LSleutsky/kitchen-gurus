@@ -99,8 +99,8 @@ export default function RatingSlider() {
     infinite: true,
     pauseOnHover: true,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 6,
+    slidesToScroll: 3,
     initialSlide: 0,
     nextArrow: <ArrowForwardIosIcon sx={carouselArrowStyles} />,
     prevArrow: <ArrowBackIosNewIcon sx={carouselArrowStyles} />,
@@ -134,7 +134,7 @@ export default function RatingSlider() {
 
   return (
     <Box
-      className="slider-container max-w-8/12 my-10 md:max-w-10/12"
+      className="slider-container max-w-8/12 my-16 md:max-w-10/12"
       component="div"
       sx={{
         '& .figure-container': {
