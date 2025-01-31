@@ -12,7 +12,8 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   const kitchenRemodelUrl = getImageParameters(`bcfe92d3-dbf2-4fe7-b383-45a3cf74e4f0`, `1200x760`);
-  const kitchenRemodelUrl2 = getImageParameters(`7615789b-aba6-4cbc-be53-f7632a052cd3`, `1200x760`);
+  const secondKitchenRemodelUrl = getImageParameters(`7615789b-aba6-4cbc-be53-f7632a052cd3`, `1200x760`);
+  const thirdKitchenRemodelUrl = getImageParameters(`14aeb5e2-1d76-4bcd-868b-0bdf32cb42b9`, `1200x760`);
 
   const dreamKitchensContent = () => {
     const paragraphOne = `Kitchen Gurus is one of the leading companies for kitchen remodeling needs in
@@ -58,11 +59,22 @@ export default function Home() {
         <Content
           contentReverse
           cta
-          contentClass="pt-6"
+          contentClass="py-6"
           ctaText="Schedule an Appointment"
           heading="Years of Experience"
           imageAlt="Kitchen remodeling"
-          imageUrl={kitchenRemodelUrl2}
+          imageUrl={secondKitchenRemodelUrl}
+          mainContent={dreamKitchensContent()}
+        />
+      </section>
+      <section>
+        <Content
+          cta
+          contentClass="py-6"
+          ctaText="Setup a Meeting"
+          heading="Attention to Detail"
+          imageAlt="Kitchen remodeling"
+          imageUrl={thirdKitchenRemodelUrl}
           mainContent={dreamKitchensContent()}
         />
       </section>
