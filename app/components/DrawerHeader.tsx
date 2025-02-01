@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from "react-router";
 
+import EmailIcon from '@mui/icons-material/Email';
 import MenuIcon from '@mui/icons-material/Menu';
 import PhoneIcon from '@mui/icons-material/Phone';
 
@@ -73,6 +74,7 @@ export default function DrawerHeader() {
                 xs: `none`,
                 sm: `flex`
               },
+              alignItems: `center`,
               marginRight: `14px`
             }}
           >
@@ -91,13 +93,14 @@ export default function DrawerHeader() {
           open={mobileOpen}
           sx={{
             display: {
-              xs: `block`,
+              xs: `flex`,
               sm: `none`
             },
             '& .MuiDrawer-paper': {
               boxSizing: `border-box`,
               width: 240,
-              backgroundColor: `#51A655`
+              backgroundColor: `#51A655`,
+              justifyContent: `space-between`
             }
           }}
           variant="temporary"
@@ -130,11 +133,22 @@ export default function DrawerHeader() {
               ))}
             </List>
           </Box>
+          <Box>
+            <Divider />
+            <span className="flex justify-center text-white py-2">
+              <Link to="mailto:kitchengurus@gmail.com">
+                <EmailIcon fontSize="small" sx={{
+                  '&.MuiSvgIcon-root': {
+                    marginRight: `4px`,
+                    transform: `translateY(-1.5px)`
+                  }
+                }} />
+                kitchengurus@gmail.com
+              </Link>
+            </span>
+          </Box>
         </Drawer>
       </nav>
-      <Box component="div">
-        <Toolbar />
-      </Box>
     </Box>
   );
 }

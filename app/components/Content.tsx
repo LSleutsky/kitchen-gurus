@@ -14,7 +14,6 @@ interface Props {
 }
 
 export default function Content({ contentReverse, cta, ctaText, heading, contentClass, imageAlt, imageUrl, mainContent }: Props) {
-
   const { width } = useWindowSize();
 
   return (

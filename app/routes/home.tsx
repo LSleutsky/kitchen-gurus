@@ -67,7 +67,7 @@ export default function Home() {
       will transform your kitchen into the most engaging and attractive space in your home.`;
 
     const paragraphThree = (
-      <span>
+      <>
         Feel free to give us a call at
         <Link className="text-[#F98500]" to="tel:1-800-555-6666">
           {` 1-800-555-6666 `}
@@ -77,7 +77,7 @@ export default function Home() {
           {` gallery `}
         </Link>
         first to get inspiration from some awesome projects which can quickly become a reality!
-      </span>
+      </>
     );
 
     return [paragraphOne, paragraphTwo, paragraphThree];
@@ -93,11 +93,11 @@ export default function Home() {
       feedback. Our kitchen transformation potential is unmatched, and has a proven track record!`;
 
     const paragraphThree = (
-      <span>
+      <>
         From our first <em>hello</em> to our last <em>goodbye</em>, from initial estimation to completion, you will be
         completely at ease - and more importantly, in awe - at the seamless transition from phase to phase, and your decision to
         hire Kitchen Gurus will be one you will <em>never</em> regret!
-      </span>
+      </>
     );
 
     return [paragraphOne, paragraphTwo, paragraphThree];
@@ -155,7 +155,7 @@ export default function Home() {
           mainContent={attentionToDetailContent()}
         />
       </section>
-      <section className="bg-[#F7F7F7] font-['Open_Sans'] pb-6">
+      <section className="bg-[#F7F7F7] font-['Open_Sans'] pb-4">
         <h1 className="text-center text-4xl font-semibold py-6">
           Our Process
         </h1>

@@ -31,7 +31,7 @@ export default function Banner() {
         style={{ backgroundImage: `url(${bannerImageUrl})` }}
       >
         <div className="absolute size-full bg-black opacity-60 content-['']" />
-        <div className="absolute right-[-24%] h-full w-7/12 skew-x-[20deg] bg-[#F98500] opacity-50 content-[''] md:right-[-12%]" />
+        <div className="absolute right-[-20%] h-full w-7/12 skew-x-[20deg] bg-[#F98500] opacity-50 content-[''] md:right-[-12%]" />
       </figure>
       <section className="bg-[#F7F7F7] py-4">
         <h1 className="text-center font-['Open_Sans'] text-4xl font-semibold">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router";
 
 import CopyrightIcon from "@mui/icons-material/Copyright";
+import EmailIcon from '@mui/icons-material/Email';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -59,10 +60,21 @@ export default function MainLayout() {
             <Logo alt="Kitchen Gurus logo" src="/kitchen-gurus-logo.png" />
           </div>
           <div className="flex flex-col items-center justify-between bg-black p-4 text-sm md:flex-row">
-            <Link className="text-white text-base mb-2 md:mb-0" to="tel:1-800-555-6666">
-              <PhoneIcon />
-              {` 1-800-555-6666`}
-            </Link>
+            <span className="flex flex-col items-center md:items-start">
+              <Link className="text-white text-base md:mb-1" to="tel:1-800-555-6666">
+                <PhoneIcon />
+                {` 1-800-555-6666`}
+              </Link>
+              <Link className="text-white text-base mb-1 md:mb-0" to="mailto:kitchengurus@gmail.com">
+                <EmailIcon sx={{
+                  '&.MuiSvgIcon-root': {
+                    marginRight: `3px`,
+                    transform: `translateY(-1.5px)`
+                  }
+                }} />
+                {` kitchengurus@gmail.com`}
+              </Link>
+            </span>
             <span>
               <CopyrightIcon className="-mt-0.5 text-white translate-[-1.5px]" fontSize="small" />
               <span className="ml-0.5 font-['Open_Sans'] text-white text-base">
