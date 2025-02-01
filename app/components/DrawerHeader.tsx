@@ -70,14 +70,15 @@ export default function DrawerHeader() {
           <Box
             sx={{
               display: {
-                xs: `none`, sm: `flex`
+                xs: `none`,
+                sm: `flex`
               },
               marginRight: `14px`
             }}
           >
             {navLinks.map((link, index) => (
               <Link key={index} to={link.route}>
-                <Button className="text-white cursor-pointer bg-transparent border-none mx-3" text={link.text} />
+                <Button className="text-white cursor-pointer bg-transparent border-none mx-3 text-lg" text={link.text} />
               </Link>
             ))}
           </Box>
@@ -89,12 +90,15 @@ export default function DrawerHeader() {
           ModalProps={{ keepMounted: true }}
           open={mobileOpen}
           sx={{
-            display: { xs: `block`, sm: `none` },
+            display: {
+              xs: `block`,
+              sm: `none`
+            },
             '& .MuiDrawer-paper': {
               boxSizing: `border-box`,
               width: 240,
               backgroundColor: `#51A655`
-            },
+            }
           }}
           variant="temporary"
           onClose={handleDrawerToggle}
