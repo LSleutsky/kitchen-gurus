@@ -1,22 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router";
 
-import CloseIcon from "@mui/icons-material/Close";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import MenuIcon from "@mui/icons-material/Menu";
 import PhoneIcon from '@mui/icons-material/Phone';
 import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
 import Banner from "~/components/Banner";
-import Header from "~/components/Header";
+import DrawerHeader from "~/components/DrawerHeader";
 import Logo from "~/components/Logo";
 import RatingSlider from "~/components/RatingSlider";
 import Strip from "~/components/svg/Strip";
-
-import useClickOutside from "~/hooks/useClickOutside";
 
 import { getUserLocation } from "~/utils";
 
@@ -34,10 +30,7 @@ const socialMediaActions: SocialMediaOptions[] = [
 ];
 
 export default function MainLayout() {
-  const [isNavBarOpen, setIsNavBarOpen] = useState<boolean>(false);
   const [userLocationData, setUserLocationData] = useState<object>({});
-  const toggleMenu = () => setIsNavBarOpen(prev => !prev);
-  const clickRef = useClickOutside(() => setIsNavBarOpen(false));
 
   useEffect(() => {
     (async () => {
@@ -49,23 +42,14 @@ export default function MainLayout() {
 
   return (
     <div className="flex h-full min-h-full flex-col">
-      <header className="relative flex items-center justify-between bg-[#51A655] text-white">
-        <div className="flex w-full items-center justify-between">
-          <Header clickRef={clickRef} isOpen={isNavBarOpen} toggleMenu={toggleMenu} />
-          <div className="flex items-center gap-4 pr-8 md:hidden">
-            <button className="cursor-pointer" onClick={toggleMenu}>
-              {isNavBarOpen ? <CloseIcon fontSize="large" /> : <MenuIcon fontSize="large" />}
-            </button>
-          </div>
-        </div>
-      </header>
+      <DrawerHeader />
       <main className="flex-[1]">
         <Banner />
         <Outlet context={userLocationData} />
       </main>
       <footer className="w-full">
         <div className="flex flex-col justify-center items-center">
-          <Strip className="pt-6" />
+          <Strip className="pt-3" />
           <h2 className="text-3xl font-['Open_Sans'] py-8">LICENSED & INSURED</h2>
           <hr className="border-2 border-[#51A655] w-16" />
           <RatingSlider />

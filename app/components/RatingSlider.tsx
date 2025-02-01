@@ -100,8 +100,7 @@ export default function RatingSlider() {
     pauseOnHover: true,
     speed: 500,
     slidesToShow: 6,
-    slidesToScroll: 3,
-    initialSlide: 0,
+    slidesToScroll: 2,
     nextArrow: <ArrowForwardIosIcon sx={carouselArrowStyles} />,
     prevArrow: <ArrowBackIosNewIcon sx={carouselArrowStyles} />,
     responsive: [

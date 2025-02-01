@@ -83,7 +83,7 @@ const locationData: LocationData[] = [
     cityStateZip: `Wilmington, DE 19804`,
     iconColor: `#C13E33`,
     location: `WILMINGTON, DE`,
-    streetAddress: `244 W Champlain Ave`,
+    streetAddress: `244 W. Champlain Ave`,
     url: `https://www.google.com/localservices/prolist?spp=Cg0vZy8xMWZ2NnBtc3l4&scp=CgAaEkJhc2VtZW50IEd1cnVzIExMQyoSQmFzZW1lbnQgR3VydXMgTExD&q=Basement+Gurus+LLC&src=2&slp=UhUIARIREg8iDS9nLzExZnY2cG1zeXg%3D`
   }
 ];

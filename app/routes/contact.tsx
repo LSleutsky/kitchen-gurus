@@ -6,10 +6,8 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Contact() {
   return (
-    <>
-      <section className="p-4 font-['Open_Sans']">
-        <h1>This is the Contact Page</h1>
-      </section>
-    </>
+    <section className="p-4 font-['Open_Sans']">
+      <h1>This is the Contact Page</h1>
+    </section>
   );
 }

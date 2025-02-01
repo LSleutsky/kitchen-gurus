@@ -7,9 +7,9 @@ interface Props {
   src: string;
 }
 
-export default function Logo({ action, alt, className, src }: Props) {
+export default function Logo({ action, alt, className = ``, src }: Props) {
   return (
-    <figure className={`${className} max-h-32 min-w-28 max-w-60 py-2`}>
+    <figure className={`max-h-32 min-w-28 max-w-60 py-2 ${className}`}>
       <Link to="/" onClick={action}>
         <img alt={alt} className="block w-full dark:block" src={src} onClick={action} />
       </Link>
