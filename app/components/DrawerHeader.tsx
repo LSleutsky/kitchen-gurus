@@ -78,7 +78,7 @@ export default function DrawerHeader() {
           >
             {navLinks.map((link, index) => (
               <Link key={index} to={link.route}>
-                <Button className="text-white cursor-pointer bg-transparent border-none mx-3 text-lg" text={link.text} />
+                <Button className="text-white cursor-pointer bg-transparent border-none mx-3 text-lg font-[Manrope] font-medium" text={link.text} />
               </Link>
             ))}
           </Box>

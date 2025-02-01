@@ -6,15 +6,15 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   build: {
-    sourcemap: true,
+    sourcemap: true
   },
   css: {
     postcss: {
-      plugins: [autoprefixer],
+      plugins: [autoprefixer]
     },
   },
   ssr: {
-    noExternal: [/^@mui\//],
+    noExternal: [/^@mui\//]
   },
-  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()]
 });
