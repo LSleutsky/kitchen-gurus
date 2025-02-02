@@ -8,6 +8,7 @@ import Reviews from "./Reviews";
 export default function Banner() {
   const [bannerImageUrl, setBannerImageUrl] = useState<string>(``);
   const location = useLocation();
+  const isOtherServicesPath = location.pathname.includes(`services`);
 
   useEffect(() => {
     const random = Math.floor(Math.random() * 4);
@@ -35,7 +36,7 @@ export default function Banner() {
       </figure>
       <section className="bg-[#F7F7F7] py-4">
         <h1 className="text-center font-['Open_Sans'] text-4xl font-semibold">
-          A Unique Kitchen Remodeling Experience
+          {isOtherServicesPath ? `Other Essential Services For A Safe Home` : `A Unique Kitchen Remodeling Experience`}
         </h1>
         <div className="grid justify-items-center pt-8 md:grid-cols-3 [&>*]:flex [&>*]:flex-col [&>*]:pb-4 [&>*]:md:pb-2">
           <Reviews

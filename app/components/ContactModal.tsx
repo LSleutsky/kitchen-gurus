@@ -14,7 +14,7 @@ import Logo from "./Logo";
 
 interface Props {
   className?: string;
-  ctaText: string;
+  ctaText?: string;
 }
 
 interface SnackbarState extends SnackbarOrigin {

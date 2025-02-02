@@ -112,20 +112,20 @@ export default function Home() {
       quality and superior work. Every step of your remodeling project will be completed to the very highest standards, from the
       best materials to precise construction craft.`;
 
-    const paragraphThree = `Our team can confidently say that the final results from your kitchen project will far exceed your
-      expectations. We simply do not worry about competitors in this field, because our process is unmatched, and the results speak
-      for themselves.`;
+    const paragraphThree = `Our philosophy at Kitchen Gurus is that it's all about the customer. Our team can confidently say that
+      the final results from your kitchen project will far exceed your expectations. We simply do not worry about competitors
+      in the field, because our process is unmatched, and the results speak volumes.`;
 
     return [paragraphOne, paragraphTwo, paragraphThree]
   };
 
   return (
-    <div>
+    <>
       <section>
         <Content
-          cta
+          contactCta
+          contactCtaText="Get a Free Estimate"
           contentClass="py-6"
-          ctaText="Get a Free Estimate"
           heading="Dream Kitchens"
           imageAlt="Light kitchen cabinets and countertops"
           imageUrl={kitchenRemodelUrl}
@@ -134,10 +134,10 @@ export default function Home() {
       </section>
       <section>
         <Content
+          contactCta
           contentReverse
-          cta
+          contactCtaText="Schedule an Appointment"
           contentClass="py-6"
-          ctaText="Schedule an Appointment"
           heading="Years of Experience"
           imageAlt="Fresh blue kitchen cabinets"
           imageUrl={secondKitchenRemodelUrl}
@@ -146,9 +146,9 @@ export default function Home() {
       </section>
       <section className="pb-6 md:pb-0">
         <Content
-          cta
+          contactCta
+          contactCtaText="Setup a Meeting"
           contentClass="md:py-6"
-          ctaText="Setup a Meeting"
           heading="Attention to Detail"
           imageAlt="Marble kitchen island and tile backsplash"
           imageUrl={thirdKitchenRemodelUrl}
@@ -174,6 +174,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-    </div>
+    </>
   );
 }

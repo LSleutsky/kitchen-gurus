@@ -29,7 +29,7 @@ const navLinks = [
     text: `Gallery`,
   },
   {
-    route: `/`,
+    route: `/services`,
     text: `Other Services`,
   },
   {

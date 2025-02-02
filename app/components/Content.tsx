@@ -1,19 +1,26 @@
 import useWindowSize from "~/hooks/useWindowSize";
 
+import Button from "./Button";
 import ContactModal from "./ContactModal";
 
 interface Props {
   contentClass?: string;
+  contactCta?: boolean;
+  contactCtaText?: string;
   contentReverse?: boolean;
   cta?: boolean;
-  ctaText: string;
+  ctaClassName?: string;
+  ctaOnClick?: () => void;
+  ctaText?: string;
   heading: string;
   imageAlt: string;
   imageUrl: string;
   mainContent: Array<any>;
 }
 
-export default function Content({ contentReverse, cta, ctaText, heading, contentClass, imageAlt, imageUrl, mainContent }: Props) {
+export default function Content({
+  contactCta, contactCtaText, contentReverse, cta, ctaClassName, ctaOnClick, ctaText, heading, contentClass, imageAlt, imageUrl, mainContent
+}: Props) {
   const { width } = useWindowSize();
 
   return (
@@ -26,7 +33,8 @@ export default function Content({ contentReverse, cta, ctaText, heading, content
               {content}
             </p>
           ))}
-          {cta && <ContactModal ctaText={ctaText} />}
+          {contactCta && <ContactModal ctaText={contactCtaText} />}
+          {cta && <Button className={ctaClassName} text={ctaText} onClick={ctaOnClick} />}
         </div>
       </div>
       <figure className="flex flex-1 self-stretch">
