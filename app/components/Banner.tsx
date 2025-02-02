@@ -20,9 +20,9 @@ export default function Banner() {
       { id: 4, slug: `79c7168d-a17f-462f-81b8-e5d53a9ba6d2` },
     ];
 
-    const url = getImageParameters(bannerImages[random].slug);
+    const bannerImagePath = getImageParameters(bannerImages[random].slug);
 
-    setBannerImageUrl(url);
+    setBannerImageUrl(bannerImagePath);
   }, [location]);
 
   return (
@@ -36,7 +36,7 @@ export default function Banner() {
       </figure>
       <section className="bg-[#F7F7F7] py-4">
         <h1 className="text-center font-['Open_Sans'] text-4xl font-semibold">
-          {isOtherServicesPath ? `Other Essential Services For A Safe Home` : `A Unique Kitchen Remodeling Experience`}
+          {isOtherServicesPath ? `Essential Services For A Safe Home` : `A Unique Kitchen Remodeling Experience`}
         </h1>
         <div className="grid justify-items-center pt-8 md:grid-cols-3 [&>*]:flex [&>*]:flex-col [&>*]:pb-4 [&>*]:md:pb-2">
           <Reviews

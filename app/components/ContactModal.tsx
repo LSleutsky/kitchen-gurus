@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -22,6 +23,8 @@ interface SnackbarState extends SnackbarOrigin {
 }
 
 export default function ContactModal({ className, ctaText }: Props) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [isContactFormSubmitted, setIsContactFormSubmitted] = useState<boolean>(false);
 
@@ -32,13 +35,18 @@ export default function ContactModal({ className, ctaText }: Props) {
   });
 
   const { horizontal, open, vertical } = snackbarState;
-  const handleCloseModal = () => setOpenModal(false);
   const handleContactFormSubmitState = (state: boolean) => setIsContactFormSubmitted(state);
 
   const handleOpenModal = () => {
     setOpenModal(true);
     setSnackbarState({ ...snackbarState, open: false });
+    navigate(location.pathname, { state: { openModal: true } });
   };
+
+  const handleCloseModal = useCallback(() => {
+    setOpenModal(false);
+    navigate(location.pathname, { state: { openModal: false } });
+  }, [location.pathname, navigate]);
 
   const handleOpenSnackbar = (newSnackbarState: SnackbarOrigin) =>
     setSnackbarState({ ...newSnackbarState, open: true });
@@ -50,11 +58,27 @@ export default function ContactModal({ className, ctaText }: Props) {
   }
 
   useEffect(() => {
+    if (location?.state?.openModal) setOpenModal(true);
+  }, [location]);
+
+  useEffect(() => {
+    const handleBrowserBackButtonClick = () => {
+      if (openModal) {
+        handleCloseModal();
+      }
+    };
+
+    window.addEventListener(`popstate`, handleBrowserBackButtonClick);
+
+    return () => window.removeEventListener(`popstate`, handleBrowserBackButtonClick);
+  }, [handleCloseModal, openModal]);
+
+  useEffect(() => {
     if (isContactFormSubmitted) {
       handleCloseModal();
       handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
     }
-  }, [isContactFormSubmitted]);
+  }, [handleCloseModal, isContactFormSubmitted]);
 
   return (
     <main className={className}>

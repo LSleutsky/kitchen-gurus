@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useLocation } from "react-router";
 
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import EmailIcon from '@mui/icons-material/Email';
@@ -32,6 +32,8 @@ const socialMediaActions: SocialMediaOptions[] = [
 
 export default function MainLayout() {
   const [userLocationData, setUserLocationData] = useState<object>({});
+  const location = useLocation();
+  const isHomePath = location.pathname === `/`;
 
   useEffect(() => {
     (async () => {
@@ -50,8 +52,8 @@ export default function MainLayout() {
       </main>
       <footer className="w-full">
         <div className="flex flex-col justify-center items-center">
-          <Strip className="pt-3" />
-          <h2 className="text-3xl font-['Open_Sans'] py-8">LICENSED & INSURED</h2>
+          <Strip className={isHomePath ? `pt-0` : `pt-3`} />
+          <h2 className="text-3xl font-[`Open_Sans`] font-semibold py-8">LICENSED & INSURED</h2>
           <hr className="border-2 border-[#51A655] w-16" />
           <RatingSlider />
         </div>

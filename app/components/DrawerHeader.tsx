@@ -48,7 +48,11 @@ export default function DrawerHeader() {
 
   return (
     <Box sx={{ display: `flex` }}>
-      <AppBar component="nav">
+      <AppBar component="nav" sx={{
+        '&.MuiPaper-root': {
+          background: `#51A655`,
+        },
+      }}>
         <Toolbar className="bg-[#51A655] flex justify-between" sx={{
           '&.MuiToolbar-root': {
             padding: `0 !important`,
@@ -80,7 +84,7 @@ export default function DrawerHeader() {
           >
             {navLinks.map((link, index) => (
               <Link key={index} to={link.route}>
-                <Button className="text-white cursor-pointer bg-transparent border-none mx-3 text-lg font-[Manrope] font-medium" text={link.text} />
+                <Button className="text-white cursor-pointer bg-transparent border-none mx-4 text-lg font-[Manrope] font-medium lg:mx-8 xl:mx-10 2xl:mx-12" text={link.text} />
               </Link>
             ))}
           </Box>
