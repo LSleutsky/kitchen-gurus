@@ -68,7 +68,6 @@ export default function Financing() {
         </Link>
         to inquire more about our financing options best suited for your customized home improvement project.
       </p>
-      <hr className="border-2 border-[#51A655] w-4xl m-auto mt-8" />
       <div className="mt-8 grid gap-12 grid-cols-1 px-8 items-center md:grid-cols-3">
         {financingData.map((data, index) => (
           <div key={index} className="flex flex-col justify-center items-center">
