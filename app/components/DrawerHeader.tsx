@@ -120,7 +120,7 @@ export default function DrawerHeader() {
             <Logo alt="Kitchen Gurus logo" src="/kitchen-gurus-logo.png" />
             <Divider />
             <Link className="text-white text-xl leading-[3em]" to="tel:1-800-555-6666">
-              <PhoneIcon fontSize="large" />
+              <PhoneIcon fontSize="medium" />
               {` 1-800-555-6666`}
             </Link>
             <Divider />

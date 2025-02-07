@@ -1,8 +1,9 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import StarIcon from "@mui/icons-material/Star";
 
+import Button from '~/components/Button';
 import ContactModal from "~/components/ContactModal";
 import Bullseye from '~/components/svg/Bullseye';
 import HandShake from '~/components/svg/Handshake';
@@ -93,6 +94,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function About() {
+  const navigate = useNavigate();
+
   return (
     <>
       <section className="px-8 py-6 font-['Open_Sans']">
@@ -122,6 +125,15 @@ export default function About() {
           exceeds our client's expectations.`}
         </p>
         <ContactModal ctaText="Get a Free Consultation" />
+      </section>
+      <section className="bg-[#51A655] text-center font-['Open_Sans'] py-6">
+        <h2 className="text-3xl font-semibold">Need Financing?</h2>
+        <h3 className="text-xl font-semibold mt-2">Check Out Our 0% Interest Financing Options</h3>
+        <Button
+          className="mx-4 mt-6 self-center p-4 cursor-pointer hover:bg-white"
+          text="Visit Financing"
+          onClick={() => navigate(`/financing`)}
+        />
       </section>
       <section className="flex flex-col justify-center items-center p-8 pb-0">
         <h1 className="text-center font-['Open_Sans'] text-4xl font-semibold pb-6">

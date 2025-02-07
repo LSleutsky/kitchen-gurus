@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import type { Photo } from "react-photo-album";
 import { RowsPhotoAlbum } from "react-photo-album";
 
@@ -6,7 +7,7 @@ import Lightbox from "yet-another-react-lightbox";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
-import { getImageParameters } from "~/utils";
+import { displayLocation, getImageParameters } from "~/utils";
 
 import type { Route } from "./+types/home";
 
@@ -123,8 +124,17 @@ export default function Gallery() {
     <>
       <section className="p-4 font-['Open_Sans']">
         <h1 className="text-center text-2xl font-semibold">
-          Explore our Gallery for a taste of our remodeling excellence
+          Explore Our Gallery For A Taste Of Our Remodeling Excellence
         </h1>
+        <p className="mt-5 text-center font-['Open_Sans'] text-lg font-light leading-8">
+          {`We understand exactly what kind of experience, ease, and stellar service you are looking for, which is why we have
+          positioned Kitchen Gurus to provide exactly that. Take a peek at some projects to see the kinds of masterpieces
+          we can provide. Please do not hesitate to`}
+          <Link className="text-[#F98500]" to="/contact">
+            {` contact us `}
+          </Link>
+          {`if you have additional questions about kitchen remodeling in ${displayLocation()}.`}
+        </p>
       </section>
       <section className="px-6">
         <RowsPhotoAlbum
