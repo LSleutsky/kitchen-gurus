@@ -85,14 +85,16 @@ export default function ContactModal({ className, ctaText }: Props) {
       <Dialog
         fullScreen
         aria-labelledby="responsive-dialog-title"
-        open={openModal}
+        open={location?.state?.openModal}
         onClose={handleCloseModal}
       >
         <header id="responsive-dialog-title">
           <div className="flex flex-col-reverse items-center justify-between bg-[#51A655] px-6 py-3 md:flex-row md:pl-0 md:py-0">
             <div className="flex flex-col items-center md:flex-row">
               <Logo action={handleCloseModal} alt="Kitchen Gurus logo" className="w-60" src="/kitchen-gurus-logo.png" />
-              <h2 className="font-['Open_Sans'] text-xl text-white text-center sm:text-2xl md:text-3xl md:pl-2">{ctaText}</h2>
+              <h2 className="font-['Open_Sans'] text-xl text-white text-center sm:text-2xl md:text-3xl md:pl-2">
+                Get Your Free Estimate
+              </h2>
             </div>
             <span className="self-end md:self-center">
               <CloseIcon
