@@ -13,20 +13,19 @@ import { useOutletContext } from "react-router";
 export const displayLocation = (showState?: boolean): string | undefined => {
   interface UserLocationData {
     city: string;
-    stateProv: string;
-    stateProvCode: string;
+    state: string;
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const locationData = useOutletContext<UserLocationData>();
   const formattedCity = locationData?.city?.split(`(`)[0].trim();
 
-  switch (locationData?.stateProvCode) {
-    case `DE`:
-    case `MD`:
-    case `NJ`:
-    case `PA`:
-      return `${formattedCity}${showState ? `, ${locationData?.stateProv}` : ``}`;
+  switch (locationData?.state) {
+    case `Delaware`:
+    case `Maryland`:
+    case `New Jersey`:
+    case `Pennsylvania`:
+      return `${formattedCity}${showState ? `, ${locationData?.state}` : ``}`;
     default:
       return `your area`;
   }
@@ -54,13 +53,12 @@ export const getImageParameters = (id: string, size: string = `1000x560`) =>
  * @example
  * {
  *   city: 'Philadelphia',
- *   stateProv: 'Pennsylvania',
- *   stateProvCode: 'PA'
+ *   state: 'Pennsylvania'
  * }
  */
 export const getUserLocation = async () => {
   try {
-    const response = await fetch(`https://api.db-ip.com/v2/free/self/`);
+    const response = await fetch(`https://geolocation-db.com/json/`);
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
