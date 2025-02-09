@@ -17,30 +17,10 @@ import Toolbar from '@mui/material/Toolbar';
 
 import Logo from "~/components/Logo";
 
-import Button from './Button';
+import type { NavLinks } from '~/utils/constants';
+import { navLinks } from '~/utils/constants';
 
-const navLinks = [
-  {
-    route: `/`,
-    text: `Home`,
-  },
-  {
-    route: `/gallery`,
-    text: `Gallery`,
-  },
-  {
-    route: `/services`,
-    text: `Other Services`,
-  },
-  {
-    route: `/about`,
-    text: `About Us`,
-  },
-  {
-    route: `/contact`,
-    text: `Contact Us`,
-  },
-];
+import Button from './Button';
 
 export default function DrawerHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -82,11 +62,11 @@ export default function DrawerHeader() {
               marginRight: `14px`
             }}
           >
-            {navLinks.map((link, index) => (
+            {navLinks.map((link: NavLinks, index) => (
               <Link key={index} to={link.route}>
                 <Button
                   className={`
-                    text-white text-xs cursor-pointer bg-transparent border-none mx-3 font-[Manrope] font-medium
+                    text-white text-sm cursor-pointer bg-transparent border-none mx-3 font-[Manrope] font-medium
                     sm:text-base md:text-lg lg:mx-8 xl:mx-10 2xl:mx-12
                   `}
                   text={link.text}
@@ -125,7 +105,7 @@ export default function DrawerHeader() {
             </Link>
             <Divider />
             <List>
-              {navLinks.map((link, index) => (
+              {navLinks.map((link: NavLinks, index) => (
                 <ListItem key={index} disablePadding>
                   <ListItemButton sx={{
                     '&.MuiButtonBase-root': {

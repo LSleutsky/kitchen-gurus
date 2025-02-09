@@ -1,50 +1,12 @@
 import { Link } from "react-router";
 
-import AddTaskIcon from '@mui/icons-material/AddTask';
-import EngineeringIcon from '@mui/icons-material/Engineering';
-import HouseIcon from '@mui/icons-material/House';
-import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
-
 import Content from "~/components/Content";
 
 import { displayLocation, getImageParameters } from "~/utils";
+import type { OurProcessData } from "~/utils/constants";
+import { ourProcessData } from "~/utils/constants";
 
 import type { Route } from "./+types/home";
-
-interface OurProcessData {
-  title: string;
-  content: string;
-  icon: React.JSX.Element;
-}
-
-const ourProcessIconStyles = {
-  '&.MuiSvgIcon-root': {
-    fontSize: `48px`
-  }
-}
-
-const ourProcessData: OurProcessData[] = [
-  {
-    icon: <PhoneInTalkIcon sx={ourProcessIconStyles} />,
-    title: `Step 1`,
-    content: `Consultation Call`
-  },
-  {
-    icon: <HouseIcon sx={ourProcessIconStyles} />,
-    title: `Step 2`,
-    content: `On-Site Visit & Design`
-  },
-  {
-    icon: <EngineeringIcon sx={ourProcessIconStyles} />,
-    title: `Step 3`,
-    content: `Meet With Technicians`
-  },
-  {
-    icon: <AddTaskIcon sx={ourProcessIconStyles} />,
-    title: `Step 4`,
-    content: `Hire With Trust`
-  }
-];
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: `Kitchen Gurus` }, { name: `description`, content: `Welcome to Kitchen Gurus!` }];

@@ -6,72 +6,11 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import Box from "@mui/material/Box";
 
+import type { RatingData } from "~/utils/constants";
+import { ratingData } from "~/utils/constants";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-interface RatingData {
-  alt: string;
-  src: string;
-  url: string;
-}
-
-const ratingData: RatingData[] = [
-  {
-    alt: `Angi Rating`,
-    src: `/angi-rating.png`,
-    url: `https://www.angi.com/companylist/us/pa/philadelphia/basement-gurus-reviews-9964580.htm`
-  },
-  {
-    alt: `BBB Rating`,
-    src: `/bbb-rating.png`,
-    url: `https://www.bbb.org/us/pa/feasterville-trevose/profile/basement-waterproofing/basement-gurus-llc-0241-236056063`
-  },
-  {
-    alt: `Build Zoom Rating`,
-    src: `/build-zoom-rating.png`,
-    url: `https://www.buildzoom.com/contractor/basement-gurus-llc`
-  },
-  {
-    alt: `Chamber of Commerce Rating`,
-    src: `/chamber-of-commerce-rating.png`,
-    url: `https://www.chamberofcommerce.com/business-directory/delaware/wilmington/waterproofing-company/40092781-basement-gurus-llc?source=memberwebsite`
-  },
-  {
-    alt: `Craft Jack Rating`,
-    src: `/craft-jack-rating.png`,
-    url: `https://yourmatches.improvenet.com/profile/details/306602?hash=preview`
-  },
-  {
-    alt: `Facebook Rating`,
-    src: `/facebook-rating.png`,
-    url: `https://www.facebook.com/basementgurus/`
-  },
-  {
-    alt: `Google Rating`,
-    src: `/google-rating.png`,
-    url: `https://www.google.com/maps/place//data=!4m2!3m1!1s0x89c6b1d00267f5b7:0xc3c464130b250006?source=g.page.share`
-  },
-  {
-    alt: `Home Advisor Rating`,
-    src: `/home-advisor-rating.png`,
-    url: `https://www.homeadvisor.com/rated.BasementGurus.97478986.html`
-  },
-  {
-    alt: `Neighborhood Faves Rating`,
-    src: `/neighborhood-faves-rating.png`,
-    url: `https://nextdoor.com/pages/basement-gurus-philadelphia-pa/`
-  },
-  {
-    alt: `Porch Rating`,
-    src: `/best-of-porch-rating.png`,
-    url: `https://pro.porch.com/philadelphia-pa/waterproofing-contractors/basement-gurus/pp`
-  },
-  {
-    alt: `Thumbtack Top Pro Rating`,
-    src: `/top-pro-rating.png`,
-    url: `https://www.thumbtack.com/pa/lancaster/waterproofing/basement-gurus/service/388863440970604554`
-  }
-];
 
 // @ts-expect-error: Property 'default' does not exist on type 'typeof Slider'
 const SliderComponent = typeof window === `undefined` ? Slider.default : Slider;
@@ -143,7 +82,7 @@ export default function RatingSlider() {
       }}
     >
       <SliderComponent {...settings}>
-        {ratingData.map((data, index) => (
+        {ratingData.map((data: RatingData, index) => (
           <Link key={index} target="_blank" to={data.url}>
             <figure className="figure-container">
               <img alt={data.alt} className="w-24 h-22" src={data.src} />

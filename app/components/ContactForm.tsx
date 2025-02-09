@@ -21,6 +21,8 @@ import TextField from "@mui/material/TextField";
 import Tooltip from '@mui/material/Tooltip';
 
 import { phoneNumberAutoFormat } from "~/utils";
+import type { ServiceOptions } from '~/utils/constants';
+import { serviceOptions } from '~/utils/constants';
 
 import Button from "./Button";
 
@@ -42,20 +44,6 @@ interface Props {
   handleContactFormSubmission: (submitted: boolean) => typeof submitted;
   headerText?: string | React.JSX.Element;
 }
-
-interface ServiceOptions {
-  value: string;
-  label: string;
-}
-
-const serviceOptions: ServiceOptions[] = [
-  { value: `cabinets`, label: `Cabinets` },
-  { value: `lighting`, label: `Lighting` },
-  { value: `flooring`, label: `Flooring` },
-  { value: `fixtures`, label: `Fixtures` },
-  { value: `appliances`, label: `Appliances` },
-  { value: `custom`, label: `Custom` },
-];
 
 const MenuProps = {
   PaperProps: {
