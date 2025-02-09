@@ -81,7 +81,7 @@ export default function Contact() {
   }, [isContactFormSubmitted]);
 
   return (
-    <section className="flex flex-col-reverse justify-between p-8 font-['Open_Sans'] md:flex-row">
+    <section className="flex flex-col-reverse justify-between p-8 pb-0 font-['Open_Sans'] md:flex-row">
       <div className="w-full md:w-6/12">
         <ContactForm
           ref={contactFormRef}
