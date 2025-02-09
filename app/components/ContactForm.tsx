@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from "react-hook-form"
 
@@ -109,7 +109,8 @@ const baseContactFormInputStyles = {
   }
 };
 
-export default function ContactForm({ handleContactFormSubmission, headerText }: Props) {
+// eslint-disable-next-line react/display-name
+const ContactForm = forwardRef(({ handleContactFormSubmission, headerText }: Props, ref) => {
   const [serviceName, setServiceName] = useState<string[]>([]);
 
   const [contactDetails, setContactDetails] = useState<FormInputTarget>({
@@ -207,6 +208,13 @@ export default function ContactForm({ handleContactFormSubmission, headerText }:
   useEffect(() => {
     handleContactFormSubmission(isSubmitted);
   }, [handleContactFormSubmission, isSubmitted]);
+
+  useImperativeHandle(ref, () => {
+    return {
+      clearFormValues,
+      clearServiceSelection
+    };
+  });
 
   return (
     <Container className="pt-6 pb-6 relative" component="form" sx={baseContactFormInputStyles} onSubmit={handleSubmit(onSubmit)}>
@@ -360,4 +368,6 @@ export default function ContactForm({ handleContactFormSubmission, headerText }:
       </section>
     </Container>
   )
-}
+});
+
+export default ContactForm;

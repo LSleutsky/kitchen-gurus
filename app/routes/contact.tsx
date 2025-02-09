@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
 import EmailIcon from '@mui/icons-material/Email';
@@ -11,6 +11,11 @@ import ContactForm from "~/components/ContactForm";
 import Submission from "~/components/Submission";
 
 import type { Route } from "./+types/home";
+
+interface ContactFormRef {
+  clearFormValues: () => void;
+  clearServiceSelection: () => void;
+}
 
 interface LocationData {
   address: string;
@@ -45,6 +50,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Contact() {
+  const contactFormRef = useRef<ContactFormRef>(null);
   const [isContactFormSubmitted, setIsContactFormSubmitted] = useState<boolean>(false);
 
   const [snackbarState, setSnackbarState] = useState<SnackbarState>({
@@ -68,6 +74,8 @@ export default function Contact() {
 
   useEffect(() => {
     if (isContactFormSubmitted) {
+      contactFormRef?.current?.clearFormValues();
+      contactFormRef?.current?.clearServiceSelection();
       handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
     }
   }, [isContactFormSubmitted]);
@@ -75,7 +83,10 @@ export default function Contact() {
   return (
     <section className="flex flex-col-reverse justify-between p-8 font-['Open_Sans'] md:flex-row">
       <div className="w-full md:w-6/12">
-        <ContactForm handleContactFormSubmission={handleContactFormSubmitState as any} />
+        <ContactForm
+          ref={contactFormRef}
+          handleContactFormSubmission={handleContactFormSubmitState as any}
+        />
       </div>
       <aside className="w-full text-center md:w-5/12 md:text-left">
         <h2 className="text-4xl font-semibold">Get In Touch</h2>
