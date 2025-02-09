@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from "react-router";
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from "react-hook-form"
 
@@ -41,6 +40,7 @@ interface FormInputTarget {
 
 interface Props {
   handleContactFormSubmission: (submitted: boolean) => typeof submitted;
+  headerText?: string | React.JSX.Element;
 }
 
 interface ServiceOptions {
@@ -109,7 +109,7 @@ const baseContactFormInputStyles = {
   }
 };
 
-export default function ContactForm({ handleContactFormSubmission }: Props) {
+export default function ContactForm({ handleContactFormSubmission, headerText }: Props) {
   const [serviceName, setServiceName] = useState<string[]>([]);
 
   const [contactDetails, setContactDetails] = useState<FormInputTarget>({
@@ -219,12 +219,7 @@ export default function ContactForm({ handleContactFormSubmission }: Props) {
           }} />
         </div>
       )}
-      <h4 className="font-['Open_Sans'] text-center mb-4">
-        If you have an emergency or need to speak with someone right away, please call us at
-        <Link className="text-[#F98500]" to="tel:1-800-555-6666">
-          {` 1-800-555-6666`}
-        </Link>
-      </h4>
+      {headerText}
       <section className={isSubmitting ? `opacity-25` : ``}>
         <FormGroup>
           {/* Filter out last key-value pair from map, which will be its own comments text field after select dropdown */}

@@ -1,17 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 import CloseIcon from "@mui/icons-material/Close";
 
-import Alert from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import type { SnackbarCloseReason, SnackbarOrigin } from '@mui/material/Snackbar';
-import Snackbar from '@mui/material/Snackbar';
 
 import Button from "./Button";
 import ContactForm from "./ContactForm";
 import Logo from "./Logo";
+import Submission from "./Submission";
 
 interface Props {
   className?: string;
@@ -56,6 +55,15 @@ export default function ContactModal({ className, ctaText }: Props) {
 
     setSnackbarState({ ...snackbarState, open: false });
   }
+
+  const contactFormHeaderText = (
+    <h4 className="font-['Open_Sans'] text-center mb-4">
+      If you have an emergency or need to speak with someone right away, please call us at
+      <Link className="text-[#F98500]" to="tel:1-800-555-6666">
+        {` 1-800-555-6666`}
+      </Link>
+    </h4>
+  );
 
   useEffect(() => {
     if (location?.state?.openModal) setOpenModal(true);
@@ -111,50 +119,19 @@ export default function ContactModal({ className, ctaText }: Props) {
           </div>
         </header>
         <DialogContent>
-          <ContactForm handleContactFormSubmission={handleContactFormSubmitState as any} />
+          <ContactForm
+            handleContactFormSubmission={handleContactFormSubmitState as any}
+            headerText={contactFormHeaderText}
+          />
         </DialogContent>
       </Dialog>
       <Button className="mx-4 mt-6 self-center p-4 cursor-pointer md:self-start" text={ctaText} onClick={handleOpenModal} />
-      <Snackbar
-        key={vertical + horizontal}
-        anchorOrigin={{ vertical, horizontal }}
-        autoHideDuration={5000}
+      <Submission
+        handleCloseSnackbar={handleCloseSnackbar}
+        horizontal={horizontal}
         open={open}
-        sx={{
-          textAlign: `center`,
-          '&.MuiSnackbar-root': {
-            boxShadow: `1px 1px 10px #222`
-          },
-          '& .MuiSnackbarContent-message': {
-            fontSize: `20px`
-          },
-          '& .MuiPaper-root': {
-            background: `#51A655`,
-            borderRadius: 0
-          },
-          '& .MuiSvgIcon-root': {
-            fontSize: `28px`
-          }
-        }}
-        onClose={handleCloseSnackbar}
-      >
-        <Alert
-          severity="success"
-          sx={{
-            width: `100%`,
-            '& .MuiAlert-icon': {
-              alignItems: `center`
-            },
-            '& .MuiAlert-message': {
-              fontSize: `20px`
-            }
-          }}
-          variant="filled"
-          onClose={handleCloseSnackbar}
-        >
-          <p>Thank you for your submission! We will do our best to contact you within 24 hours.</p>
-        </Alert>
-      </Snackbar>
+        vertical={vertical}
+      />
     </main>
   );
 }
