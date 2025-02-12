@@ -16,6 +16,7 @@ export default function Contact() {
   const guttersImagePath = getImageParameters(`94514333-1eb4-4a81-89fc-f52ea96f9458`, `1200x760`);
   const moldRemediationImagePath = getImageParameters(`548070ac-a918-419d-92e5-819113e6aa59`, `1200x760`);
   const roofingSidingImagePath = getImageParameters(`fdb46ca8-2e7c-40c9-889f-36325daf5e83`, `1200x760`);
+  const landscapingFencingImagePath = getImageParameters(`148d8257-5c66-4b04-9778-bb5dd1cde075`, `1200x760`);
 
   const basementWaterproofingContent = () => {
     const paragraphOne = (
@@ -140,13 +141,52 @@ export default function Contact() {
     return [paragraphOne, paragraphTwo, paragraphThree];
   };
 
+  const landscapingFencingContent = () => {
+    const paragraphOne = (
+      <>
+        Our sister company
+        <Link className="text-[#F98500]" target="_blank" to="https://lawn-gurus.com/">
+          {` Lawn Gurus `}
+        </Link>
+        specializes in maintaining healthy, green lawns for residential and commercial clients. Comprehensive services
+        include mowing, fertilizing, aerating, seeding, and pest control.
+      </>
+    );
+
+    const paragraphTwo = (
+      <>
+        Lawn Gurus also provide professional
+        <Link className="text-[#F98500]" target="_blank" to="https://lawn-gurus.com/services/fence-installation-repair/">
+          {` fence installation `}
+        </Link>
+        services, offering a range of materials including chain link, wood, and vinyl fencing. The affordable options ensure
+        low maintenance and secure boundaries, as well as beautifying any property.
+      </>
+    );
+
+    const paragraphThree = (
+      <>
+        <Link className="text-[#F98500]" target="_blank" to="https://lawn-gurus.com/services/sprinkler-installation-repair/">
+          Sprinkler installations
+        </Link>
+        {` is another service that we provide. We specialize in installing efficient sprinkler systems that automatically distribute
+        water to keep your lawn and plants healthy. Our services include connecting water supplies, assembling valve manifolds,
+        and positioning sprinklers for optimal coverage.`}
+      </>
+    );
+
+    return [paragraphOne, paragraphTwo, paragraphThree];
+  };
+
+  const ctaClassName = `w-fit mx-4 mt-6 p-4 cursor-pointer self-center lg:self-start`;
+
   return (
     <>
       <section>
         <Content
           cta
           contentClass="py-6"
-          ctaClassName="w-fit mx-4 mt-6 p-4 cursor-pointer self-center md:self-start"
+          ctaClassName={ctaClassName}
           ctaOnClick={() => window.open(`https://basementwaterproofinggurus.com/`)}
           ctaText="Visit Basement Waterproofing"
           heading="Basement Waterproofing"
@@ -160,7 +200,7 @@ export default function Contact() {
           contentReverse
           cta
           contentClass="py-6"
-          ctaClassName="w-fit mx-4 mt-6 p-4 cursor-pointer self-center md:self-start"
+          ctaClassName={ctaClassName}
           ctaOnClick={() => window.open(`https://basementwaterproofinggurus.com/mold-remediation`)}
           ctaText="Visit Mold Remediation"
           heading="Mold Remediation"
@@ -173,7 +213,7 @@ export default function Contact() {
         <Content
           cta
           contentClass="py-6"
-          ctaClassName="w-fit mx-4 mt-6 p-4 cursor-pointer self-center md:self-start"
+          ctaClassName={ctaClassName}
           ctaOnClick={() => window.open(`https://roofgurus.com/`)}
           ctaText="Visit Roofing & Siding"
           heading="Roofing & Siding"
@@ -187,13 +227,26 @@ export default function Contact() {
           contentReverse
           cta
           contentClass="py-6"
-          ctaClassName="w-fit mx-4 mt-6 p-4 cursor-pointer self-center md:self-start"
+          ctaClassName={ctaClassName}
           ctaOnClick={() => window.open(`https://guttergurus.com/`)}
           ctaText="Visit Gutters & Windows"
           heading="Gutters & Windows"
           imageAlt="Gutters and Windows"
           imageUrl={guttersImagePath}
           mainContent={guttersWindowsContent()}
+        />
+      </section>
+      <section>
+        <Content
+          cta
+          contentClass="py-6"
+          ctaClassName={ctaClassName}
+          ctaOnClick={() => window.open(`https://lawn-gurus.com/`)}
+          ctaText="Visit Landscaping & Fencing"
+          heading="Landscaping & Fencing"
+          imageAlt="Landscaping and Fencing"
+          imageUrl={landscapingFencingImagePath}
+          mainContent={landscapingFencingContent()}
         />
       </section>
     </>
