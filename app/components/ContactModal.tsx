@@ -26,6 +26,7 @@ export default function ContactModal({ className, ctaText }: Props) {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [isContactFormSubmitted, setIsContactFormSubmitted] = useState<boolean>(false);
+  const [isContactFormSuccessfullySubmitted, setIsContactFormSuccessfullySubmitted] = useState<boolean>(false);
 
   const [snackbarState, setSnackbarState] = useState<SnackbarState>({
     open: false,
@@ -35,6 +36,7 @@ export default function ContactModal({ className, ctaText }: Props) {
 
   const { horizontal, open, vertical } = snackbarState;
   const handleContactFormSubmitState = (state: boolean) => setIsContactFormSubmitted(state);
+  const handleContactFormSubmitSuccessState = (state: boolean) => setIsContactFormSuccessfullySubmitted(state);
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -82,11 +84,15 @@ export default function ContactModal({ className, ctaText }: Props) {
   }, [handleCloseModal, openModal]);
 
   useEffect(() => {
-    if (isContactFormSubmitted) {
+    if (isContactFormSuccessfullySubmitted) {
       handleCloseModal();
       handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
     }
-  }, [handleCloseModal, isContactFormSubmitted]);
+
+    if (isContactFormSubmitted && !isContactFormSuccessfullySubmitted)
+      handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
+
+  }, [handleCloseModal, isContactFormSubmitted, isContactFormSuccessfullySubmitted]);
 
   return (
     <main className={className}>
@@ -121,6 +127,7 @@ export default function ContactModal({ className, ctaText }: Props) {
         <DialogContent>
           <ContactForm
             handleContactFormSubmission={handleContactFormSubmitState as any}
+            handleContactFormSuccessSubmission={handleContactFormSubmitSuccessState as any}
             headerText={contactFormHeaderText}
           />
         </DialogContent>
@@ -129,6 +136,7 @@ export default function ContactModal({ className, ctaText }: Props) {
       <Submission
         handleCloseSnackbar={handleCloseSnackbar}
         horizontal={horizontal}
+        isSubmitted={isContactFormSuccessfullySubmitted}
         open={open}
         vertical={vertical}
       />

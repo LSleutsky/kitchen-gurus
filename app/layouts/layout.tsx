@@ -3,11 +3,7 @@ import { Link, Outlet, useLocation } from "react-router";
 
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import EmailIcon from '@mui/icons-material/Email';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
 import PhoneIcon from '@mui/icons-material/Phone';
-import XIcon from '@mui/icons-material/X';
-import YouTubeIcon from '@mui/icons-material/YouTube';
 
 import Banner from "~/components/Banner";
 import DrawerHeader from "~/components/DrawerHeader";
@@ -16,19 +12,8 @@ import RatingSlider from "~/components/RatingSlider";
 import Strip from "~/components/svg/Strip";
 
 import { getUserLocation } from "~/utils";
-
-interface SocialMediaOptions {
-  icon: React.JSX.Element;
-  name: string;
-  url: string;
-}
-
-const socialMediaActions: SocialMediaOptions[] = [
-  { icon: <FacebookIcon />, name: `Facebook`, url: `https://www.facebook.com/basementgurus/` },
-  { icon: <InstagramIcon />, name: `Instagram`, url: `https://www.instagram.com/basementguruu/` },
-  { icon: <XIcon />, name: `X`, url: `https://x.com/basement_gurus` },
-  { icon: <YouTubeIcon sx={{ fontSize: `32px` }} />, name: `YouTube`, url: `https://www.youtube.com/@basementgurus` }
-];
+import type { SocialMediaOptions } from "~/utils/constants";
+import { socialMediaActions } from "~/utils/constants";
 
 export default function MainLayout() {
   const [userLocationData, setUserLocationData] = useState<object>({});

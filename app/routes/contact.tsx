@@ -10,6 +10,8 @@ import type { SnackbarCloseReason, SnackbarOrigin } from '@mui/material/Snackbar
 import ContactForm from "~/components/ContactForm";
 import Submission from "~/components/Submission";
 
+import useWindowSize from "~/hooks/useWindowSize";
+
 import type { LocationData } from '~/utils/constants';
 import { locationData } from '~/utils/constants';
 
@@ -31,6 +33,8 @@ export function meta({}: Route.MetaArgs) {
 export default function Contact() {
   const contactFormRef = useRef<ContactFormRef>(null);
   const [isContactFormSubmitted, setIsContactFormSubmitted] = useState<boolean>(false);
+  const [isContactFormSuccessfullySubmitted, setIsContactFormSuccessfullySubmitted] = useState<boolean>(false);
+  const { width } = useWindowSize();
 
   const [snackbarState, setSnackbarState] = useState<SnackbarState>({
       open: false,
@@ -39,6 +43,7 @@ export default function Contact() {
     });
 
   const handleContactFormSubmitState = (state: boolean) => setIsContactFormSubmitted(state);
+  const handleContactFormSubmitSuccessState = (state: boolean) => setIsContactFormSuccessfullySubmitted(state);
 
   const handleOpenSnackbar = (newSnackbarState: SnackbarOrigin) =>
       setSnackbarState({ ...newSnackbarState, open: true });
@@ -52,12 +57,15 @@ export default function Contact() {
   const { horizontal, open, vertical } = snackbarState;
 
   useEffect(() => {
-    if (isContactFormSubmitted) {
+    if (isContactFormSuccessfullySubmitted) {
       contactFormRef?.current?.clearFormValues();
       contactFormRef?.current?.clearServiceSelection();
       handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
     }
-  }, [isContactFormSubmitted]);
+
+    if (isContactFormSubmitted && !isContactFormSuccessfullySubmitted)
+      handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
+  }, [isContactFormSubmitted, isContactFormSuccessfullySubmitted]);
 
   return (
     <section className="flex flex-col justify-between p-8 pb-0 font-['Open_Sans'] md:flex-row">
@@ -65,14 +73,15 @@ export default function Contact() {
         <ContactForm
           ref={contactFormRef}
           handleContactFormSubmission={handleContactFormSubmitState as any}
+          handleContactFormSuccessSubmission={handleContactFormSubmitSuccessState as any}
         />
       </div>
       <aside className="w-full text-center pt-4 md:pt-0 md:w-5/12 md:text-left">
         <h2 className="text-4xl font-semibold">Get In Touch</h2>
         <p>
           {`We'd love to hear from you! Whether you have questions, concerns, feedback, or just want to leave us a note,
-          feel free to reach out to us anytime, day or night. If you use our contact form, we'll do our best to get back to
-          you within 24 hours.`}
+          feel free to reach out to us anytime, day or night. If you use our contact form ${width < 768 ? `above` : `to the left`},
+          we'll do our best to get back to you within 24 hours.`}
         </p>
         <div className="my-8">
           <span className="flex justify-center items-center mt-6 md:justify-start">
@@ -114,6 +123,7 @@ export default function Contact() {
       <Submission
         handleCloseSnackbar={handleCloseSnackbar}
         horizontal={horizontal}
+        isSuccessfullySubmitted={isContactFormSuccessfullySubmitted}
         open={open}
         vertical={vertical}
       />

@@ -1,7 +1,11 @@
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import EngineeringIcon from '@mui/icons-material/Engineering';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import HouseIcon from '@mui/icons-material/House';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+import XIcon from '@mui/icons-material/X';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 
 import Bullseye from '~/components/svg/Bullseye';
 import HandShake from '~/components/svg/Handshake';
@@ -60,10 +64,10 @@ export interface ServiceOptions {
   label: string;
 }
 
-const ourProcessIconStyles = {
-  '&.MuiSvgIcon-root': {
-    fontSize: `48px`
-  }
+export interface SocialMediaOptions {
+  icon: React.JSX.Element;
+  name: string;
+  url: string;
 }
 
 export const aboutUsData: AboutUsData[] = [
@@ -192,6 +196,12 @@ export const navLinks: NavLinks[] = [
   },
 ];
 
+const ourProcessIconStyles = {
+  '&.MuiSvgIcon-root': {
+    fontSize: `48px`
+  }
+}
+
 export const ourProcessData: OurProcessData[] = [
   {
     icon: <PhoneInTalkIcon sx={ourProcessIconStyles} />,
@@ -312,4 +322,11 @@ export const serviceOptions: ServiceOptions[] = [
   { value: `fixtures`, label: `Fixtures` },
   { value: `appliances`, label: `Appliances` },
   { value: `custom`, label: `Custom` },
+];
+
+export const socialMediaActions: SocialMediaOptions[] = [
+  { icon: <FacebookIcon />, name: `Facebook`, url: `https://www.facebook.com/basementgurus/` },
+  { icon: <InstagramIcon />, name: `Instagram`, url: `https://www.instagram.com/basementguruu/` },
+  { icon: <XIcon />, name: `X`, url: `https://x.com/basement_gurus` },
+  { icon: <YouTubeIcon sx={{ fontSize: `32px` }} />, name: `YouTube`, url: `https://www.youtube.com/@basementgurus` }
 ];

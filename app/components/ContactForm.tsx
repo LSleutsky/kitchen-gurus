@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import type { SubmitHandler } from 'react-hook-form';
+import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from "react-hook-form"
 
 import { capitalize, startCase } from "es-toolkit/string";
@@ -42,6 +42,7 @@ interface FormInputTarget {
 
 interface Props {
   handleContactFormSubmission: (submitted: boolean) => typeof submitted;
+  handleContactFormSuccessSubmission: (submittedSuccess: boolean) => typeof submittedSuccess;
   headerText?: string | React.JSX.Element;
 }
 
@@ -98,7 +99,7 @@ const baseContactFormInputStyles = {
 };
 
 // eslint-disable-next-line react/display-name
-const ContactForm = forwardRef(({ handleContactFormSubmission, headerText }: Props, ref) => {
+const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactFormSuccessSubmission, headerText }: Props, ref) => {
   const [serviceName, setServiceName] = useState<string[]>([]);
 
   const [contactDetails, setContactDetails] = useState<FormInputTarget>({
@@ -107,15 +108,28 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, headerText }: Pro
     lastName: ``,
     phoneNumber: ``,
     email: ``,
-    comments: ``,
+    comments: ``
   });
 
   const {
+    clearErrors,
     control,
     handleSubmit,
-    formState: { errors, isSubmitted, isSubmitting, isValid },
-    reset
-  } = useForm<ContactFormInputs>({ mode: `onTouched` })
+    formState: { errors, isSubmitSuccessful, isSubmitted, isSubmitting, isValid },
+    reset,
+    setError
+  } = useForm<ContactFormInputs>({
+    defaultValues: {
+      firstName: ``,
+      spouseName: ``,
+      lastName: ``,
+      phoneNumber: ``,
+      email: ``,
+      comments: ``
+    },
+    mode: `onTouched`,
+    reValidateMode: `onSubmit`
+  });
 
   const clearServiceSelection = () => setServiceName([]);
 
@@ -188,14 +202,36 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, headerText }: Pro
   };
 
   const onSubmit: SubmitHandler<ContactFormInputs> = async data => {
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Simulate an API call that might fail
+      const response = await fetch(`/api/submit`, {
+        method: `POST`,
+        body: JSON.stringify(data),
+      });
 
-    console.info(data);
+      if (!response.ok) {
+        handleContactFormSuccessSubmission(isSubmitSuccessful);
+        setError(`root`, { type: `serve`, message: `Submission failed` });
+
+        return;
+      }
+
+      // Handle successful submission
+      console.info(`Success!`, data);
+    } catch (error) {
+      console.error(error);
+      setError(`root`, { type: `client`, message: `Network error` });
+    }
+  };
+
+  const onError: SubmitErrorHandler<ContactFormInputs> = (error) => {
+    console.error(`Submission Error: `, error);
   };
 
   useEffect(() => {
     handleContactFormSubmission(isSubmitted);
-  }, [handleContactFormSubmission, isSubmitted]);
+    handleContactFormSuccessSubmission(isSubmitSuccessful);
+  }, [handleContactFormSubmission, handleContactFormSuccessSubmission, isSubmitSuccessful, isSubmitted]);
 
   useImperativeHandle(ref, () => {
     return {
@@ -205,7 +241,11 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, headerText }: Pro
   });
 
   return (
-    <Container className="pt-6 pb-6 relative" component="form" sx={baseContactFormInputStyles} onSubmit={handleSubmit(onSubmit)}>
+    <Container className="pt-6 pb-6 relative" component="form" sx={baseContactFormInputStyles} onSubmit={e => {
+      clearErrors();
+      reset();
+      handleSubmit(onSubmit, onError)(e);
+    }}>
       {isSubmitting && (
         <div className={`absolute w-full h-full flex justify-center items-center ${isSubmitting ? `z-10` : ``}`}>
           <CircularProgress size="8em" sx={{
@@ -341,12 +381,16 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, headerText }: Pro
                 sx: { fontSize: `14px` }
               }
             }}
-            title="Please fill out the required form fields"
+            title={!isValid && !isSubmitted && `Please fill out the required form fields`}
           >
             <span className="w-full">
               <Button
-                className={`w-full mt-2 ml-0 p-4 px-10 cursor-${isValid ? `pointer` : `not-allowed`} md:mt-4 md:mr-0`}
-                disabled={!isValid}
+                className={`
+                  w-full mt-2 ml-0 p-4 px-10
+                  cursor-${isValid || (isSubmitted && !isSubmitSuccessful) ? `pointer` : `not-allowed`}
+                  md:mt-4 md:mr-0`
+                }
+                disabled={!isValid && !isSubmitted}
                 text="Submit"
                 type="submit"
               />
