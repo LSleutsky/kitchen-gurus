@@ -1,5 +1,11 @@
 {
-  "include": ["**/*", "**/.server/**/*", "**/.client/**/*", ".react-router/types/**/*", "eslint.config.mjs"],
+  "include": [
+    "**/*",
+    "**/.server/**/*",
+    "**/.client/**/*",
+    ".react-router/types/**/*",
+    "eslint.config.mjs"
+  ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": ["node", "vite/client"],
@@ -17,6 +23,8 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true
-  }
+    "strict": true,
+    "checkJs": true
+  },
+  "references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.vite.json" }]
 }
