@@ -91,7 +91,6 @@ export default function ContactModal({ className, ctaText }: Props) {
 
     if (isContactFormSubmitted && !isContactFormSuccessfullySubmitted)
       handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
-
   }, [handleCloseModal, isContactFormSubmitted, isContactFormSuccessfullySubmitted]);
 
   return (
@@ -136,7 +135,7 @@ export default function ContactModal({ className, ctaText }: Props) {
       <Submission
         handleCloseSnackbar={handleCloseSnackbar}
         horizontal={horizontal}
-        isSubmitted={isContactFormSuccessfullySubmitted}
+        isSuccessfullySubmitted={isContactFormSuccessfullySubmitted}
         open={open}
         vertical={vertical}
       />

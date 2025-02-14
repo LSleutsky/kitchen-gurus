@@ -203,30 +203,27 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactForm
 
   const onSubmit: SubmitHandler<ContactFormInputs> = async data => {
     try {
-      // Simulate an API call that might fail
-      const response = await fetch(`/api/submit`, {
+      const response = await fetch(`/api/submit-contact-form`, {
         method: `POST`,
-        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': `application/json`
+        },
+        body: JSON.stringify(data)
       });
 
       if (!response.ok) {
-        handleContactFormSuccessSubmission(isSubmitSuccessful);
-        setError(`root`, { type: `serve`, message: `Submission failed` });
+        handleContactFormSuccessSubmission(false);
+        setError(`root`, { type: `manual`, message: `Submission failed` });
 
         return;
       }
-
-      // Handle successful submission
-      console.info(`Success!`, data);
     } catch (error) {
-      console.error(error);
-      setError(`root`, { type: `client`, message: `Network error` });
+      console.error(`Error sending email: `, error);
     }
   };
 
-  const onError: SubmitErrorHandler<ContactFormInputs> = (error) => {
+  const onError: SubmitErrorHandler<ContactFormInputs> = (error) =>
     console.error(`Submission Error: `, error);
-  };
 
   useEffect(() => {
     handleContactFormSubmission(isSubmitted);
@@ -243,7 +240,7 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactForm
   return (
     <Container className="pt-6 pb-6 relative" component="form" sx={baseContactFormInputStyles} onSubmit={e => {
       clearErrors();
-      reset();
+      reset(undefined, { keepDirtyValues: true });
       handleSubmit(onSubmit, onError)(e);
     }}>
       {isSubmitting && (
