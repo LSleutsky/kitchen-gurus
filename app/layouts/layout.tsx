@@ -5,6 +5,7 @@ import DiscountIcon from '@mui/icons-material/Discount';
 import PhoneIcon from '@mui/icons-material/Phone';
 
 import Banner from "~/components/Banner";
+import ContactModal from "~/components/ContactModal";
 import DrawerHeader from "~/components/DrawerHeader";
 import Logo from "~/components/Logo";
 import RatingSlider from "~/components/RatingSlider";
@@ -50,8 +51,8 @@ export default function MainLayout({ loaderData }: Route.ComponentProps) {
         </section>
         <section className="flex flex-col items-center bg-[#F7F7F7] p-8">
           <span className="pb-5">
-            {Array.from({ length: 5 }).map((_, index: number) => (
-              <DiscountIcon key={index} className="m-auto inline-block text-[#51A655]" fontSize="large" />
+            {Array.from({ length: 3 }).map((_, index: number) => (
+              <DiscountIcon key={index} className="m-auto inline-block text-[#F7C400]" fontSize="large" />
             ))}
           </span>
           <h1 className="text-center font-['Open_Sans'] text-4xl font-semibold" id="discounts">Discounts Available</h1>
@@ -59,6 +60,7 @@ export default function MainLayout({ loaderData }: Route.ComponentProps) {
           <p className="text-center font-['Open_Sans'] text-lg font-light leading-8">
             Military | Police | Firefighters | First Responders | Teachers | Seniors
           </p>
+          <ContactModal ctaText="Meet With Us" />
         </section>
         <section className="bg-[#51A655]">
           <div className="flex justify-center text-white md:justify-start">

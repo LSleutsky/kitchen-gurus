@@ -25,6 +25,10 @@ export interface FinancingData {
   info: string[];
 }
 
+export interface FormInputTarget {
+  [key: string]: any;
+}
+
 export interface LocationData {
   backgroundColor: string;
   cityStateZip: string;
@@ -146,6 +150,35 @@ export const financingData: FinancingData[] = [
     ]
   }
 ];
+
+export const formValidationRules = (key: string) => {
+  switch (key) {
+    case `email`:
+      return {
+        pattern: {
+          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+          message: `Please enter a valid email address`
+        }
+      };
+    case `firstName`:
+      return {
+        required: `First name is required`
+      };
+    case `lastName`:
+      return {
+        required: `Last name is required`
+      }
+    case `phoneNumber`:
+      return {
+        required: `Phone number is required`,
+        minLength: {
+          // min length is to account for the phone number format util that masks entered user input value
+          value: 14,
+          message: `A valid 10 digit phone number is required`
+        }
+      };
+  }
+};
 
 export const locationData: LocationData[] = [
   {

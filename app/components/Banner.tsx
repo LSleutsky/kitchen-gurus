@@ -34,24 +34,24 @@ export default function Banner({ userLocation }: Props) {
         style={{ backgroundImage: `url(${bannerImageUrl})` }}
       >
         <div className="absolute size-full bg-black opacity-60 content-['']" />
-        <div className="absolute right-[-26%] h-full w-7/12 skew-x-[20deg] bg-[#F98500] opacity-50 content-[''] sm:right-[-20%] md:right-[-12%] 2xl:w-8/12" />
+        <div className="absolute right-[-26%] h-full w-8/12 skew-x-[20deg] bg-[#F98500] opacity-50 content-[''] sm:right-[-20%] md:right-[-16%] 2xl:w-9/12" />
         <div className="relative size-full p-4 pt-8">
           <div className="flex flex-col justify-around items-center md:flex-row">
             <section className="font-['Open_Sans'] h-full flex flex-col items-center text-white md:pr-2">
-              <div className="text-center font-light text-lg sm:text-xl">
+              <h3 className="text-center font-light text-lg sm:text-xl">
                 {`Kitchen Remodeling in ${startCase(endUsersLocation)}`}
-              </div>
-              <div className="text-center text-2xl md:my-5 md:text-3xl">
+              </h3>
+              <h2 className="text-center text-2xl md:my-5 md:text-3xl">
                 Experience The Kitchen Of Your Dreams
-              </div>
-              <div className="text-center text-white font-light text-lg sm:text-xl">
+              </h2>
+              <h3 className="text-center text-white font-light text-lg sm:text-xl">
                 <Link to="/financing">
                   Financing Available
                 </Link>
                 <Link to="#discounts">
                   {` | Discounts Available`}
                 </Link>
-              </div>
+              </h3>
             </section>
             <aside className="flex flex-col items-center justify-center mt-4 md:pl-2">
               <QuickContact />

@@ -21,8 +21,8 @@ import TextField from "@mui/material/TextField";
 import Tooltip from '@mui/material/Tooltip';
 
 import { phoneNumberAutoFormat } from "~/utils";
-import type { ServiceOptions } from '~/utils/constants';
-import { serviceOptions } from '~/utils/constants';
+import type { FormInputTarget, ServiceOptions } from '~/utils/constants';
+import { formValidationRules, serviceOptions } from '~/utils/constants';
 
 import Button from "./Button";
 
@@ -34,10 +34,6 @@ interface ContactFormInputs {
   email?: string;
   serviceOptions: ServiceOptions;
   comments?: string;
-}
-
-interface FormInputTarget {
-  [key: string]: any;
 }
 
 interface Props {
@@ -160,46 +156,9 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactForm
       ...contactDetails,
       [event.target.name]: event.target.name === `email`
         ? event.target.value
-        : event.target.value.replace(/[^a-zA-Z\s]+/, ``).split(` `).map(capitalize).join(` `)
+        : event.target.value.replace(/[^[a-zA-Z0-9_.-\s]*$/, ``).split(` `).map(capitalize).join(` `)
     });
   }
-
-  const formValidationRules = (key: string) => {
-    switch (key) {
-      case `email`:
-        return {
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: `Please enter a valid email address`
-          }
-        };
-      case `firstName`:
-        return {
-          required: `First name is required`,
-          pattern: {
-            value: /^[A-Za-z\s]*$/i,
-            message: `First name is required`
-          }
-        };
-      case `lastName`:
-        return {
-          required: `Last name is required`,
-          pattern: {
-            value: /^[A-Za-z\s]*$/,
-            message: `Last name is required`
-          }
-        }
-      case `phoneNumber`:
-        return {
-          required: `Phone number is required`,
-          minLength: {
-            // min length is to account for the phone number format util that masks entered user input value
-            value: 14,
-            message: `A valid 10 digit phone number is required`
-          }
-        };
-    }
-  };
 
   const onSubmit: SubmitHandler<ContactFormInputs> = async data => {
     try {
