@@ -31,13 +31,13 @@ export default function Banner({ userLocation }: Props) {
     <div>
       <section className="relative flex-flex-col">
         <figure
-          className={`relative h-[70vh] overflow-hidden bg-cover bg-center bg-no-repeat mt-22 sm:h-[60vh]`}
+          className={`relative h-[62vh] overflow-hidden bg-cover bg-center bg-no-repeat mt-22 sm:h-[60vh]`}
           style={{ backgroundImage: `url(${bannerImageUrl})` }}
         >
           <div className="absolute size-full bg-black opacity-60 content-['']" />
           <div className="absolute right-[-26%] h-full w-7/12 skew-x-[20deg] bg-[#F98500] opacity-50 content-[''] sm:right-[-20%] md:right-[-12%] 2xl:w-8/12" />
         </figure>
-        <div className="absolute top-0 h-full w-full px-4 [&>*]:px-4 pt-5 sm:py-0 md:top-6">
+        <div className="absolute top-0 h-full w-full px-4 [&>*]:px-4 pt-5 sm:py-0 md:top-4">
           <div className="flex flex-col justify-around items-center h-full md:flex-row">
             <section className="font-['Open_Sans'] h-full flex flex-col justify-evenly items-center text-white md:pr-2 md:justify-center">
               <div className="text-center font-light text-lg sm:text-xl">
@@ -50,7 +50,7 @@ export default function Banner({ userLocation }: Props) {
                 Financing Available | Discounts Available
               </div>
             </section>
-            <aside className="pt-3 flex flex-col items-center justify-center sm:pt-0 md:pl-2">
+            <aside className="flex flex-col items-center justify-center md:pl-2">
               <QuickContact />
             </aside>
           </div>
