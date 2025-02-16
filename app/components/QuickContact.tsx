@@ -181,7 +181,7 @@ export default function QuickContact() {
     <Container className="relative flex flex-col font-['Open_Sans']" component="form" onSubmit={e => {
       if (!isSubmitSuccessful) {
         clearErrors();
-        reset(undefined, { keepDirtyValues: !isSubmitSuccessful });
+        reset(undefined, { keepDirtyValues: true });
       }
 
       handleSubmit(onSubmit, onError)(e);
@@ -341,7 +341,7 @@ export default function QuickContact() {
               w-full mt-2 ml-0 p-2 px-10
               md:mt-4 md:mr-0
               cursor-${isValid || (isSubmitted && !isSubmitSuccessful) ? `pointer` : `not-allowed`}
-              ${isValid ? `hover:bg-white` : ``}
+              ${isValid || !isSubmitSuccessful ? `hover:bg-white` : ``}
             `}
               disabled={(!isValid && !isSubmitted) || isSubmitSuccessful}
               text="Submit"
