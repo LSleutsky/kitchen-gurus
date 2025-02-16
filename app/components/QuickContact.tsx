@@ -50,7 +50,7 @@ export default function QuickContact() {
   };
 
   return (
-    <section className="flex flex-col font-['Open_Sans'] pb-2">
+    <section className="flex flex-col font-['Open_Sans']">
       <Box className="flex items-center justify-center w-full h-full mb-3">
         <TextField
           label="First Name"
