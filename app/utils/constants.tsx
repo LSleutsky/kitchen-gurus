@@ -70,6 +70,11 @@ export interface SocialMediaOptions {
   url: string;
 }
 
+export interface UserLocationData {
+  city: string;
+  state: string;
+}
+
 export const aboutUsData: AboutUsData[] = [
   {
     content: `Our team of experts aim to achieve the utmost standards and provide the best level of care in designing
@@ -102,6 +107,10 @@ export const bannerImages = [
   { id: 2, slug: `6d99280e-439d-40ab-9513-142d9aa0b6e0` },
   { id: 3, slug: `a1099375-2c11-4824-9c13-28b22de109cf` },
   { id: 4, slug: `79c7168d-a17f-462f-81b8-e5d53a9ba6d2` },
+  { id: 5, slug: `06a96622-c502-4185-a741-954b82cbe04c` },
+  { id: 6, slug: `025efa1d-8da6-4710-8b09-c1d7e36e96a4` },
+  { id: 7, slug: `85bdd67c-a59b-4a58-b2ae-7d7cae602c00` },
+  { id: 8, slug: `50c57926-b3ac-4053-b7ce-d78546574858` },
 ];
 
 export const financingData: FinancingData[] = [

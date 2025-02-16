@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router";
 
 import CopyrightIcon from "@mui/icons-material/Copyright";
-import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 
 import Banner from "~/components/Banner";
@@ -11,29 +9,36 @@ import Logo from "~/components/Logo";
 import RatingSlider from "~/components/RatingSlider";
 import Strip from "~/components/svg/Strip";
 
-import { getUserLocation } from "~/utils";
 import type { SocialMediaOptions } from "~/utils/constants";
 import { socialMediaActions } from "~/utils/constants";
 
-export default function MainLayout() {
-  const [userLocationData, setUserLocationData] = useState<object>({});
+import type { Route } from "./+types/layout";
+
+export async function clientLoader({}: Route.ClientLoaderArgs) {
+  try {
+    const response = await fetch(`https://geolocation-db.com/json/`);
+
+    if (!response.ok)
+      throw new Error(`Response status: ${response.status}`);
+
+    const json = await response.json();
+
+    return json;
+  } catch (error: any) {
+    console.error(`Error fetching data:`, error);
+  }
+}
+
+export default function MainLayout({ loaderData }: Route.ComponentProps) {
   const location = useLocation();
   const isHomePath = location.pathname === `/`;
-
-  useEffect(() => {
-    (async () => {
-      const userLocation = await getUserLocation();
-
-      setUserLocationData(userLocation);
-    })();
-  }, []);
 
   return (
     <div className="flex h-full min-h-full flex-col">
       <DrawerHeader />
       <main className="flex-[1]">
-        <Banner />
-        <Outlet context={userLocationData} />
+        <Banner userLocation={loaderData} />
+        <Outlet context={loaderData} />
       </main>
       <footer className="w-full">
         <div className="flex flex-col justify-center items-center">
@@ -51,15 +56,6 @@ export default function MainLayout() {
               <Link className="text-white text-base md:mb-1" to="tel:1-800-555-6666">
                 <PhoneIcon />
                 {` 1-800-555-6666`}
-              </Link>
-              <Link className="text-white text-base mb-1 md:mb-0" to="mailto:kitchengurus@gmail.com">
-                <EmailIcon sx={{
-                  '&.MuiSvgIcon-root': {
-                    marginRight: `3px`,
-                    transform: `translateY(-1.5px)`
-                  }
-                }} />
-                {` kitchengurus@gmail.com`}
               </Link>
             </span>
             <span>

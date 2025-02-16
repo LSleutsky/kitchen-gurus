@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useOutletContext } from "react-router";
 import { RowsPhotoAlbum } from "react-photo-album";
 
 import Lightbox from "yet-another-react-lightbox";
@@ -7,6 +7,7 @@ import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 import { displayLocation } from "~/utils";
+import type { UserLocationData } from "~/utils/constants";
 import { imageSources } from "~/utils/gallery";
 
 import type { Route } from "./+types/home";
@@ -20,6 +21,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Gallery() {
   const [imageIndex, setImageIndex] = useState<number>(-1);
+  const userLocation = useOutletContext<UserLocationData>();
 
   return (
     <>
@@ -34,7 +36,7 @@ export default function Gallery() {
           <Link className="text-[#F98500]" to="/contact">
             {` contact us `}
           </Link>
-          {`if you have additional questions about kitchen remodeling in ${displayLocation()}.`}
+          {`if you have additional questions about kitchen remodeling in ${displayLocation(userLocation)}.`}
         </p>
       </section>
       <section className="px-6">

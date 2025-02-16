@@ -1,23 +1,17 @@
-import { useOutletContext } from "react-router";
+import type { UserLocationData } from "./constants";
 
 /**
  * Gets a user's city and state location data, or uses a default
  *
- * @param {boolean} showState Show current location state
+ * @param {UserLocationData} locationData The user's location data
+ * @param {boolean} showState Show current location's state
  *
  * @returns {string} The current user's location details
  *
  * @example
  * 'Philadelphia, Pennsylvania'
  */
-export const displayLocation = (showState?: boolean): string | undefined => {
-  interface UserLocationData {
-    city: string;
-    state: string;
-  }
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const locationData = useOutletContext<UserLocationData>();
+export const displayLocation = (locationData: UserLocationData, showState: boolean = false): string => {
   const formattedCity = locationData?.city?.split(`(`)[0].trim();
 
   switch (locationData?.state) {
@@ -44,33 +38,6 @@ export const displayLocation = (showState?: boolean): string | undefined => {
  */
 export const getImageParameters = (id: string, size: string = `1000x560`) =>
   `https://ucarecdn.com/${id}/-/preview/${size}/-/format/auto/-/quality/smart/`;
-
-/**
- * Retrieve user's location data based on IP address
- *
- * @returns {Object} JSON object for current user's location data
- *
- * @example
- * {
- *   city: 'Philadelphia',
- *   state: 'Pennsylvania'
- * }
- */
-export const getUserLocation = async () => {
-  try {
-    const response = await fetch(`https://geolocation-db.com/json/`);
-
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const json = await response.json();
-
-    return json;
-  } catch (error: any) {
-    console.error(`Error fetching data:`, error);
-  }
-};
 
 /**
  * Takes in a raw string value - digits only - of a phone number, and formats accordingly

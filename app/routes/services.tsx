@@ -1,8 +1,9 @@
-import { Link } from "react-router";
+import { Link, useOutletContext } from "react-router";
 
 import Content from "~/components/Content";
 
 import { displayLocation, getImageParameters } from "~/utils";
+import type { UserLocationData } from "~/utils/constants";
 
 import type { Route } from "./+types/home";
 
@@ -12,6 +13,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Contact() {
+  const userLocation = useOutletContext<UserLocationData>();
   const basementWaterproofingImagePath = getImageParameters(`2d0fa6d4-5e41-4855-847e-13a520806c5b`, `1200x760`);
   const guttersImagePath = getImageParameters(`94514333-1eb4-4a81-89fc-f52ea96f9458`, `1200x760`);
   const moldRemediationImagePath = getImageParameters(`548070ac-a918-419d-92e5-819113e6aa59`, `1200x760`);
@@ -35,7 +37,7 @@ export default function Contact() {
     );
 
     const paragraphTwo = `Basements will get wet for a number of different reasons, from the water table underground in
-      ${displayLocation()}, to a structurally unsound foundation, to a home simply being old and settling. Whether you
+      ${displayLocation(userLocation)}, to a structurally unsound foundation, to a home simply being old and settling. Whether you
       have hydrostatic pressure pushing on the walls of your foundation, or rising water levels underneath your home, water
       will naturally seek the path of least resistance, and find its way in.`;
 

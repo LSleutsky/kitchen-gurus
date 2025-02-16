@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.disable('x-powered-by');
 
 app.post('/api/submit-contact-form', (req, res) => {
+  const { firstName, spouseName, lastName, phoneNumber, email, serviceOptions, comments } = req.body;
+
   const config = {
     host: 'smtp.gmail.com',
     port: 587,
@@ -27,22 +29,20 @@ app.post('/api/submit-contact-form', (req, res) => {
     }
   };
 
-  console.log(`REQ BODY: `, req.body);
-
   const transporter = nodemailer.createTransport(config);
 
   const message = {
-    from: `${req.body.firstName} ${req.body.lastName} ${req.body.email ? `<${req.body.email}>` : ``}`,
+    from: `${firstName} ${lastName} ${email ? `<${email}>` : ``}`,
     to: 'lushsleutsky@gmail.com',
-    subject: 'CONTACT FORM SUBMISSION',
+    subject: 'KITCHEN GURUS CONTACT FORM',
     html: `
-      <h3>First Name: </h3> ${req.body.firstName}
-      ${req.body.spouseName ? `<h3>Spouse Name:</h3> ${req.body.spouseName}` : ``}
-      <h3>Last Name: </h3> ${req.body.lastName}
-      <h3>Phone Number: </h3> ${req.body.phoneNumber}
-      ${req?.body?.email ? `<h3>Email:</h3> ${req.body.email}` : ``}
-      ${req.body.serviceOptions ? `<h3>Services:</h3> ${req.body.serviceOptions.join(', ')}` : ``}
-      ${req.body.comments ? `<h3>Comments:</h3> ${req.body.comments}` : ``}
+      <h3>First Name: </h3> ${firstName}
+      ${spouseName ? `<h3>Spouse Name:</h3> ${spouseName}` : ``}
+      <h3>Last Name: </h3> ${lastName}
+      <h3>Phone Number: </h3> ${phoneNumber}
+      ${email ? `<h3>Email:</h3> ${email}` : ``}
+      ${serviceOptions ? `<h3>Services:</h3> ${serviceOptions.join(', ')}` : ``}
+      ${comments ? `<h3>Comments:</h3> ${comments}` : ``}
     `
   };
 
@@ -50,7 +50,7 @@ app.post('/api/submit-contact-form', (req, res) => {
     .sendMail(message)
     .then((info) => {
       return res.status(201).json({
-        msg: 'Email sent',
+        msg: 'Email sent successfully',
         info: info.messageId,
         preview: nodemailer.getTestMessageUrl(info)
       });

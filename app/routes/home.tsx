@@ -1,9 +1,9 @@
-import { Link } from "react-router";
+import { Link, useOutletContext } from "react-router";
 
 import Content from "~/components/Content";
 
 import { displayLocation, getImageParameters } from "~/utils";
-import type { OurProcessData } from "~/utils/constants";
+import type { OurProcessData, UserLocationData } from "~/utils/constants";
 import { ourProcessData } from "~/utils/constants";
 
 import type { Route } from "./+types/home";
@@ -13,13 +13,14 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const userLocation = useOutletContext<UserLocationData>();
   const kitchenRemodelingImagePath = getImageParameters(`bf14a7dc-7164-4167-8a91-d9d49dcf6f6b`, `1200x560`);
   const secondKitchenRemodelingImagePath = getImageParameters(`7615789b-aba6-4cbc-be53-f7632a052cd3`, `1200x760`);
   const thirdKitchenRemodelingImagePath = getImageParameters(`14aeb5e2-1d76-4bcd-868b-0bdf32cb42b9`, `1200x760`);
 
   const dreamKitchensContent = () => {
     const paragraphOne = `Kitchen Gurus is one of the leading companies for kitchen remodeling needs in
-      ${displayLocation(true)}. We will professionally and responsibly complete all of your kitchen makeover alterations,
+      ${displayLocation(userLocation, true)}. We will professionally and responsibly complete all of your kitchen makeover alterations,
       and be there every step of the way in providing you with stunning and affordable results. From cabinets to marble,
       granite, and/or quartz countertops, to flooring and lighting, our experts will precisely craft a beautiful and
       functional room that you'll never want to leave!`;
@@ -70,7 +71,7 @@ export default function Home() {
 
   const attentionToDetailContent = () => {
     const paragraphOne = `Kitchen Gurus creativity, professionalism, and hard work have cemented us on the list of one of the
-      best kitchen remodeling companies in ${displayLocation()}. We are firm believers in listening to all of your ideas, sprinkling
+      best kitchen remodeling companies in ${displayLocation(userLocation)}. We are firm believers in listening to all of your ideas, sprinkling
       in some of our suggestions, and then producing unique designs customized and tailored to your preferences`;
 
     const paragraphTwo = `We employ only the highest-skilled laborers and technicians who are truly committed to offering top
@@ -91,7 +92,7 @@ export default function Home() {
           contactCta
           contactCtaText="Get a Free Estimate"
           contentClass="py-6"
-          heading="Dream Kitchens"
+          heading="Ultimate  Kitchens"
           imageAlt="Light kitchen cabinets and countertops"
           imageUrl={kitchenRemodelingImagePath}
           mainContent={dreamKitchensContent()}

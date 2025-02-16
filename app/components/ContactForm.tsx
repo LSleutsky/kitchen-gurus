@@ -363,7 +363,7 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactForm
         </FormGroup>
         <footer className="w-full flex flex-col mb-2 md:flex-row">
           <Button
-            className="w-full mt-4 mr-2 p-4 px-10 cursor-pointer"
+            className="mt-4 p-4 px-10 cursor-pointer md:w-1/2 md:mr-3"
             text="Reset"
             onClick={() => {
               clearFormValues();
@@ -380,13 +380,13 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactForm
             }}
             title={!isValid && !isSubmitted && `Please fill out the required form fields`}
           >
-            <span className="w-full">
+            <span className="md:w-1/2">
               <Button
                 className={`
                   w-full mt-2 ml-0 p-4 px-10
                   cursor-${isValid || (isSubmitted && !isSubmitSuccessful) ? `pointer` : `not-allowed`}
-                  md:mt-4 md:mr-0`
-                }
+                  md:mt-4 md:mr-0
+                `}
                 disabled={!isValid && !isSubmitted}
                 text="Submit"
                 type="submit"
