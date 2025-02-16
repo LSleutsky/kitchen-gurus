@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from "react-hook-form"
 
 import { capitalize } from "es-toolkit/string";
 
+import CircularProgress from '@mui/material/CircularProgress';
 import Container from "@mui/material/Container";
+import type { SnackbarCloseReason, SnackbarOrigin } from '@mui/material/Snackbar';
 import TextField from "@mui/material/TextField";
+import Tooltip from '@mui/material/Tooltip';
 
 import { phoneNumberAutoFormat } from "~/utils";
-import type { FormInputTarget } from '~/utils/constants';
+import type { FormInputTarget, SnackbarState } from '~/utils/constants';
 import { formValidationRules } from "~/utils/constants";
 
 import Button from "./Button";
+import Submission from "./Submission";
 
 interface QuickContactFormInputs {
   firstName: string;
@@ -78,10 +83,21 @@ export default function QuickContact() {
       comments: ``
     });
 
+  const [snackbarState, setSnackbarState] = useState<SnackbarState>({
+    open: false,
+    vertical: `top`,
+    horizontal: `center`
+  });
+
+  const { horizontal, open, vertical } = snackbarState;
+
   const {
+      clearErrors,
       control,
-      formState: { errors, isSubmitSuccessful, isSubmitted, isValid },
-      reset
+      formState: { errors, isSubmitSuccessful, isSubmitted, isSubmitting, isValid },
+      handleSubmit,
+      reset,
+      setError
   } = useForm<QuickContactFormInputs>({
       defaultValues: {
         firstName: ``,
@@ -91,7 +107,7 @@ export default function QuickContact() {
         comments: ``
       },
       mode: `onTouched`,
-      reValidateMode: `onSubmit`
+      reValidateMode: `onBlur`
     });
 
   const clearFormValues = () => {
@@ -121,9 +137,65 @@ export default function QuickContact() {
     });
   }
 
+  const handleOpenSnackbar = (newSnackbarState: SnackbarOrigin) =>
+      setSnackbarState({ ...newSnackbarState, open: true });
+
+  const handleCloseSnackbar = (_: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+    if (reason === `clickaway`) return;
+
+    setSnackbarState({ ...snackbarState, open: false });
+  };
+
+  const onSubmit: SubmitHandler<QuickContactFormInputs> = async data => {
+      try {
+        const response = await fetch(`/api/submit-contact-form`, {
+          method: `POST`,
+          headers: {
+            'Content-Type': `application/json`
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          setError(`root`, { type: `manual`, message: `Submission failed` });
+
+          return;
+        }
+
+        clearFormValues();
+      } catch (error) {
+        console.error(`Error sending email: `, error);
+      }
+    };
+
+    const onError: SubmitErrorHandler<QuickContactFormInputs> = error =>
+      console.error(`Submission Error: `, error);
+
+    useEffect(() => {
+      if (isSubmitSuccessful) handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
+
+      if (isSubmitted && !isSubmitSuccessful) handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
+    }, [isSubmitted, isSubmitSuccessful]);
+
   return (
-    <Container className="flex flex-col font-['Open_Sans']" component="form">
-      <h3 className="text-white text-xl text-center pb-2">Get a Free Kitchen Estimate</h3>
+    <Container className="relative flex flex-col font-['Open_Sans']" component="form" onSubmit={e => {
+      if (!isSubmitSuccessful) {
+        clearErrors();
+        reset(undefined, { keepDirtyValues: !isSubmitSuccessful });
+      }
+
+      handleSubmit(onSubmit, onError)(e);
+    }}>
+      {isSubmitting && (
+        <div className={`absolute w-full h-full flex justify-center items-center ${isSubmitting ? `z-10` : ``}`}>
+          <CircularProgress size="8em" sx={{
+            '&.MuiCircularProgress-root': {
+              color: `#F98500`
+            }
+          }} />
+        </div>
+      )}
+      <h3 className="text-white text-xl text-center font-light pb-2">Get a Free Kitchen Estimate</h3>
       <div className="flex items-center justify-center mb-3">
         <Controller
           control={control}
@@ -133,7 +205,6 @@ export default function QuickContact() {
               {...field}
               required
               error={!!errors[`firstName`]}
-              // helperText={errors[`firstName`]?.message}
               label="First Name"
               name="firstName"
               size="small"
@@ -156,7 +227,6 @@ export default function QuickContact() {
               {...field}
               required
               error={!!errors[`lastName`]}
-              // helperText={errors[`lastName`]?.message}
               label="Last Name"
               name="lastName"
               size="small"
@@ -181,7 +251,6 @@ export default function QuickContact() {
               {...field}
               required
               error={!!errors[`phoneNumber`]}
-              // helperText={errors[`phoneNumber`]?.message}
               label="Phone Number"
               name="phoneNumber"
               size="small"
@@ -210,7 +279,6 @@ export default function QuickContact() {
             <TextField
               {...field}
               error={!!errors[`email`]}
-              helperText={errors[`email`]?.message}
               label="Email"
               name="email"
               size="small"
@@ -241,7 +309,7 @@ export default function QuickContact() {
               name="comments"
               size="small"
               sx={baseQuickContactFormInputStyles}
-              value={contactDetails.comments}
+              value={capitalize(contactDetails.comments)}
               variant="filled"
               onChange={event => {
                 field.onChange(event);
@@ -257,20 +325,38 @@ export default function QuickContact() {
           text="Reset"
           onClick={clearFormValues}
         />
-        <span className="md:w-1/2">
-          <Button
-            className={`
+        <Tooltip
+          disableInteractive
+          followCursor
+          slotProps={{
+            tooltip: {
+              sx: { fontSize: `14px` }
+            }
+          }}
+          title={((!isValid && !isSubmitted) || isSubmitSuccessful) && `Please fill out the required form fields`}
+        >
+          <span className="md:w-1/2">
+            <Button
+              className={`
               w-full mt-2 ml-0 p-2 px-10
               md:mt-4 md:mr-0
               cursor-${isValid || (isSubmitted && !isSubmitSuccessful) ? `pointer` : `not-allowed`}
               ${isValid ? `hover:bg-white` : ``}
             `}
-            disabled={!isValid && !isSubmitted}
-            text="Submit"
-            type="submit"
-          />
-        </span>
+              disabled={(!isValid && !isSubmitted) || isSubmitSuccessful}
+              text="Submit"
+              type="submit"
+            />
+          </span>
+        </Tooltip>
       </footer>
+      <Submission
+        handleCloseSnackbar={handleCloseSnackbar}
+        horizontal={horizontal}
+        isSuccessfullySubmitted={isSubmitSuccessful}
+        open={open}
+        vertical={vertical}
+      />
     </Container>
   );
 }

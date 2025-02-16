@@ -7,6 +7,8 @@ import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
+import type { SnackbarOrigin } from '@mui/material/Snackbar';
+
 import Bullseye from '~/components/svg/Bullseye';
 import HandShake from '~/components/svg/Handshake';
 import Ribbon from "~/components/svg/Ribbon";
@@ -66,6 +68,10 @@ export interface ReviewsData {
 export interface ServiceOptions {
   value: string;
   label: string;
+}
+
+export interface SnackbarState extends SnackbarOrigin {
+  open: boolean;
 }
 
 export interface SocialMediaOptions {

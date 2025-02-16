@@ -181,7 +181,7 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactForm
     }
   };
 
-  const onError: SubmitErrorHandler<ContactFormInputs> = (error) =>
+  const onError: SubmitErrorHandler<ContactFormInputs> = error =>
     console.error(`Submission Error: `, error);
 
   useEffect(() => {

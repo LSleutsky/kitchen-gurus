@@ -7,6 +7,8 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import type { SnackbarCloseReason, SnackbarOrigin } from '@mui/material/Snackbar';
 
+import type { SnackbarState } from "~/utils/constants";
+
 import Button from "./Button";
 import ContactForm from "./ContactForm";
 import Logo from "./Logo";
@@ -15,10 +17,6 @@ import Submission from "./Submission";
 interface Props {
   className?: string;
   ctaText?: string;
-}
-
-interface SnackbarState extends SnackbarOrigin {
-  open: boolean;
 }
 
 export default function ContactModal({ className, ctaText }: Props) {
