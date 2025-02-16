@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation } from "react-router";
 
 import CopyrightIcon from "@mui/icons-material/Copyright";
+import DiscountIcon from '@mui/icons-material/Discount';
 import PhoneIcon from '@mui/icons-material/Phone';
 
 import Banner from "~/components/Banner";
@@ -41,13 +42,25 @@ export default function MainLayout({ loaderData }: Route.ComponentProps) {
         <Outlet context={loaderData} />
       </main>
       <footer className="w-full">
-        <div className="flex flex-col justify-center items-center">
+        <section className="flex flex-col justify-center items-center">
           <Strip className={isHomePath ? `pt-0` : `pt-3`} />
           <h2 className="text-3xl font-[`Open_Sans`] font-semibold py-8">LICENSED & INSURED</h2>
           <hr className="border-2 border-[#51A655] w-16" />
           <RatingSlider />
-        </div>
-        <div className="bg-[#51A655]">
+        </section>
+        <section className="flex flex-col items-center bg-[#F7F7F7] p-8">
+          <span className="pb-5">
+            {Array.from({ length: 5 }).map((_, index: number) => (
+              <DiscountIcon key={index} className="m-auto inline-block text-[#51A655]" fontSize="large" />
+            ))}
+          </span>
+          <h1 className="text-center font-['Open_Sans'] text-4xl font-semibold" id="discounts">Discounts Available</h1>
+          <h2 className="text-center font-['Open_Sans'] text-xl font-semibold mt-2" id="discounts">15% Off</h2>
+          <p className="text-center font-['Open_Sans'] text-lg font-light leading-8">
+            Military | Police | Firefighters | First Responders | Teachers | Seniors
+          </p>
+        </section>
+        <section className="bg-[#51A655]">
           <div className="flex justify-center text-white md:justify-start">
             <Logo alt="Kitchen Gurus logo" src="/kitchen-gurus-logo.png" />
           </div>
@@ -77,7 +90,7 @@ export default function MainLayout({ loaderData }: Route.ComponentProps) {
               )}
             </span>
           </div>
-        </div>
+        </section>
       </footer>
     </div>
   );

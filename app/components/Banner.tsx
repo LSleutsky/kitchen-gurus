@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 
 import { startCase } from "es-toolkit/string";
 
@@ -46,8 +46,13 @@ export default function Banner({ userLocation }: Props) {
               <div className="text-center text-2xl md:my-5 md:text-3xl">
                 Experience The Kitchen Of Your Dreams
               </div>
-              <div className="text-center font-light text-lg sm:text-xl">
-                Financing Available | Discounts Available
+              <div className="text-center text-white font-light text-lg sm:text-xl">
+                <Link to="financing">
+                  Financing Available
+                </Link>
+                <Link to="#discounts">
+                  {` | Discounts Available`}
+                </Link>
               </div>
             </section>
             <aside className="flex flex-col items-center justify-center md:pl-2">
