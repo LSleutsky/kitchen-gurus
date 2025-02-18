@@ -62,8 +62,8 @@ export default function Financing() {
       </p>
       <p className="mt-3 px-6">
         Call us at
-        <Link className="text-[#F98500]" to="tel:1-800-555-6666">
-          {` 1-800-555-6666 `}
+        <Link className="text-[#F98500]" to="tel:1-800-834-6584">
+          {` 1-800-834-6584 `}
         </Link>
         or fill out our
         <Link className="text-[#F98500]" to="/contact">

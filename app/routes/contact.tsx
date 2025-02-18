@@ -79,8 +79,8 @@ export default function Contact() {
             <EmailIcon />
             <h3 className="text-2xl ml-2 font-semibold">Email Us</h3>
           </span>
-          <Link className="text-[#F98500] text-xl md:ml-8" to="mailto:kitchengurus@gmail.com">
-            kitchengurus@gmail.com
+          <Link className="text-[#F98500] text-xl md:ml-8" to="mailto:kitchengurusinc@gmail.com">
+            kitchengurusinc@gmail.com
           </Link>
         </div>
         <div className="my-8">
@@ -88,8 +88,8 @@ export default function Contact() {
             <PhoneIcon />
             <h3 className="text-2xl ml-2 font-semibold">Call Us</h3>
           </span>
-          <Link className="text-[#F98500] text-xl md:ml-8" to="tel:1-800-555-6666">
-            1-800-555-6666
+          <Link className="text-[#F98500] text-xl md:ml-8" to="tel:1-800-834-6584">
+            1-800-834-6584
           </Link>
         </div>
         <div className="mt-8">

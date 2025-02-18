@@ -99,9 +99,9 @@ export default function DrawerHeader() {
           <Box sx={{ textAlign: `center` }} onClick={handleDrawerToggle}>
             <Logo alt="Kitchen Gurus logo" src="/kitchen-gurus-logo.png" />
             <Divider />
-            <Link className="text-white text-xl leading-[3em]" to="tel:1-800-555-6666">
+            <Link className="text-white text-xl leading-[3em]" to="tel:1-800-834-6584">
               <PhoneIcon fontSize="medium" />
-              {` 1-800-555-6666`}
+              {` 1-800-834-6584`}
             </Link>
             <Divider />
             <List>
@@ -126,14 +126,14 @@ export default function DrawerHeader() {
           <Box>
             <Divider />
             <span className="flex justify-center text-white py-2">
-              <Link to="mailto:kitchengurus@gmail.com">
+              <Link to="mailto:kitchengurusinc@gmail.com">
                 <EmailIcon fontSize="small" sx={{
                   '&.MuiSvgIcon-root': {
                     marginRight: `4px`,
                     transform: `translateY(-1.5px)`
                   }
                 }} />
-                kitchengurus@gmail.com
+                kitchengurusinc@gmail.com
               </Link>
             </span>
           </Box>

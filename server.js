@@ -24,15 +24,15 @@ app.post('/api/submit-contact-form', (req, res) => {
     port: 587,
     secure: false,
     auth: {
-      user: 'lushsleutsky@gmail.com',
-      pass: 'wnjo xuea hzvz tohn'
+      user: 'kitchengurusinc@gmail.com',
+      pass: 'qzyt wuzu apzu oexz'
     }
   };
 
   const transporter = nodemailer.createTransport(config);
 
   const message = {
-    from: `${firstName} ${lastName} ${email ? `<${email}>` : ``}`,
+    from: email,
     to: 'lushsleutsky@gmail.com',
     subject: 'KITCHEN GURUS CONTACT FORM',
     html: `

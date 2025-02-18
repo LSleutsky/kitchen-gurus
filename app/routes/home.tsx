@@ -33,8 +33,8 @@ export default function Home() {
     const paragraphThree = (
       <>
         Feel free to give us a call at
-        <Link className="text-[#F98500]" to="tel:1-800-555-6666">
-          {` 1-800-555-6666 `}
+        <Link className="text-[#F98500]" to="tel:1-800-834-6584">
+          {` 1-800-834-6584 `}
         </Link>
         for a <span className="italic">100% free consultation</span>, or check out our
         <Link className="text-[#F98500]" to="/gallery">

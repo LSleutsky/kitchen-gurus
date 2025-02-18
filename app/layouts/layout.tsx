@@ -68,9 +68,9 @@ export default function MainLayout({ loaderData }: Route.ComponentProps) {
           </div>
           <div className="flex flex-col items-center justify-between bg-black p-4 text-sm md:flex-row">
             <span className="flex flex-col items-center md:items-start">
-              <Link className="text-white text-base md:mb-1" to="tel:1-800-555-6666">
+              <Link className="text-white text-base md:mb-1" to="tel:1-800-834-6584">
                 <PhoneIcon />
-                {` 1-800-555-6666`}
+                {` 1-800-834-6584`}
               </Link>
             </span>
             <span>

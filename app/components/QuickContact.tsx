@@ -80,6 +80,7 @@ const baseQuickContactFormInputStyles = {
 
 export default function QuickContact() {
   const [hasAdornmentFocus, setHasAdornmentFocus] = useState<boolean>(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
 
   const [contactDetails, setContactDetails] = useState<FormInputTarget>({
       firstName: ``,
@@ -115,7 +116,7 @@ export default function QuickContact() {
         comments: ``
       },
       mode: `onTouched`,
-      reValidateMode: `onBlur`
+      reValidateMode: `onSubmit`
     });
 
   const clearFormValues = () => {
@@ -171,6 +172,8 @@ export default function QuickContact() {
           return;
         }
 
+        if (response.ok) setIsFormSubmitted(true);
+
         clearFormValues();
       } catch (error) {
         console.error(`Error sending email: `, error);
@@ -185,6 +188,10 @@ export default function QuickContact() {
 
       if (isSubmitted && !isSubmitSuccessful) handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
     }, [isSubmitted, isSubmitSuccessful]);
+
+    useEffect(() => {
+      if (isFormSubmitted) reset();
+    }, [isFormSubmitted, reset]);
 
   return (
     <Container className="relative flex flex-col font-['Open_Sans']" component="form" onSubmit={e => {
@@ -372,7 +379,7 @@ export default function QuickContact() {
               sx: { fontSize: `14px` }
             }
           }}
-          title={((!isValid && !isSubmitted) || isSubmitSuccessful) && `Please fill out the required form fields`}
+          title={!isValid && `Please fill out the required form fields`}
         >
           <span className="md:w-1/2">
             <Button
@@ -382,7 +389,7 @@ export default function QuickContact() {
               cursor-${isValid || (isSubmitted && !isSubmitSuccessful) ? `pointer` : `not-allowed`}
               ${isValid || (isSubmitted && !isSubmitSuccessful) ? `hover:bg-white` : ``}
             `}
-              disabled={(!isValid && !isSubmitted) || isSubmitSuccessful}
+              disabled={!isValid}
               text="Submit"
               type="submit"
             />
@@ -392,7 +399,7 @@ export default function QuickContact() {
       <Submission
         handleCloseSnackbar={handleCloseSnackbar}
         horizontal={horizontal}
-        isSuccessfullySubmitted={isSubmitSuccessful}
+        isSuccessfullySubmitted={isFormSubmitted}
         open={open}
         vertical={vertical}
       />

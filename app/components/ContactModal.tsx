@@ -59,8 +59,8 @@ export default function ContactModal({ className, ctaText }: Props) {
   const contactFormHeaderText = (
     <h4 className="font-['Open_Sans'] text-center mb-4">
       If you have an emergency or need to speak with someone right away, please call us at
-      <Link className="text-[#F98500]" to="tel:1-800-555-6666">
-        {` 1-800-555-6666`}
+      <Link className="text-[#F98500]" to="tel:1-800-834-6584">
+        {` 1-800-834-6584`}
       </Link>
     </h4>
   );
