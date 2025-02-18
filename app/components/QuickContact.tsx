@@ -6,6 +6,8 @@ import { capitalize } from "es-toolkit/string";
 
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from "@mui/material/Container";
+import InputAdornment from '@mui/material/InputAdornment';
+import { inputBaseClasses } from '@mui/material/InputBase';
 import type { SnackbarCloseReason, SnackbarOrigin } from '@mui/material/Snackbar';
 import TextField from "@mui/material/TextField";
 import Tooltip from '@mui/material/Tooltip';
@@ -77,6 +79,8 @@ const baseQuickContactFormInputStyles = {
 };
 
 export default function QuickContact() {
+  const [hasAdornmentFocus, setHasAdornmentFocus] = useState<boolean>(false);
+
   const [contactDetails, setContactDetails] = useState<FormInputTarget>({
       firstName: ``,
       lastName: ``,
@@ -93,6 +97,7 @@ export default function QuickContact() {
 
   const { width } = useWindowSize();
   const { horizontal, open, vertical } = snackbarState;
+  const setInputAdornmentFocus = () => setHasAdornmentFocus(true);
 
   const {
       clearErrors,
@@ -122,6 +127,7 @@ export default function QuickContact() {
       comments: ``
     });
 
+    setHasAdornmentFocus(false);
     reset();
   };
 
@@ -263,11 +269,34 @@ export default function QuickContact() {
                 size="small"
                 slotProps={{
                   htmlInput: {
-                    // weird bug where one extra number gets appended to end value sent to form data if extra numbers pressed on input
                     maxLength: 14
+                  },
+                  input: {
+                    startAdornment: hasAdornmentFocus ? (
+                      <InputAdornment
+                        position="start"
+                        sx={{
+                          opacity: 0,
+                          pointerEvents: `none`,
+                          [`[data-shrink=true] ~ .${inputBaseClasses.root} > &`]: {
+                            opacity: 1
+                          },
+                          '&.MuiInputAdornment-root': {
+                            mt: `20.5px !important`
+                          }
+                        }}
+                      >
+                        +1
+                      </InputAdornment>
+                    ) : null
                   }
                 }}
-                sx={baseQuickContactFormInputStyles}
+                sx={{
+                  ...baseQuickContactFormInputStyles,
+                  '& .MuiInputBase-input': {
+                    pl: `6px`
+                  }
+                }}
                 type="tel"
                 value={contactDetails.phoneNumber}
                 variant="filled"
@@ -275,6 +304,7 @@ export default function QuickContact() {
                   field.onChange(event);
                   setFormValues(event);
                 }}
+                onFocus={setInputAdornmentFocus}
               />
             )}
             rules={formValidationRules(`phoneNumber`)}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect,useState } from 'react';
 import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from "react-hook-form"
 
@@ -11,6 +11,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Container from "@mui/material/Container";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
+import InputAdornment from '@mui/material/InputAdornment';
+import { inputBaseClasses } from '@mui/material/InputBase';
 import InputLabel from '@mui/material/InputLabel';
 import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
@@ -96,6 +98,7 @@ const baseContactFormInputStyles = {
 
 export default function ContactForm({ handleContactFormSubmission, handleContactFormSuccessSubmission, headerText }: Props) {
   const [serviceName, setServiceName] = useState<string[]>([]);
+  const [hasAdornmentFocus, setHasAdornmentFocus] = useState<boolean>(false);
 
   const [contactDetails, setContactDetails] = useState<FormInputTarget>({
     firstName: ``,
@@ -127,6 +130,7 @@ export default function ContactForm({ handleContactFormSubmission, handleContact
   });
 
   const clearServiceSelection = () => setServiceName([]);
+  const setInputAdornmentFocus = () => setHasAdornmentFocus(true);
 
   const clearFormValues = () => {
     setContactDetails({
@@ -138,6 +142,7 @@ export default function ContactForm({ handleContactFormSubmission, handleContact
       comments: ``
     });
 
+    setHasAdornmentFocus(false);
     reset();
   };
 
@@ -227,9 +232,33 @@ export default function ContactForm({ handleContactFormSubmission, handleContact
                     htmlInput: {
                       maxLength: key === `phoneNumber` ? 14 : ``
                     },
+                    input: {
+                      startAdornment: key === `phoneNumber` && hasAdornmentFocus ? (
+                        <InputAdornment
+                          position="start"
+                          sx={{
+                            opacity: 0,
+                            pointerEvents: `none`,
+                            [`[data-shrink=true] ~ .${inputBaseClasses.root} > &`]: {
+                              opacity: 1
+                            },
+                            '&.MuiInputAdornment-root': {
+                              mt: `3.5px`
+                            }
+                          }}
+                        >
+                          +1
+                        </InputAdornment>
+                      ) : null
+                    },
                     inputLabel: { shrink: fieldState.isFocused }
                   }}
-                  sx={{ mb: 2.5 }}
+                  sx={{
+                    mb: 2.5,
+                    '& .MuiInputBase-input': {
+                      pl: key === `phoneNumber` ? `10px` : ``
+                    }
+                  }}
                   type={
                     key === `email`
                       ? `email`
@@ -242,6 +271,7 @@ export default function ContactForm({ handleContactFormSubmission, handleContact
                     field.onChange(event);
                     setFormValues(event);
                   }}
+                  onFocus={key === `phoneNumber` && setInputAdornmentFocus}
                 />
               )}
               rules={formValidationRules(key)}
