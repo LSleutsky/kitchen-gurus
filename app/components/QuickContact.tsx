@@ -10,6 +10,8 @@ import type { SnackbarCloseReason, SnackbarOrigin } from '@mui/material/Snackbar
 import TextField from "@mui/material/TextField";
 import Tooltip from '@mui/material/Tooltip';
 
+import useWindowSize from "~/hooks/useWindowSize";
+
 import { phoneNumberAutoFormat } from "~/utils";
 import type { FormInputTarget, SnackbarState } from '~/utils/constants';
 import { formValidationRules } from "~/utils/constants";
@@ -89,6 +91,7 @@ export default function QuickContact() {
     horizontal: `center`
   });
 
+  const { width } = useWindowSize();
   const { horizontal, open, vertical } = snackbarState;
 
   const {
@@ -124,10 +127,10 @@ export default function QuickContact() {
 
   const setFormValues = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (event.target.name === `phoneNumber`)
-      return setContactDetails((prev: FormInputTarget) => ({
+      return setContactDetails({
         ...contactDetails,
-        phoneNumber: phoneNumberAutoFormat(event.target.value, prev.phoneNumber)
-      }));
+        phoneNumber: phoneNumberAutoFormat(event.target.value)
+      });
 
     setContactDetails({
       ...contactDetails,
@@ -187,7 +190,7 @@ export default function QuickContact() {
       handleSubmit(onSubmit, onError)(e);
     }}>
       {isSubmitting && (
-        <div className={`absolute w-full h-full flex justify-center items-center ${isSubmitting ? `z-10` : ``}`}>
+        <div className={`absolute left-0 w-full h-full flex justify-center items-center ${isSubmitting ? `z-10` : ``}`}>
           <CircularProgress size="8em" sx={{
             '&.MuiCircularProgress-root': {
               color: `#F98500`
@@ -196,128 +199,134 @@ export default function QuickContact() {
         </div>
       )}
       <h3 className="text-white text-xl text-center font-light pb-2">Get a Free Kitchen Estimate</h3>
-      <div className="flex items-center justify-center mb-3">
-        <Controller
-          control={control}
-          name="firstName"
-          render={({ field }) => (
-            <TextField
-              {...field}
-              required
-              error={!!errors[`firstName`]}
-              label="First Name"
-              name="firstName"
-              size="small"
-              sx={baseQuickContactFormInputStyles}
-              value={contactDetails.firstName}
-              variant="filled"
-              onChange={event => {
-                field.onChange(event);
-                setFormValues(event);
-              }}
-            />
-          )}
-          rules={formValidationRules(`firstName`)}
-        />
-        <Controller
-          control={control}
-          name="lastName"
-          render={({ field }) => (
-            <TextField
-              {...field}
-              required
-              error={!!errors[`lastName`]}
-              label="Last Name"
-              name="lastName"
-              size="small"
-              sx={baseQuickContactFormInputStyles}
-              value={contactDetails.lastName}
-              variant="filled"
-              onChange={event => {
-                field.onChange(event);
-                setFormValues(event);
-              }}
-            />
-          )}
-          rules={formValidationRules(`lastName`)}
-        />
-      </div>
-      <div className="flex items-center justify-center mb-3">
-        <Controller
-          control={control}
-          name="phoneNumber"
-          render={({ field }) => (
-            <TextField
-              {...field}
-              required
-              error={!!errors[`phoneNumber`]}
-              label="Phone Number"
-              name="phoneNumber"
-              size="small"
-              slotProps={{
-                htmlInput: {
-                  // weird bug where one extra number gets appended to end value sent to form data if extra numbers pressed on input
-                  maxLength: 14
-                }
-              }}
-              sx={baseQuickContactFormInputStyles}
-              type="tel"
-              value={contactDetails.phoneNumber}
-              variant="filled"
-              onChange={event => {
-                field.onChange(event);
-                setFormValues(event);
-              }}
-            />
-          )}
-          rules={formValidationRules(`phoneNumber`)}
-        />
-        <Controller
-          control={control}
-          name="email"
-          render={({ field }) => (
-            <TextField
-              {...field}
-              error={!!errors[`email`]}
-              label="Email"
-              name="email"
-              size="small"
-              sx={baseQuickContactFormInputStyles}
-              type="email"
-              value={contactDetails.email}
-              variant="filled"
-              onChange={event => {
-                field.onChange(event);
-                setFormValues(event);
-              }}
-            />
-          )}
-          rules={formValidationRules(`email`)}
-        />
-      </div>
-      <div className="flex items-center justify-center">
-        <Controller
-          control={control}
-          name="comments"
-          render={({ field }) => (
-            <TextField
-              {...field}
-              fullWidth
-              multiline
-              label="How Can We Help You?"
-              minRows="2"
-              name="comments"
-              size="small"
-              sx={baseQuickContactFormInputStyles}
-              value={capitalize(contactDetails.comments)}
-              variant="filled"
-              onChange={event => {
-                field.onChange(event);
-                setFormValues(event);
-              }}
-            />
-          )}
-        />
+      <div className={isSubmitting ? `opacity-25` : ``}>
+        <div className="flex items-center justify-center mb-3">
+          <Controller
+            control={control}
+            name="firstName"
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+                required
+                error={!!errors[`firstName`]}
+                label="First Name"
+                name="firstName"
+                size="small"
+                sx={baseQuickContactFormInputStyles}
+                value={contactDetails.firstName}
+                variant="filled"
+                onChange={event => {
+                  field.onChange(event);
+                  setFormValues(event);
+                }}
+              />
+            )}
+            rules={formValidationRules(`firstName`)}
+          />
+          <Controller
+            control={control}
+            name="lastName"
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+                required
+                error={!!errors[`lastName`]}
+                label="Last Name"
+                name="lastName"
+                size="small"
+                sx={baseQuickContactFormInputStyles}
+                value={contactDetails.lastName}
+                variant="filled"
+                onChange={event => {
+                  field.onChange(event);
+                  setFormValues(event);
+                }}
+              />
+            )}
+            rules={formValidationRules(`lastName`)}
+          />
+        </div>
+        <div className="flex items-center justify-center mb-3">
+          <Controller
+            control={control}
+            name="phoneNumber"
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+                required
+                error={!!errors[`phoneNumber`]}
+                label={width < 768 || width > 900 ? `Phone Number` : `Phone`}
+                name="phoneNumber"
+                size="small"
+                slotProps={{
+                  htmlInput: {
+                    // weird bug where one extra number gets appended to end value sent to form data if extra numbers pressed on input
+                    maxLength: 14
+                  }
+                }}
+                sx={baseQuickContactFormInputStyles}
+                type="tel"
+                value={contactDetails.phoneNumber}
+                variant="filled"
+                onChange={event => {
+                  field.onChange(event);
+                  setFormValues(event);
+                }}
+              />
+            )}
+            rules={formValidationRules(`phoneNumber`)}
+          />
+          <Controller
+            control={control}
+            name="email"
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+                error={!!errors[`email`]}
+                label="Email"
+                name="email"
+                size="small"
+                sx={baseQuickContactFormInputStyles}
+                type="email"
+                value={contactDetails.email}
+                variant="filled"
+                onChange={event => {
+                  field.onChange(event);
+                  setFormValues(event);
+                }}
+              />
+            )}
+            rules={formValidationRules(`email`)}
+          />
+        </div>
+        <div className="flex items-center justify-center">
+          <Controller
+            control={control}
+            name="comments"
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+                multiline
+                label="How Can We Help You?"
+                minRows="2"
+                name="comments"
+                size="small"
+                sx={baseQuickContactFormInputStyles}
+                value={capitalize(contactDetails.comments)}
+                variant="filled"
+                onChange={event => {
+                  field.onChange(event);
+                  setFormValues(event);
+                }}
+              />
+            )}
+          />
+        </div>
       </div>
       <footer className="w-full flex flex-col mb-2 md:flex-row">
         <Button
@@ -341,7 +350,7 @@ export default function QuickContact() {
               w-full mt-2 ml-0 p-2 px-10
               md:mt-4 md:mr-0
               cursor-${isValid || (isSubmitted && !isSubmitSuccessful) ? `pointer` : `not-allowed`}
-              ${isValid || !isSubmitSuccessful ? `hover:bg-white` : ``}
+              ${isValid || (isSubmitted && !isSubmitSuccessful) ? `hover:bg-white` : ``}
             `}
               disabled={(!isValid && !isSubmitted) || isSubmitSuccessful}
               text="Submit"

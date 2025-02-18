@@ -43,23 +43,21 @@ export const getImageParameters = (id: string, size: string = `1000x560`) =>
  * Takes in a raw string value - digits only - of a phone number, and formats accordingly
  *
  * @param phoneNumberValue The current phone number value
- * @param previousPhoneNumberValue The previous phone number value
  * 
  * @returns {string} The formatted phone number string
  * 
  * @example
  * '(123) 456-7890'
  */
-export const phoneNumberAutoFormat = (phoneNumberValue: string, previousPhoneNumberValue: string): string | undefined => {
+export const phoneNumberAutoFormat = (phoneNumberValue: string): string | undefined => {
   if (!phoneNumberValue) return phoneNumberValue;
 
   const phoneNumber = phoneNumberValue.replace(/[^\d]/g, ``);
+  const phoneNumberLength = phoneNumber.length;
 
-  if (!previousPhoneNumberValue || phoneNumberValue.length > previousPhoneNumberValue.length) {
-    if (phoneNumber.length < 4) return phoneNumber;
+  if (phoneNumberLength < 4) return phoneNumber;
 
-    if (phoneNumber.length < 7) return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+  if (phoneNumberLength < 7) return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
 
-    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
-  }
+  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
 };

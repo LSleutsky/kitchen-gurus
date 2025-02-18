@@ -39,7 +39,13 @@ app.post('/api/submit-contact-form', (req, res) => {
       <h3>First Name: </h3> ${firstName}
       ${spouseName ? `<h3>Spouse Name:</h3> ${spouseName}` : ``}
       <h3>Last Name: </h3> ${lastName}
-      <h3>Phone Number: </h3> ${phoneNumber}
+      <h3>Phone Number: </h3>
+        ${
+          // account for browser autofill value which sends phone number unformatted due to mui / react-hook-form validation logic
+          phoneNumber.length === 10
+            ? `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`
+            : `${phoneNumber}`
+        }
       ${email ? `<h3>Email:</h3> ${email}` : ``}
       ${serviceOptions ? `<h3>Services:</h3> ${serviceOptions.join(', ')}` : ``}
       ${comments ? `<h3>Comments:</h3> ${comments}` : ``}

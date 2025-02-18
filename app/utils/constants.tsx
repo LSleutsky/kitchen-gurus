@@ -173,13 +173,13 @@ export const formValidationRules = (key: string) => {
     case `lastName`:
       return {
         required: `Last name is required`
-      }
+      };
     case `phoneNumber`:
       return {
         required: `Phone number is required`,
-        minLength: {
-          // min length is to account for the phone number format util that masks entered user input value
-          value: 14,
+        pattern: {
+          // second pattern conditional is to account for browser autofill not reading phone number input value properly
+          value: /^\(?([0-9]{3})\)?[ ]([0-9]{3})[-]([0-9]{4})$|^\d{10}$/,
           message: `A valid 10 digit phone number is required`
         }
       };

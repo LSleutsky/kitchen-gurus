@@ -53,7 +53,7 @@ export default function Banner({ userLocation }: Props) {
                 </Link>
               </h3>
             </section>
-            <aside className="flex flex-col items-center justify-center mt-4 md:pl-2">
+            <aside className="flex flex-col items-center justify-center w-full mt-4 md:pl-2 md:w-auto">
               <QuickContact />
             </aside>
           </div>

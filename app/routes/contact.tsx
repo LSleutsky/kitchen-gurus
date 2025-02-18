@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 import EmailIcon from '@mui/icons-material/Email';
@@ -17,11 +17,6 @@ import { locationData } from '~/utils/constants';
 
 import type { Route } from "./+types/home";
 
-interface ContactFormRef {
-  clearFormValues: () => void;
-  clearServiceSelection: () => void;
-}
-
 interface SnackbarState extends SnackbarOrigin {
   open: boolean;
 }
@@ -31,7 +26,6 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Contact() {
-  const contactFormRef = useRef<ContactFormRef>(null);
   const [isContactFormSubmitted, setIsContactFormSubmitted] = useState<boolean>(false);
   const [isContactFormSuccessfullySubmitted, setIsContactFormSuccessfullySubmitted] = useState<boolean>(false);
   const { width } = useWindowSize();
@@ -58,8 +52,6 @@ export default function Contact() {
 
   useEffect(() => {
     if (isContactFormSuccessfullySubmitted) {
-      contactFormRef?.current?.clearFormValues();
-      contactFormRef?.current?.clearServiceSelection();
       handleOpenSnackbar({ vertical: `top`, horizontal: `center` });
     }
 
@@ -71,7 +63,6 @@ export default function Contact() {
     <section className="flex flex-col justify-between p-8 pb-0 font-['Open_Sans'] md:flex-row">
       <div className="w-full md:w-6/12">
         <ContactForm
-          ref={contactFormRef}
           handleContactFormSubmission={handleContactFormSubmitState as any}
           handleContactFormSuccessSubmission={handleContactFormSubmitSuccessState as any}
         />

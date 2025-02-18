@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from "react-hook-form"
 
@@ -94,8 +94,7 @@ const baseContactFormInputStyles = {
   }
 };
 
-// eslint-disable-next-line react/display-name
-const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactFormSuccessSubmission, headerText }: Props, ref) => {
+export default function ContactForm({ handleContactFormSubmission, handleContactFormSuccessSubmission, headerText }: Props) {
   const [serviceName, setServiceName] = useState<string[]>([]);
 
   const [contactDetails, setContactDetails] = useState<FormInputTarget>({
@@ -147,10 +146,10 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactForm
 
   const setFormValues = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (event.target.name === `phoneNumber`)
-      return setContactDetails((prev: FormInputTarget) => ({
+      return setContactDetails({
         ...contactDetails,
-        phoneNumber: phoneNumberAutoFormat(event.target.value, prev.phoneNumber)
-      }));
+        phoneNumber: phoneNumberAutoFormat(event.target.value)
+      });
 
     setContactDetails({
       ...contactDetails,
@@ -176,6 +175,8 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactForm
 
         return;
       }
+
+      clearFormValues();
     } catch (error) {
       console.error(`Error sending email: `, error);
     }
@@ -188,13 +189,6 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactForm
     handleContactFormSubmission(isSubmitted);
     handleContactFormSuccessSubmission(isSubmitSuccessful);
   }, [handleContactFormSubmission, handleContactFormSuccessSubmission, isSubmitSuccessful, isSubmitted]);
-
-  useImperativeHandle(ref, () => {
-    return {
-      clearFormValues,
-      clearServiceSelection
-    };
-  });
 
   return (
     <Container className="pt-6 pb-6 relative" component="form" sx={baseContactFormInputStyles} onSubmit={e => {
@@ -225,12 +219,12 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactForm
                   {...field}
                   error={!!errors[key as keyof ContactFormInputs]}
                   helperText={errors[key as keyof ContactFormInputs]?.message}
+                  id={key}
                   label={startCase(key)}
                   name={key}
                   required={key === `firstName` || key === `lastName` || key === `phoneNumber`}
                   slotProps={{
                     htmlInput: {
-                      // weird bug where one extra number gets appended to end value sent to form data if extra numbers pressed on input
                       maxLength: key === `phoneNumber` ? 14 : ``
                     },
                     inputLabel: { shrink: fieldState.isFocused }
@@ -356,6 +350,4 @@ const ContactForm = forwardRef(({ handleContactFormSubmission, handleContactForm
       </section>
     </Container>
   )
-});
-
-export default ContactForm;
+}
