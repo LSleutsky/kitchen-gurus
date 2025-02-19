@@ -44,7 +44,11 @@ export default function About() {
         <p className="mt-5 text-center font-['Open_Sans'] text-lg font-light leading-8">
           {`Our expert technicians have successfully and seamlessly completed thousands of renovations on time and within
           budgets. We guarantee 100% customer satisfaction by going above and beyond in ensuring that each project
-          exceeds our client's expectations.`}
+          exceeds our client's expectations, and our`}
+          <Link className="text-[#F98500]" to="/testimonials">
+            {` testimonials `}
+          </Link>
+          give a glimpse into the type of quality we provide.
         </p>
         <ContactModal ctaText="Get a Free Consultation" />
       </section>

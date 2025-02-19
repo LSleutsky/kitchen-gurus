@@ -80,6 +80,12 @@ export interface SocialMediaOptions {
   url: string;
 }
 
+export interface TestimonialsData {
+  name: string;
+  location?: string;
+  testimonial: string;
+}
+
 export interface UserLocationData {
   city: string;
   state: string;
@@ -377,4 +383,67 @@ export const socialMediaActions: SocialMediaOptions[] = [
   { icon: <InstagramIcon />, name: `Instagram`, url: `https://www.instagram.com/basementguruu/` },
   { icon: <XIcon />, name: `X`, url: `https://x.com/basement_gurus` },
   { icon: <YouTubeIcon sx={{ fontSize: `32px` }} />, name: `YouTube`, url: `https://www.youtube.com/@basementgurus` }
+];
+
+export const testimonialsData: TestimonialsData[] = [
+  {
+    name: `Kathleen P.`,
+    location: `Hatboro, PA`,
+    testimonial: `“Basement Gurus exceeded my expectations. In addition to improving the drainage system around my basement,
+    mold was removed and basement walls and ceiling was painted. An egress window was installed and the basement was put back
+    in better condition than when the work was started.”`
+  },
+  {
+    name: `Benjamin Cerniglia`,
+    testimonial: `“From the beginning of the project to the end, Basement Gurus made the process feel painless. They gave me a
+    clear understanding of what remedies were necessary to fix my foundation and ensured that all of my expectations would be met.
+    The contracted workers were timely, considerate, clean, and personable. I would strongly recommend Basement Gurus for any
+    waterproofing work and will be using them as often as necessary in the future.”`
+  },
+  {
+    name: `Brent K.`,
+    testimonial: `“I cannot express how grateful I am for the service that Basement Gurus provided. They are super professional,
+    answered every question, the work and advice that they offer is exceptional and effective. My Basement used to be moldy, now
+    we are averaging 40 to 45 humidity eliminating the mold issue completely. I can't thank them enough for their help.”`
+  },
+  {
+    name: `Troy D.`,
+    location: `Wilmington, DE`,
+    testimonial: `“For anyone looking to get waterproofing done in their home: I moved into my house about two years ago and would
+    get floods in my basement during every storm. I tried to fix it myself environmentally but failed in my attempts. I then decided
+    to finally fix the problem and get my basement waterproofed. Being relatively new to Delaware, I put in a request to get free
+    estimates. I had a few companies come out to look at it and narrowed my choices down. I was down to Basement Waterproofing Specialists (BWS)
+    and Basement Gurus. The difference was the representative from Basement Gurus had a more natural approach and took the time to ask numerous
+    questions, as the other representatives asked little to no questions. The Basement Gurus representative suggested to fix internally AND
+    externally, plus they even added a lateral system in my basement. No other company felt to even thought of a lateral systems or external
+    drainage, or to even ask about it. I could not speak more highly of the representative and his team at Basement Gurus, they took the time to
+    explain every step and the process before and during the installation to keep me involved with what was going on. The crew was extremely
+    polite and respectful of my house, they were very efficient and they *did not play games* for lack of a better word. lol The very next day
+    we had heavy rains, which I was excited to test out my waterproofing system! During and after it rained there was not even a single drop of
+    water in my basement or laundry room. The representative even had his team remove and replace all of the studs that had become moldy and also
+    put in new mold-resistant drywall. Basement Gurus treated us as if we were family and for anyone looking to get waterproofing done in their house,
+    call Basement Gurus, they truly stand themselves apart from the competition!“`
+  },
+  {
+    name: `Bacon B.`,
+    location: `Philadelphia, PA`,
+    testimonial: `“One of the best experiences I have had as a homeowner, hands down. In February 2020, we had a flood in our basement due to a clog
+    in the sewage pipe. At the time, we did not realize that this had caused mold to spore. Our home started to have a strange smell and soon we made
+    a realization that we had to do something about it. We remembered that we had previously been given a quote for waterproofing and mold remediation
+    by the Basement Gurus (following excellent work we had done by Roof Gurus). They did not pressure us to do anything or try to up-sell. There was no
+    icky/slimy sales rep feeling. Just natural, human connection with the customer's best interest in mind. These guys came in and gave us service at a
+    fraction of the cost and ten times the friendliness of the larger competitors - no price gouging. Whenever I think of a home project, I will think
+    of the Gurus (Roof Gurus, Basement Gurus etc.). They have always been willing to come give estimates or simply investigate an issue - even when it
+    has turned out to be not 100% related their service area. I come from a 10 year background of customer service so trust me when I say these guys
+    are the real deal. Quality work, quality products & excellent customer service that I will never forget.“`
+  },
+  {
+    name: `Randy F.`,
+    location: `Wilmington, DE`,
+    testimonial: `“Dan and his team were both efficient and knowledgeable. They installed a french drain sump pump and made repairs to our footings at
+    our residence three years ago and not a drop of water since then! Thats why we recommended them for the work we recently did at our church. The
+    crew installed a complete system with two sumps and pumps in two days! From start to finish they did an outstanding job at competitive prices using
+    quality materials. The clean up was amazing as well! Except for the new concrete, you would never know all of the work that was involved! I highly
+    recommend Dan and the Basement Gurus for all of your water infiltration/foundation needs!!! You wont be disappointed!!!“`
+  }
 ];

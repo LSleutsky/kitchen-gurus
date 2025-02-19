@@ -63,8 +63,22 @@ export default function MainLayout({ loaderData }: Route.ComponentProps) {
           <ContactModal ctaText="Meet With Us" />
         </section>
         <section className="bg-[#51A655]">
-          <div className="flex justify-center text-white md:justify-start">
+          <div className="flex flex-col-reverse justify-between items-center text-white md:flex-row">
             <Logo alt="Kitchen Gurus logo" src="/kitchen-gurus-logo.png" />
+            <div className="w-full flex flex-col items-center pt-2 [&>*]:pb-2 md:grid md:grid-cols-2 md:w-2/3">
+              <Link to="/testimonials">
+                Testimonials
+              </Link>
+              <Link to="/financing">
+                Financing
+              </Link>
+              <Link to="/licensed-insured">
+                Licensed & Insured
+              </Link>
+              <Link to="/affordable-experienced">
+                Affordable & Experienced
+              </Link>
+            </div>
           </div>
           <div className="flex flex-col items-center justify-between bg-black p-4 text-sm md:flex-row">
             <span className="flex flex-col items-center md:items-start">

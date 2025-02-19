@@ -59,7 +59,7 @@ const baseQuickContactFormInputStyles = {
   },
   '&.MuiTextField-root': {
     background: `white`,
-    '&:first-child': {
+    '&:first-of-type': {
       mr: 2
     },
     '&:last-child': {
@@ -80,7 +80,7 @@ const baseQuickContactFormInputStyles = {
 
 export default function QuickContact() {
   const [hasAdornmentFocus, setHasAdornmentFocus] = useState<boolean>(false);
-  const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
+  const [isQuickContactFormSuccessfullySubmitted, setIsQuickContactFormSuccessfullySubmitted] = useState<boolean>(false);
 
   const [contactDetails, setContactDetails] = useState<FormInputTarget>({
       firstName: ``,
@@ -172,7 +172,7 @@ export default function QuickContact() {
           return;
         }
 
-        if (response.ok) setIsFormSubmitted(true);
+        if (response.ok) setIsQuickContactFormSuccessfullySubmitted(true);
 
         clearFormValues();
       } catch (error) {
@@ -190,8 +190,8 @@ export default function QuickContact() {
     }, [isSubmitted, isSubmitSuccessful]);
 
     useEffect(() => {
-      if (isFormSubmitted) reset();
-    }, [isFormSubmitted, reset]);
+      if (isQuickContactFormSuccessfullySubmitted) reset();
+    }, [isQuickContactFormSuccessfullySubmitted, reset]);
 
   return (
     <Container className="relative flex flex-col font-['Open_Sans']" component="form" onSubmit={e => {
@@ -399,7 +399,7 @@ export default function QuickContact() {
       <Submission
         handleCloseSnackbar={handleCloseSnackbar}
         horizontal={horizontal}
-        isSuccessfullySubmitted={isFormSubmitted}
+        isSuccessfullySubmitted={isQuickContactFormSuccessfullySubmitted}
         open={open}
         vertical={vertical}
       />
