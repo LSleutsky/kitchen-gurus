@@ -8,7 +8,7 @@ import { testimonialsData } from "~/utils/constants";
 
 export default function Testimonials() {
   return (
-    <section className="font-['Open_Sans']">
+    <article className="font-['Open_Sans']">
       <h1 className="text-center text-4xl font-semibold p-6">
         Testimonials
       </h1>
@@ -29,26 +29,24 @@ export default function Testimonials() {
           5-star Reviews!
         </h2>
       </section>
-      <section className="my-4 mx-6 mb-0">
+      <section className="mx-6 mt-4 mb-0">
         <Masonry columns={{ 480: 1, 640: 2, 768: 2, 1024: 3 }} gap={12}>
           {testimonialsData.map((data: TestimonialsData, index: number) => (
-            <div key={index} className="items bg-[#51A655] text-white text-center p-4 size-fit">
+            <div key={index} className="bg-[#51A655] text-white text-center p-4 size-fit">
               <header className="pb-5 text-center">
                 {Array.from({ length: 5 }).map((_, index: number) => (
                   <StarIcon key={index} className="m-auto inline-block text-[#F7C400]" fontSize="large" />
                 ))}
               </header>
-              <div className="">
-                <p>{data.testimonial}</p>
-                <span>
-                  <p className="font-black pt-12">{data.name}</p>
-                  <p>{data?.location}</p>
-                </span>
-              </div>
+              <p>{data.testimonial}</p>
+              <span>
+                <p className="font-black pt-12">{data.name}</p>
+                <p>{data?.location}</p>
+              </span>
             </div>
           ))}
         </Masonry>
       </section>
-    </section>
+    </article>
   );
 }
