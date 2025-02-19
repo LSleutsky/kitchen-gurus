@@ -394,17 +394,24 @@ export const testimonialsData: TestimonialsData[] = [
     in better condition than when the work was started.”`
   },
   {
-    name: `Benjamin Cerniglia`,
-    testimonial: `“From the beginning of the project to the end, Basement Gurus made the process feel painless. They gave me a
-    clear understanding of what remedies were necessary to fix my foundation and ensured that all of my expectations would be met.
-    The contracted workers were timely, considerate, clean, and personable. I would strongly recommend Basement Gurus for any
-    waterproofing work and will be using them as often as necessary in the future.”`
+    name: `Todd L.`,
+    location: `Harrisburg, PA`,
+    testimonial: `“After getting an estimate from another company, Basement Gurus offered us a much better system for a much lower
+    price. We had a large and complicated job to do, and the crew finished it all beautifully. Since then, we've had several tropical
+    storms, and not a drop of water in the house.”`
   },
   {
-    name: `Brent K.`,
-    testimonial: `“I cannot express how grateful I am for the service that Basement Gurus provided. They are super professional,
-    answered every question, the work and advice that they offer is exceptional and effective. My Basement used to be moldy, now
-    we are averaging 40 to 45 humidity eliminating the mold issue completely. I can't thank them enough for their help.”`
+    name: `Paula B.`,
+    location: `Millsboro, DE`,
+    testimonial: `“I recently purchased my first home. The day of closing I did a walk-through and had mud and water in my basement.
+    The seller and seller's realtor assured me that water problem in my basement would be resolved in 30 days.. That never
+    happened, In my opinion this was the house from hell. I called 4 companies for estimates, quotes, and a review of my basement.
+    Before leaving John Ford from Basement Gurus last words were Paula, Basement Gurus has your back. John really meant what he said, in fact,
+    John was the only person who called me back after reviewing the basement to find out if I had any questions or if he needed to explain
+    anything to me from the estimate that he wrote up for me. John also gave me his direct phone number and told me to call him anytime.
+    Meanwhile, none of the other companies called me, so for that reason alone I really appreciated that. When John told me do not worry
+    Paula I got your back. He really meant that. I guess the saying is true, it is not what someone says to you But how they made you feel.
+    THE Gurus kept their promise! Thank you so much again, especially you John Ford.... I am so relieved. ”`
   },
   {
     name: `Troy D.`,
