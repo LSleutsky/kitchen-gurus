@@ -69,11 +69,11 @@ export default function MainLayout({ loaderData }: Route.ComponentProps) {
               <Link to="/testimonials">
                 Testimonials
               </Link>
-              <Link to="/financing">
-                Financing
-              </Link>
               <Link to="/licensed-insured">
                 Licensed & Insured
+              </Link>
+              <Link to="/financing">
+                Financing
               </Link>
               <Link to="/affordable-experienced">
                 Affordable & Experienced

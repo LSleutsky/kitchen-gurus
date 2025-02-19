@@ -3,48 +3,7 @@ import { Link } from "react-router";
 import type { FinancingData } from "~/utils/constants";
 import { financingData } from "~/utils/constants";
 
-import type { Route } from "./+types/home";
-
-// interface FinancingData {
-//   alt: string;
-//   src: string;
-//   url: string;
-//   info: string[];
-// }
-
-// const financingData: FinancingData[] = [
-//   {
-//     alt: `Foundation Finance Company`,
-//     src: `/foundation-financing.png`,
-//     url: `https://portal.foundationfinance.com/links/JRdlQdCnsLmrLcujdRwrYQ9nQi0nQhhclMBEIP5lJW4=`,
-//     info: [
-//       `Foundation Finance has some of the lowest interest rates available.`,
-//       `Loan options for low, medium, and high credit scores.`,
-//       `Available in DE - MD - PA`
-//     ]
-//   },
-//   {
-//     alt: `Mariner Finance`,
-//     src: `/mariner-financing.webp`,
-//     url: `https://www.tciconnection.com/internetApp/marinerfinance/application/get_started.action`,
-//     info: [
-//       `Mariner has several locations throughout the Tristate area to serve you.`,
-//       `Mariner offers 0% Financing for the first 12 months.`,
-//       `They're known for their high approval rates.`,
-//       `Available in DE - MD - NJ - PA`
-//     ]
-//   },
-//   {
-//     alt: `Enhancify`,
-//     src: `/enhancify-logo.webp`,
-//     url: `https://www.enhancify.com/basement-gurus`,
-//     info: [
-//       `Enhancify offers 0% interest for qualified customers as well as HELOC loans!`,
-//       `Loan options for all credit scores.`,
-//       `Available in DE - MD - NJ - PA`
-//     ]
-//   }
-// ];
+import type { Route } from "./+types/financing";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: `Financing Options | Kitchen Gurus` }, { name: `description`, content: `Financing with Kitchen Gurus` }];

@@ -9,7 +9,7 @@ import ContactModal from "~/components/ContactModal";
 import type { AboutUsData, LocationData } from '~/utils/constants';
 import { aboutUsData, locationData } from '~/utils/constants';
 
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/about";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: `About Us | Kitchen Gurus` }, { name: `description`, content: `About Kitchen Gurus` }];

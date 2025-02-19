@@ -31,6 +31,12 @@ export interface FormInputTarget {
   [key: string]: any;
 }
 
+export interface QuickLinksData {
+  header: string;
+  footer: string;
+  reasons: any;
+}
+
 export interface LocationData {
   backgroundColor: string;
   cityStateZip: string;
@@ -192,6 +198,22 @@ export const formValidationRules = (key: string) => {
   }
 };
 
+export const licensedInsuredData: QuickLinksData = {
+  header: `At Kitchen Gurus, we strongly hiring licensed and insured experts for any services related to remodeling for several reasons.`,
+  footer: `By hiring licensed and insured experts for services related to your home, you can be assured that the work will be done safely, efficiently,
+    and to the highest standard. It also provides peace of mind, knowing that you and your property are protected from any liabilities that may
+    arise during the project.`,
+  reasons: [
+    `Firstly, licensed and insured experts have the expertise and knowledge to handle specific tasks related to kitchen remodeling projects.
+      They are trained and certified to identify and address underlying problems such as architecture, dimensions, and support systems
+      using the latest tools and techniques, ensuring high-quality workmanship that meets or exceeds industry standards.`,
+    `Secondly, working any remodeling job can be potentially dangerous, especially if there are intricate and specific criteria. Licensed and insured
+      experts have the necessary safety training and equipment to ensure that the work is done safely without accidents or injuries.`,
+    `Thirdly, licensed and insured experts carry liability insurance that protects you and your property in case of any accidents or damage that
+      may occur during the project. This means that you won't be held responsible for any damages or injuries that may arise during the project.`
+  ]
+};
+
 export const locationData: LocationData[] = [
   {
     backgroundColor: `#475B48`,
@@ -278,6 +300,24 @@ export const ourProcessData: OurProcessData[] = [
     content: `Hire With Trust`
   }
 ];
+
+export const affordableExperiencedData: QuickLinksData = {
+  header: `At Kitchen Gurus, we understand that our clients want affordable, honest, and experienced services when it comes to their
+    kitchen remodeling needs. That's why we prioritize these values in every aspect of our work.`,
+  footer: `Choosing affordable, honest, and experienced services for your home's needs ensures that you get the best value for your
+    investment. At Kitchen Gurus, we strive to exceed our clients' expectations and provide them with peace of mind knowing that their
+    home is in good hands!`,
+  reasons: [
+    `Affordability: We believe that high-quality services should be accessible to everyone. That's why we offer competitive pricing
+      without sacrificing the quality of our work. We also offer financing options to help make our services more affordable for our clients.`,
+    `Honesty: We believe in transparency and honesty in all of our dealings with our clients. We provide clear and detailed explanations of
+      the work that needs to be done and why. We also offer a free inspection and estimate so that our clients can make informed decisions about
+      their kitchen remodeling needs.`,
+    `Experience: Our team of licensed and insured experts has years of experience in the industry. We have encountered a wide range of issues
+      and have the knowledge and skills to handle any situation. We also keep up-to-date with the latest industry standards and techniques to
+      ensure that our services are top-notch.`
+  ]
+};
 
 export const ratingData: RatingData[] = [
   {

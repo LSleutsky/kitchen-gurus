@@ -5,7 +5,7 @@ import Content from "~/components/Content";
 import { displayLocation, getImageParameters } from "~/utils";
 import type { UserLocationData } from "~/utils/constants";
 
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/services";
 
 
 export function meta({}: Route.MetaArgs) {

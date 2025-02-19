@@ -10,7 +10,7 @@ import { displayLocation } from "~/utils";
 import type { UserLocationData } from "~/utils/constants";
 import { imageSources } from "~/utils/gallery";
 
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/gallery";
 
 import "react-photo-album/rows.css";
 import "yet-another-react-lightbox/styles.css";

@@ -15,11 +15,12 @@ import Logo from "./Logo";
 import Submission from "./Submission";
 
 interface Props {
+  buttonClassName?: string;
   className?: string;
   ctaText?: string;
 }
 
-export default function ContactModal({ className, ctaText }: Props) {
+export default function ContactModal({ buttonClassName, className, ctaText }: Props) {
   const location = useLocation();
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -92,7 +93,7 @@ export default function ContactModal({ className, ctaText }: Props) {
   }, [handleCloseModal, isContactFormSubmitted, isContactFormSuccessfullySubmitted]);
 
   return (
-    <main className={className}>
+    <div className={className}>
       <Dialog
         fullScreen
         aria-labelledby="responsive-dialog-title"
@@ -129,7 +130,7 @@ export default function ContactModal({ className, ctaText }: Props) {
           />
         </DialogContent>
       </Dialog>
-      <Button className="mx-4 mt-6 self-center p-4 cursor-pointer md:self-start" text={ctaText} onClick={handleOpenModal} />
+      <Button className={`mx-4 mt-6 self-center p-4 cursor-pointer md:self-start ${buttonClassName}`} text={ctaText} onClick={handleOpenModal} />
       <Submission
         handleCloseSnackbar={handleCloseSnackbar}
         horizontal={horizontal}
@@ -137,6 +138,6 @@ export default function ContactModal({ className, ctaText }: Props) {
         open={open}
         vertical={vertical}
       />
-    </main>
+    </div>
   );
 }

@@ -15,7 +15,7 @@ import useWindowSize from "~/hooks/useWindowSize";
 import type { LocationData } from '~/utils/constants';
 import { locationData } from '~/utils/constants';
 
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/contact";
 
 interface SnackbarState extends SnackbarOrigin {
   open: boolean;

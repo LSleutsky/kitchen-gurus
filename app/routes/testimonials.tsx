@@ -6,6 +6,12 @@ import StarIcon from "@mui/icons-material/Star";
 import type { TestimonialsData } from "~/utils/constants";
 import { testimonialsData } from "~/utils/constants";
 
+import type { Route } from "./+types/testimonials";
+
+export function meta({}: Route.MetaArgs) {
+  return [{ title: `Testimonials | Kitchen Gurus` }, { name: `description`, content: `Kitchen Gurus Testimonials` }];
+}
+
 export default function Testimonials() {
   return (
     <article className="font-['Open_Sans']">
