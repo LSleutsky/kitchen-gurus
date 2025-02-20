@@ -1,5 +1,3 @@
-import useWindowSize from "~/hooks/useWindowSize";
-
 import Button from "./Button";
 import ContactModal from "./ContactModal";
 
@@ -19,12 +17,25 @@ interface Props {
 }
 
 export default function Content({
-  contactCta, contactCtaText, contentReverse, cta, ctaClassName, ctaOnClick, ctaText, heading, contentClass, imageAlt, imageUrl, mainContent
+  contactCta,
+  contactCtaText,
+  contentReverse,
+  cta,
+  ctaClassName,
+  ctaOnClick,
+  ctaText,
+  heading,
+  contentClass,
+  imageAlt,
+  imageUrl,
+  mainContent
 }: Props) {
-  const { width } = useWindowSize();
-
   return (
-    <article className={`flex ${width < 1024 ? `flex-col-reverse` : ``} ${contentReverse ? `lg:flex-row-reverse` : `lg:flex-row`} `}>
+    <article className={`
+        flex flex-col-reverse lg:flex-col      
+        ${contentReverse ? `lg:flex-row-reverse` : `lg:flex-row`}
+      `}
+    >
       <div className={`flex flex-1 flex-col ${contentClass}`}>
         <div className="flex flex-1 flex-col justify-evenly px-4 [&>*]:text-center [&>*]:lg:text-left">
           <h1 className="px-4 pb-8 font-['Open_Sans'] text-4xl font-semibold">{heading}</h1>

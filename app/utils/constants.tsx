@@ -1,3 +1,5 @@
+import { Link } from 'react-router';
+
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -13,6 +15,8 @@ import Bullseye from '~/components/svg/Bullseye';
 import HandShake from '~/components/svg/Handshake';
 import Ribbon from "~/components/svg/Ribbon";
 import StarUser from "~/components/svg/StarUser";
+
+import { displayLocation } from '~/utils';
 
 export interface AboutUsData {
   content: string;
@@ -302,6 +306,127 @@ export const navLinks: NavLinks[] = [
     text: `Contact Us`,
   },
 ];
+
+export const otherServicesData = {
+  waterproofing: (locationData: UserLocationData) => [
+    <>
+      {`If you're dealing with a leaking/flooded basement, and/or`}
+      <Link className="text-[#F98500]" target="_blank" to="https://basementwaterproofinggurus.com/structural-repair/">
+        {` structural repair `}
+      </Link>
+      issues, then our sister company
+      <Link className="text-[#F98500]" target="_blank" to="https://basementwaterproofinggurus.com">
+        {` Basement Waterproofing Gurus `}
+      </Link>
+      {`is what you're looking for to obtain peace of mind! We handle both interior and exterior issues, and our inspectors
+        are expertly trained in this area to provide the most adequate solutions based on the current industry standards.`}
+    </>,
+    `Basements will get wet for a number of different reasons, from the water table underground in ${displayLocation(locationData)},
+      to a structurally unsound foundation, to a home simply being old and settling. Whether you have hydrostatic pressure pushing on
+      the walls of your foundation, or rising water levels underneath your home, water will naturally seek the path of least resistance,
+      and find its way in.`,
+    `With Basement Waterproofing Gurus, you no longer have to dread walking down into your basement, and dealing with dampness,
+      condensation, and that musty odor. We use the latest technology and cutting-edge techniques to ensure your basement stays
+      dry and can easily become an extra living space.`
+  ],
+  moldRemediation: [
+    `Wet basements can lead to serious mold issues, damage to property, your home's foundation, and can cause serious health
+      problems for you and your family. Where there is darkness and wetness - like a basement - odds are very high that mold
+      spores will have a prime breeding ground.`,
+    <>
+      <Link className="text-[#F98500]" target="_blank" to="https://basementwaterproofinggurus.com/">
+        {` Basement Gurus `}
+      </Link>
+      are highly experienced and trained in every step of the mold detection and mold removal process, being certified
+      along the way, giving you assurance that the job will be completed efficiently and safely.
+    </>,
+    `High humidity levels in the home can also lead to mold and other unfavorable conditions, which can quickly spread into other
+      areas of your home, including the vents, which will result in moldy/musty spores being circulated throughout your household.
+      Dehumidifiers are a great resource, particularly in the warm summer months.`
+  ],
+  roofingSiding: [
+    <>
+      {`When it comes to curb appeal, nothing enhances your home's value and credibility like a shiny new roof and fresh, clean siding.
+      Not only is your roof and`}
+      <Link className="text-[#F98500]" target="_blank" to="https://roofgurus.com/siding-services/">
+        {` siding `}
+      </Link>
+      {`a fundamental layer between you and the outdoor elements, it's one of the first things people - and more importantly, `}
+      <em>you</em> - look at when seeing a structure.
+    </>,
+    <>
+      Our sister company
+      <Link className="text-[#F98500]" target="_blank" to="https://roofgurus.com/">
+        {` Roof Gurus `}
+      </Link>
+      specializes in both residential and
+      <Link className="text-[#F98500]" target="_blank" to="https://roofgurus.com/roofing-services/commercial-roofing/">
+        {` commercial roofing `}
+      </Link>
+      ranging from
+      <Link className="text-[#F98500]" target="_blank" to="https://roofgurus.com/roofing-services/shingle-roofing/">
+        {` traditional shingles `}
+      </Link>
+      to flat roofs,
+      <Link className="text-[#F98500]" target="_blank" to="https://roofgurus.com/roofing-services/metal-roofing/">
+        {` metal roofs`}
+      </Link>
+      ,
+      <Link className="text-[#F98500]" target="_blank" to="https://roofgurus.com/roofing-services/rubber-roofing/">
+        {` rubber roofs`}
+      </Link>
+      ,
+      and everything in between. We can repair just about anything atop your home or business, and your home will come out safe
+      from leaks, heat penetration, and storms!
+    </>,
+    `Without proper maintenance and repairs, a roof can become very damaged over time and lead to costly repairs and/or replacements
+      down the road. It's important to have a professional check for signs of wear, such as missing shingles or buckled areas,
+      so manageable repairs don't become nightmare ones.`
+  ],
+  guttersWindows: [
+    `Seamless gutters are one of the most popular types of gutters on the market. Their seamless base greatly reduces the possibility
+      of leaks and clogs. The drainage system is located at the corners, which are then connected to a downspout. These gutters come
+      in a variety of colors, allowing a perfect match for your home.`,
+    `We use a virtually invisible steel hanger which secures the gutter to your home tightly. This distinctive gutter hanger will augment
+      the seamless look of your gutters, and is also significantly stronger than the spike and ferrule system used with lightweight
+      aluminum gutters.`,
+    <>
+      {`Windows are an extremely important aspect of your home's effectiveness. Whatever your window needs are - energy efficiency, aesthetics,
+      durability, traditional double-hung - our sister company`}
+      <Link className="text-[#F98500]" target="_blank" to="https://guttergurus.com/">
+        {` Gutter Gurus `}
+      </Link>
+      meets them with high-quality
+      Affinity Window products that meet or exceed the industry standards
+    </>
+  ],
+  landscapingFencing: [
+    <>
+      Our sister company
+      <Link className="text-[#F98500]" target="_blank" to="https://lawn-gurus.com/">
+        {` Lawn Gurus `}
+      </Link>
+      specializes in maintaining healthy, green lawns for residential and commercial clients. Comprehensive services include mowing, fertilizing,
+      aerating, seeding, and pest control.
+    </>,
+    <>
+      Lawn Gurus also provide professional
+      <Link className="text-[#F98500]" target="_blank" to="https://lawn-gurus.com/services/fence-installation-repair/">
+        {` fence installation `}
+      </Link>
+      services, offering a range of materials including chain link, wood, and vinyl fencing. The affordable options ensure low maintenance and
+      secure boundaries, as well as beautifying any property.
+    </>,
+    <>
+      <Link className="text-[#F98500]" target="_blank" to="https://lawn-gurus.com/services/sprinkler-installation-repair/">
+        Sprinkler installations
+      </Link>
+      {` is another service that we provide. We specialize in installing efficient sprinkler systems that automatically distribute water to keep
+      your lawn and plants healthy. Our services include connecting water supplies, assembling valve manifolds, and positioning sprinklers for
+      optimal coverage.`}
+    </>
+  ]
+};
 
 const ourProcessIconStyles = {
   '&.MuiSvgIcon-root': {
