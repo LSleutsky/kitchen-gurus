@@ -11,5 +11,5 @@ export default [
     route(`testimonials`, `./routes/testimonials.tsx`),
     route(`licensed-insured`, `./routes/licensed-insured.tsx`),
     route(`affordable-experienced`, `./routes/affordable-experienced.tsx`)
-  ]),
+  ])
 ] satisfies RouteConfig;

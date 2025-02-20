@@ -8,13 +8,15 @@ import { metaData, ourProcessData } from "~/utils/constants";
 
 import type { Route } from "./+types/home";
 
-export function meta({}: Route.MetaArgs): MetaData | object {
+export function meta({ matches }: Route.MetaArgs): MetaData | object {
+  const loaderData = matches.find(match => match?.id === `layouts/layout`)?.data;
+
   return [
     { title: `Kitchen Gurus` },
     { name: `description`, content: `Welcome to Kitchen Gurus!` },
     {
       name: `keywords`,
-      content: `kitchens, kitchen renovation, kitchen remodel, kitchen contractors, kitchen upgrade, kitchen remodeling cost, kitchen refurbishment, kitchen cost, kitchen makeover, kitchen cabinets, new kitchen`
+      content: `kitchens, kitchen renovation, kitchen remodel, kitchen contractors, kitchen upgrade, kitchen remodeling cost, kitchen refurbishment, kitchen cost, kitchen makeover, kitchen cabinets, new kitchen, kitchen remodeling in ${displayLocation(loaderData, true)}, kitchen renovations in ${displayLocation(loaderData, true)}, kitchen upgrades in ${displayLocation(loaderData, true)}`
     },
     { name: `og:title`, content: `Kitchen Gurus` },
     { name: `og:description`, content: `Welcome to Kitchen Gurus!` },

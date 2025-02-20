@@ -16,7 +16,7 @@ import { socialMediaActions } from "~/utils/constants";
 
 import type { Route } from "./+types/layout";
 
-export async function clientLoader({}: Route.ClientLoaderArgs) {
+export async function loader({}: Route.LoaderArgs) {
   try {
     const response = await fetch(`https://geolocation-db.com/json/`);
 

@@ -12,6 +12,7 @@ import Submission from "~/components/Submission";
 
 import useWindowSize from "~/hooks/useWindowSize";
 
+import { displayLocation } from "~/utils";
 import type { LocationData, MetaData } from '~/utils/constants';
 import { locationData, metaData } from '~/utils/constants';
 
@@ -21,13 +22,15 @@ interface SnackbarState extends SnackbarOrigin {
   open: boolean;
 }
 
-export function meta({}: Route.MetaArgs): MetaData | object {
+export function meta({ matches }: Route.MetaArgs): MetaData | object {
+  const loaderData = matches.find(match => match?.id === `layouts/layout`)?.data;
+
   return [
     { title: `Contact Us | Kitchen Gurus` },
     { name: `description`, content: `Contact Kitchen Gurus` },
     {
       name: `keywords`,
-      content: `kitchen makeovers, contemporary kitchen, kitchen floor plan, cost to redo kitchen, renovate kitchen, remodeling contractor, average cost to renovate kitchen, kitchen makeover, kitchen redesign`
+      content: `kitchen makeovers, contemporary kitchen, kitchen floor plan, cost to redo kitchen, renovate kitchen, remodeling contractor, average cost to renovate kitchen, kitchen makeover, kitchen redesign, kitchen cabinets ${displayLocation(loaderData, true)}, ${displayLocation(loaderData)} kitchen remodel, ${displayLocation(loaderData, true)} kitchen remodeling`
     },
     { name: `og:title`, content: `Contact Us | Kitchen Gurus` },
     { name: `og:description`, content: `Kitchen Gurus is your trusted kitchen renovation partner! Trust us to meet your every remodeling need` },
