@@ -46,6 +46,11 @@ export interface LocationData {
   url: string;
 }
 
+export interface MetaData {
+  name: string;
+  content: string;
+}
+
 export interface NavLinks {
   route: string;
   text: string;
@@ -123,6 +128,24 @@ export const aboutUsData: AboutUsData[] = [
     title: `Notable Quality`
   }
 ];
+
+export const affordableExperiencedData: QuickLinksData = {
+  header: `At Kitchen Gurus, we understand that our clients want affordable, honest, and experienced services when it comes to their
+    kitchen remodeling needs. That's why we prioritize these values in every aspect of our work.`,
+  footer: `Choosing affordable, honest, and experienced services for your home's needs ensures that you get the best value for your
+    investment. At Kitchen Gurus, we strive to exceed our clients' expectations and provide them with peace of mind knowing that their
+    home is in good hands!`,
+  reasons: [
+    `Affordability: We believe that high-quality services should be accessible to everyone. That's why we offer competitive pricing
+      without sacrificing the quality of our work. We also offer financing options to help make our services more affordable for our clients.`,
+    `Honesty: We believe in transparency and honesty in all of our dealings with our clients. We provide clear and detailed explanations of
+      the work that needs to be done and why. We also offer a free inspection and estimate so that our clients can make informed decisions about
+      their kitchen remodeling needs.`,
+    `Experience: Our team of licensed and insured experts has years of experience in the industry. We have encountered a wide range of issues
+      and have the knowledge and skills to handle any situation. We also keep up-to-date with the latest industry standards and techniques to
+      ensure that our services are top-notch.`
+  ]
+};
 
 export const bannerImages = [
   { id: 1, slug: `abfb8500-2160-4798-ba8f-11e6bf606870` },
@@ -249,6 +272,14 @@ export const locationData: LocationData[] = [
   }
 ];
 
+export const metaData: MetaData[] = [
+  { name: `og:image`, content: `http://kitchengurus.net/kitchen-gurus-logo.png` },
+  { name: `og:locale`, content: `en_US` },
+  { name: `og:site_name`, content: `Kitchen Gurus` },
+  { name: `og:type`, content: `article` },
+  { name: `og:url`, content: `https://kitchengurus.net` }
+];
+
 export const navLinks: NavLinks[] = [
   {
     route: `/`,
@@ -300,24 +331,6 @@ export const ourProcessData: OurProcessData[] = [
     content: `Hire With Trust`
   }
 ];
-
-export const affordableExperiencedData: QuickLinksData = {
-  header: `At Kitchen Gurus, we understand that our clients want affordable, honest, and experienced services when it comes to their
-    kitchen remodeling needs. That's why we prioritize these values in every aspect of our work.`,
-  footer: `Choosing affordable, honest, and experienced services for your home's needs ensures that you get the best value for your
-    investment. At Kitchen Gurus, we strive to exceed our clients' expectations and provide them with peace of mind knowing that their
-    home is in good hands!`,
-  reasons: [
-    `Affordability: We believe that high-quality services should be accessible to everyone. That's why we offer competitive pricing
-      without sacrificing the quality of our work. We also offer financing options to help make our services more affordable for our clients.`,
-    `Honesty: We believe in transparency and honesty in all of our dealings with our clients. We provide clear and detailed explanations of
-      the work that needs to be done and why. We also offer a free inspection and estimate so that our clients can make informed decisions about
-      their kitchen remodeling needs.`,
-    `Experience: Our team of licensed and insured experts has years of experience in the industry. We have encountered a wide range of issues
-      and have the knowledge and skills to handle any situation. We also keep up-to-date with the latest industry standards and techniques to
-      ensure that our services are top-notch.`
-  ]
-};
 
 export const ratingData: RatingData[] = [
   {

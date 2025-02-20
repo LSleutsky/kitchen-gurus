@@ -3,13 +3,23 @@ import { Link, useOutletContext } from "react-router";
 import Content from "~/components/Content";
 
 import { displayLocation, getImageParameters } from "~/utils";
-import type { OurProcessData, UserLocationData } from "~/utils/constants";
-import { ourProcessData } from "~/utils/constants";
+import type { MetaData, OurProcessData, UserLocationData } from "~/utils/constants";
+import { metaData, ourProcessData } from "~/utils/constants";
 
 import type { Route } from "./+types/home";
 
-export function meta({}: Route.MetaArgs) {
-  return [{ title: `Kitchen Gurus` }, { name: `description`, content: `Welcome to Kitchen Gurus!` }];
+export function meta({}: Route.MetaArgs): MetaData | object {
+  return [
+    { title: `Kitchen Gurus` },
+    { name: `description`, content: `Welcome to Kitchen Gurus!` },
+    {
+      name: `keywords`,
+      content: `kitchens, kitchen renovation, kitchen remodel, kitchen contractors, kitchen upgrade, kitchen remodeling cost, kitchen refurbishment, kitchen cost, kitchen makeover, kitchen cabinets, new kitchen`
+    },
+    { name: `og:title`, content: `Kitchen Gurus` },
+    { name: `og:description`, content: `Welcome to Kitchen Gurus!` },
+    ...metaData
+  ];
 }
 
 export default function Home() {
