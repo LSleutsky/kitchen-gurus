@@ -7,7 +7,8 @@ import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 import { displayLocation } from "~/utils";
-import type { UserLocationData } from "~/utils/constants";
+import type { MetaData, UserLocationData } from "~/utils/constants";
+import { metaData } from "~/utils/constants";
 import { imageSources } from "~/utils/gallery";
 
 import type { Route } from "./+types/gallery";
@@ -15,8 +16,18 @@ import type { Route } from "./+types/gallery";
 import "react-photo-album/rows.css";
 import "yet-another-react-lightbox/styles.css";
 
-export function meta({}: Route.MetaArgs) {
-  return [{ title: `Gallery | Kitchen Gurus` }, { name: `description`, content: `Kitchen Gurus Gallery` }];
+export function meta({}: Route.MetaArgs): MetaData | object {
+  return [
+    { title: `Gallery | Kitchen Gurus` },
+    { name: `description`, content: `Kitchen Gurus Gallery` },
+    {
+      name: `keywords`,
+      content: `kitchens, countertops, granite countertops, quartz countertops, marble countertops, butcher block countertops, stainless steel appliances, ceramic tile flooring, hardwood flooring, laminate flooring, backsplash, tile backsplash, glass tile backsplash, subway tile backsplash, kitchen remodeling pictures, kitchen remodeling ideas pictures`
+    },
+    { name: `og:title`, content: `Gallery | Kitchen Gurus` },
+    { name: `og:description`, content: `Discover premium kitchen remodeling in Pennsylvania, New Jersey, Delaware, and Maryland` },
+    ...metaData
+  ];
 }
 
 export default function Gallery() {

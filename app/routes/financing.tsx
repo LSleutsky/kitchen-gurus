@@ -1,12 +1,22 @@
 import { Link } from "react-router";
 
-import type { FinancingData } from "~/utils/constants";
-import { financingData } from "~/utils/constants";
+import type { FinancingData, MetaData } from "~/utils/constants";
+import { financingData, metaData } from "~/utils/constants";
 
 import type { Route } from "./+types/financing";
 
-export function meta({}: Route.MetaArgs) {
-  return [{ title: `Financing Options | Kitchen Gurus` }, { name: `description`, content: `Financing with Kitchen Gurus` }];
+export function meta({}: Route.MetaArgs): MetaData | object {
+  return [
+    { title: `Financing Options | Kitchen Gurus` },
+    { name: `description`, content: `Financing with Kitchen Gurus` },
+    {
+      name: `keywords`,
+      content: `kitchen cost, kitchen remodeling cost, kitchen renovation cost, kitchen makeover cost, how much does it cost to remodel kitchen, kitchen design cost, kitchen redesign cost, cost to remodel kitchen, cost to upgrade kitchen, kitchen cabinet cost, how much does it cost to replace kitchen cabinets, average kitchen renovation cost, average cost of small kitchen remodel, kitchen refurbishment cost, kitchen facelift, kitchen makeovers on a budget, cost of kitchen remodel ${new Date().getFullYear()}`
+    },
+    { name: `og:title`, content: `Financing Options | Kitchen Gurus` },
+    { name: `og:description`, content: `Kitchen Gurus is your trusted kitchen renovation partner! Trust us to meet your every remodeling need` },
+    ...metaData
+  ];
 }
 
 export default function Financing() {

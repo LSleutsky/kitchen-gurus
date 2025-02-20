@@ -273,10 +273,10 @@ export const locationData: LocationData[] = [
 ];
 
 export const metaData: MetaData[] = [
-  { name: `og:image`, content: `http://kitchengurus.net/kitchen-gurus-logo.png` },
+  { name: `og:image`, content: `https://ucarecdn.com/922d3ed0-8fa0-45a2-8f24-29f2e0df4437/kitchen-gurus-og-image.png` },
   { name: `og:locale`, content: `en_US` },
   { name: `og:site_name`, content: `Kitchen Gurus` },
-  { name: `og:type`, content: `article` },
+  { name: `og:type`, content: `website` },
   { name: `og:url`, content: `https://kitchengurus.net` }
 ];
 

@@ -3,13 +3,24 @@ import { Link, useOutletContext } from "react-router";
 import Content from "~/components/Content";
 
 import { displayLocation, getImageParameters } from "~/utils";
-import type { UserLocationData } from "~/utils/constants";
+import type { MetaData, UserLocationData } from "~/utils/constants";
+import { metaData } from "~/utils/constants";
 
 import type { Route } from "./+types/services";
 
 
-export function meta({}: Route.MetaArgs) {
-  return [{ title: `Other Services | Kitchen Gurus` }, { name: `description`, content: `Additional Gurus Services` }];
+export function meta({}: Route.MetaArgs): MetaData | object {
+  return [
+    { title: `Other Services | Kitchen Gurus` },
+    { name: `description`, content: `Additional Gurus Services` },
+    {
+      name: `keywords`,
+      content: `home services, essential home services, healthy home, keeping home healthy, modern updated home, home improvement, air quality, mold control, exterior repairs, landscaping, fencing`
+    },
+    { name: `og:title`, content: `Other Services | Kitchen Gurus` },
+    { name: `og:description`, content: `Essential Home Services provided by the Gurus family of contractors` },
+    ...metaData
+  ];
 }
 
 export default function Contact() {

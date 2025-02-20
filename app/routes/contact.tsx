@@ -12,8 +12,8 @@ import Submission from "~/components/Submission";
 
 import useWindowSize from "~/hooks/useWindowSize";
 
-import type { LocationData } from '~/utils/constants';
-import { locationData } from '~/utils/constants';
+import type { LocationData, MetaData } from '~/utils/constants';
+import { locationData, metaData } from '~/utils/constants';
 
 import type { Route } from "./+types/contact";
 
@@ -21,8 +21,18 @@ interface SnackbarState extends SnackbarOrigin {
   open: boolean;
 }
 
-export function meta({}: Route.MetaArgs) {
-  return [{ title: `Contact Us | Kitchen Gurus` }, { name: `description`, content: `Contact Kitchen Gurus` }];
+export function meta({}: Route.MetaArgs): MetaData | object {
+  return [
+    { title: `Contact Us | Kitchen Gurus` },
+    { name: `description`, content: `Contact Kitchen Gurus` },
+    {
+      name: `keywords`,
+      content: `kitchen makeovers, contemporary kitchen, kitchen floor plan, cost to redo kitchen, renovate kitchen, remodeling contractor, average cost to renovate kitchen, kitchen makeover, kitchen redesign`
+    },
+    { name: `og:title`, content: `Contact Us | Kitchen Gurus` },
+    { name: `og:description`, content: `Kitchen Gurus is your trusted kitchen renovation partner! Trust us to meet your every remodeling need` },
+    ...metaData
+  ];
 }
 
 export default function Contact() {

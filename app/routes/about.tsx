@@ -6,13 +6,23 @@ import StarIcon from "@mui/icons-material/Star";
 import Button from '~/components/Button';
 import ContactModal from "~/components/ContactModal";
 
-import type { AboutUsData, LocationData } from '~/utils/constants';
-import { aboutUsData, locationData } from '~/utils/constants';
+import type { AboutUsData, LocationData, MetaData } from '~/utils/constants';
+import { aboutUsData, locationData, metaData } from '~/utils/constants';
 
 import type { Route } from "./+types/about";
 
-export function meta({}: Route.MetaArgs) {
-  return [{ title: `About Us | Kitchen Gurus` }, { name: `description`, content: `About Kitchen Gurus` }];
+export function meta({}: Route.MetaArgs): MetaData | object {
+  return [
+    { title: `About Us | Kitchen Gurus` },
+    { name: `description`, content: `About Kitchen Gurus` },
+    {
+      name: `keywords`,
+      content: `kitchens, kitchen designs, kitchen design ideas, kitchen design inspirations, modern kitchen design, traditional kitchen design, small kitchen design, small kitchen remodeling, small kitchen renovations, large kitchen design, large kitchen remodeling, large kitchen renovations, open kitchen design, closed kitchen design, modern kitchen`
+    },
+    { name: `og:title`, content: `About Us | Kitchen Gurus` },
+    { name: `og:description`, content: `Kitchen Gurus are experts in precise kitchen remodeling and renovations` },
+    ...metaData
+  ];
 }
 
 export default function About() {

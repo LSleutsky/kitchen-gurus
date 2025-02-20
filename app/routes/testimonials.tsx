@@ -3,13 +3,23 @@ import Masonry from 'react-layout-masonry';
 
 import StarIcon from "@mui/icons-material/Star";
 
-import type { TestimonialsData } from "~/utils/constants";
-import { testimonialsData } from "~/utils/constants";
+import type { MetaData, TestimonialsData } from "~/utils/constants";
+import { metaData, testimonialsData } from "~/utils/constants";
 
 import type { Route } from "./+types/testimonials";
 
-export function meta({}: Route.MetaArgs) {
-  return [{ title: `Testimonials | Kitchen Gurus` }, { name: `description`, content: `Kitchen Gurus Testimonials` }];
+export function meta({}: Route.MetaArgs): MetaData | object {
+  return [
+    { title: `Testimonials | Kitchen Gurus` },
+    { name: `description`, content: `Kitchen Gurus Testimonials` },
+    {
+      name: `keywords`,
+      content: `kitchen remodeling reviews, best kitchen remodeling contractors, best kitchen renovation contractor, best kitchen company, highly rated kitchen remodeling, top kitchen remodeling, quality kitchen renovations, best kitchen upgrades, best kitchen transformations, best kitchen remodeling ${new Date().getFullYear()}, top kitchen remodelers ${new Date().getFullYear()}, 5 star kitchen contractors`
+    },
+    { name: `og:title`, content: `Testimonials | Kitchen Gurus` },
+    { name: `og:description`, content: `5 Star Reviews! Our customers trust us to exceed their expectations for their kitchen remodeling needs` },
+    ...metaData
+  ];
 }
 
 export default function Testimonials() {
