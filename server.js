@@ -3,7 +3,6 @@ import compression from 'compression';
 import express from 'express';
 import morgan from 'morgan';
 import nodemailer from 'nodemailer';
-import 'dotenv/config';
 
 // Short-circuit the type-checking of the built output.
 const BUILD_PATH = './build/server/index.js';
