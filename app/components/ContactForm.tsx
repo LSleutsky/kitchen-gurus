@@ -361,7 +361,7 @@ export default function ContactForm({ handleContactFormSubmission, handleContact
                 sx: { fontSize: `14px` }
               }
             }}
-            title={!isValid && !isSubmitted && `Please fill out the required form fields`}
+            title={!isValid && `Please fill out the required form fields`}
           >
             <span className="md:w-1/2">
               <Button
@@ -370,7 +370,7 @@ export default function ContactForm({ handleContactFormSubmission, handleContact
                   cursor-${isValid || (isSubmitted && !isSubmitSuccessful) ? `pointer` : `not-allowed`}
                   md:mt-4 md:mr-0
                 `}
-                disabled={!isValid && !isSubmitted}
+                disabled={!isValid || (isSubmitted && isSubmitSuccessful)}
                 text="Submit"
                 type="submit"
               />

@@ -379,7 +379,7 @@ export default function QuickContact() {
               sx: { fontSize: `14px` }
             }
           }}
-          title={!isValid && !isSubmitted && `Please fill out the required form fields`}
+          title={!isValid && `Please fill out the required form fields`}
         >
           <span className="md:w-1/2">
             <Button
@@ -389,7 +389,7 @@ export default function QuickContact() {
               cursor-${isValid || (isSubmitted && !isSubmitSuccessful) ? `pointer` : `not-allowed`}
               ${isValid || (isSubmitted && !isSubmitSuccessful) ? `hover:bg-white` : ``}
             `}
-              disabled={!isValid && !isSubmitted}
+              disabled={!isValid || (isSubmitted && isSubmitSuccessful)}
               text="Submit"
               type="submit"
             />
