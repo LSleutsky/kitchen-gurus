@@ -88,7 +88,7 @@ export default function DrawerHeader() {
             },
             '& .MuiDrawer-paper': {
               boxSizing: `border-box`,
-              width: 240,
+              width: 250,
               backgroundColor: `#51A655`,
               justifyContent: `space-between`
             }
@@ -125,7 +125,7 @@ export default function DrawerHeader() {
           </Box>
           <Box>
             <Divider />
-            <span className="flex justify-center text-white py-2">
+            <span className="flex justify-center text-white px-2 py-3">
               <Link to="mailto:kitchengurusinc@gmail.com">
                 <EmailIcon fontSize="small" sx={{
                   '&.MuiSvgIcon-root': {
