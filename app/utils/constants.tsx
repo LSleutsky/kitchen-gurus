@@ -60,6 +60,15 @@ export interface NavLinks {
   text: string;
 }
 
+interface OtherServicesData {
+  // eslint-disable-next-line no-unused-vars
+  waterproofing: (locationData: UserLocationData) => (string | React.JSX.Element)[];
+  moldRemediation: (string | React.JSX.Element)[];
+  roofingSiding: (string | React.JSX.Element)[];
+  guttersWindows: (string | React.JSX.Element)[];
+  landscapingFencing: (string | React.JSX.Element)[];
+}
+
 export interface OurProcessData {
   title: string;
   content: string;
@@ -307,7 +316,7 @@ export const navLinks: NavLinks[] = [
   },
 ];
 
-export const otherServicesData = {
+export const otherServicesData: OtherServicesData = {
   waterproofing: (locationData: UserLocationData) => [
     <>
       {`If you're dealing with a leaking/flooded basement, and/or`}
