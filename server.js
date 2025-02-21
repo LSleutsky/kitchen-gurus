@@ -3,6 +3,7 @@ import compression from 'compression';
 import express from 'express';
 import morgan from 'morgan';
 import nodemailer from 'nodemailer';
+import 'dotenv/config';
 
 // Short-circuit the type-checking of the built output.
 const BUILD_PATH = './build/server/index.js';
@@ -24,16 +25,16 @@ app.post('/api/submit-contact-form', (req, res) => {
     port: 587,
     secure: false,
     auth: {
-      user: 'kitchengurusinc@gmail.com',
-      pass: 'qzyt wuzu apzu oexz'
+      user: process.env.NODEMAILER_USER,
+      pass: process.env.NODEMAILER_PASSWORD
     }
   };
 
   const transporter = nodemailer.createTransport(config);
 
   const message = {
-    from: email,
-    to: 'lushsleutsky@gmail.com',
+    from: email || 'kitchengurusinc@gmail.com',
+    to: 'kitchengurusinc@gmail.com',
     subject: 'KITCHEN GURUS CONTACT FORM',
     html: `
       <h3>First Name: </h3> ${firstName}
