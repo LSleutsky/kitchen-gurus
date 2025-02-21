@@ -25,8 +25,8 @@ app.post('/api/submit-contact-form', (req, res) => {
     port: 587,
     secure: false,
     auth: {
-      user: process.env.NODEMAILER_USER,
-      pass: process.env.NODEMAILER_PASSWORD
+      user: 'kitchengurusinc@gmail.com',
+      pass: 'qzyt wuzu apzu oexz'
     }
   };
 
