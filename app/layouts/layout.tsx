@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from "react-router";
+import { Link, Outlet, useLoaderData, useLocation } from "react-router";
 
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import DiscountIcon from '@mui/icons-material/Discount';
@@ -12,35 +12,47 @@ import RatingSlider from "~/components/RatingSlider";
 import Strip from "~/components/svg/Strip";
 
 import type { SocialMediaOptions } from "~/utils/constants";
-import { socialMediaActions } from "~/utils/constants";
+import { googleMapsApiKey, socialMediaActions } from "~/utils/constants";
 
 import type { Route } from "./+types/layout";
 
-export async function loader({}: Route.LoaderArgs) {
-  try {
-    const response = await fetch(`https://geolocation-db.com/json/`);
+export async function clientLoader({}: Route.ClientLoaderArgs) {
+  return new Promise(resolve =>
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const { latitude, longitude } = position.coords;
 
-    if (!response.ok)
-      throw new Error(`Response status: ${response.status}`);
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${googleMapsApiKey}`)
+          .then(response => response.json())
+          .then(data => {
+            let city = ``;
+            let state = ``;
 
-    const json = await response.json();
+            data.results[0].address_components.forEach((component: any) => {
+              if (component.types.includes(`locality`)) city = component.long_name;
 
-    return json;
-  } catch (error: any) {
-    console.error(`Error fetching data:`, error);
-  }
+              if (component.types.includes(`administrative_area_level_1`)) state = component.long_name;
+            });
+
+            resolve({ city, state });
+          })
+          .catch(error => console.error(`Error fetching location data: `, error));
+      },
+      error => console.error(`Error getting location: `, error)
+    ));
 }
 
-export default function MainLayout({ loaderData }: Route.ComponentProps) {
+export default function MainLayout() {
   const location = useLocation();
   const isHomePath = location.pathname === `/`;
+  const userLocationData = useLoaderData();
 
   return (
     <div className="flex h-full min-h-full flex-col">
       <DrawerHeader />
       <main className="flex-[1]">
-        <Banner userLocation={loaderData} />
-        <Outlet context={loaderData} />
+        <Banner userLocation={userLocationData} />
+        <Outlet context={userLocationData} />
       </main>
       <footer className="w-full">
         <section className="flex flex-col justify-center items-center">
