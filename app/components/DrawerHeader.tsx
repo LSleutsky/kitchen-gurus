@@ -125,7 +125,7 @@ export default function DrawerHeader() {
           </Box>
           <Box>
             <Divider />
-            <span className="flex justify-center text-white px-2 py-3">
+            <span className="flex justify-center text-white text-sm px-2 py-3">
               <Link to="mailto:kitchengurusllc@gmail.com">
                 <EmailIcon fontSize="small" sx={{
                   '&.MuiSvgIcon-root': {
