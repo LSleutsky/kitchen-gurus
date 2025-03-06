@@ -24,16 +24,16 @@ app.post('/api/submit-contact-form', (req, res) => {
     port: 587,
     secure: false,
     auth: {
-      user: 'kitchengurusinc@gmail.com',
-      pass: 'qzyt wuzu apzu oexz'
+      user: 'kitchengurusllc@gmail.com',
+      pass: 'ltjz gtva ugkd yfcr'
     }
   };
 
   const transporter = nodemailer.createTransport(config);
 
   const message = {
-    from: email || 'kitchengurusinc@gmail.com',
-    to: 'kitchengurusinc@gmail.com',
+    from: email || 'kitchengurusllc@gmail.com',
+    to: 'kitchengurusllc@gmail.com',
     subject: 'KITCHEN GURUS CONTACT FORM',
     html: `
       <h3>First Name: </h3> ${firstName}

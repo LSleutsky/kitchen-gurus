@@ -126,14 +126,14 @@ export default function DrawerHeader() {
           <Box>
             <Divider />
             <span className="flex justify-center text-white px-2 py-3">
-              <Link to="mailto:kitchengurusinc@gmail.com">
+              <Link to="mailto:kitchengurusllc@gmail.com">
                 <EmailIcon fontSize="small" sx={{
                   '&.MuiSvgIcon-root': {
                     marginRight: `4px`,
                     transform: `translateY(-1.5px)`
                   }
                 }} />
-                kitchengurusinc@gmail.com
+                KitchenGurusLLC@gmail.com
               </Link>
             </span>
           </Box>
