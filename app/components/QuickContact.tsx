@@ -12,8 +12,6 @@ import type { SnackbarCloseReason, SnackbarOrigin } from '@mui/material/Snackbar
 import TextField from "@mui/material/TextField";
 import Tooltip from '@mui/material/Tooltip';
 
-import useWindowSize from "~/hooks/useWindowSize";
-
 import { phoneNumberAutoFormat } from "~/utils";
 import type { FormInputTarget, SnackbarState } from '~/utils/constants';
 import { formValidationRules } from "~/utils/constants";
@@ -96,7 +94,6 @@ export default function QuickContact() {
     horizontal: `center`
   });
 
-  const { width } = useWindowSize();
   const { horizontal, open, vertical } = snackbarState;
   const setInputAdornmentFocus = () => setHasAdornmentFocus(true);
 
@@ -271,7 +268,7 @@ export default function QuickContact() {
                 fullWidth
                 required
                 error={!!errors[`phoneNumber`]}
-                label={width < 768 || width > 900 ? `Phone Number` : `Phone`}
+                label="Phone Number"
                 name="phoneNumber"
                 size="small"
                 slotProps={{
