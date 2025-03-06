@@ -88,7 +88,7 @@ export default function DrawerHeader() {
             },
             '& .MuiDrawer-paper': {
               boxSizing: `border-box`,
-              width: 250,
+              width: 260,
               backgroundColor: `#51A655`,
               justifyContent: `space-between`
             }
