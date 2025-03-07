@@ -1,4 +1,5 @@
-import { Link, Outlet, useLoaderData, useLocation } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, Outlet, useLocation } from "react-router";
 
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import DiscountIcon from '@mui/icons-material/Discount';
@@ -11,37 +12,42 @@ import Logo from "~/components/Logo";
 import RatingSlider from "~/components/RatingSlider";
 import Strip from "~/components/svg/Strip";
 
-import type { SocialMediaOptions } from "~/utils/constants";
+import type { SocialMediaOptions, UserLocationData } from "~/utils/constants";
 import { socialMediaActions } from "~/utils/constants";
 
-import type { Route } from "./+types/layout";
-
-export async function loader({ }: Route.LoaderArgs) {
-  try {
-    const response = await fetch(`https://ipinfo.io/json`);
-
-    if (!response.ok)
-      throw new Error(`Response status: ${response.status}`);
-
-    const json = await response.json();
-
-    return json;
-  } catch (error: any) {
-    console.error(`Error fetching data:`, error);
-  }
-}
-
 export default function MainLayout() {
+  const [clientLocation, setClientLocation] = useState <UserLocationData>({
+    localadmin: ``,
+    locality: ``,
+    region: ``
+  });
+
   const location = useLocation();
   const isHomePath = location.pathname === `/`;
-  const userLocationData = useLoaderData();
+
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      throw new Error(`Geolocation is not supported by this browser.`);
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async position => {
+        const { latitude, longitude } = position.coords;
+        const geolocationData = await fetch(`https://api.geocodify.com/v2/reverse?api_key=yuJYV8kdVQfxtwzr646iOUofhHqg0owi&lat=${latitude}&lng=${longitude}`)
+        const locationData = await geolocationData.json();
+
+        setClientLocation(locationData.response.features[0].properties);
+      },
+      error => console.error(`Error getting user location: `, error)
+    )
+  }, []);
 
   return (
     <div className="flex h-full min-h-full flex-col">
       <DrawerHeader />
       <main className="flex-[1]">
-        <Banner userLocation={userLocationData} />
-        <Outlet context={userLocationData} />
+        <Banner userLocation={clientLocation} />
+        <Outlet context={clientLocation} />
       </main>
       <footer className="w-full">
         <section className="flex flex-col justify-center items-center">

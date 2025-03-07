@@ -2,22 +2,20 @@ import { useOutletContext } from "react-router";
 
 import Content from "~/components/Content";
 
-import { displayLocation, getImageParameters } from "~/utils";
+import { getImageParameters } from "~/utils";
 import type { MetaData, UserLocationData } from "~/utils/constants";
 import { metaData, otherServicesData } from "~/utils/constants";
 
 import type { Route } from "./+types/services";
 
 
-export function meta({ matches }: Route.MetaArgs): MetaData | object {
-  const loaderData = matches.find(match => match?.id === `layouts/layout`)?.data;
-
+export function meta({}: Route.MetaArgs): MetaData | object {
   return [
     { title: `Other Services | Kitchen Gurus` },
     { name: `description`, content: `Additional Gurus Services` },
     {
       name: `keywords`,
-      content: `home services, essential home services, healthy home, keeping home healthy, modern updated home, home improvement, air quality, mold control, exterior repairs, landscaping, fencing, home services in ${displayLocation(loaderData, true)}, essential home services in ${displayLocation(loaderData, true)} home improvement home services in ${displayLocation(loaderData, true)}`
+      content: `home services, essential home services, healthy home, keeping home healthy, modern updated home, home improvement, air quality, mold control, exterior repairs, landscaping, fencing`
     },
     { name: `og:title`, content: `Other Services | Kitchen Gurus` },
     { name: `og:description`, content: `Essential Home Services provided by the Gurus family of contractors` },

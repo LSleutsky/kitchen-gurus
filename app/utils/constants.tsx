@@ -111,7 +111,8 @@ export interface TestimonialsData {
 }
 
 export interface UserLocationData {
-  city: string;
+  localadmin: string;
+  locality: string;
   region: string;
 }
 

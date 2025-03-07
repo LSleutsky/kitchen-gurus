@@ -6,21 +6,18 @@ import StarIcon from "@mui/icons-material/Star";
 import Button from '~/components/Button';
 import ContactModal from "~/components/ContactModal";
 
-import { displayLocation } from "~/utils";
 import type { AboutUsData, LocationData, MetaData } from '~/utils/constants';
 import { aboutUsData, locationData, metaData } from '~/utils/constants';
 
 import type { Route } from "./+types/about";
 
-export function meta({ matches }: Route.MetaArgs): MetaData | object {
-  const loaderData: any = matches.find(match => match?.id === `layouts/layout`)?.data;
-
+export function meta({}: Route.MetaArgs): MetaData | object {
   return [
     { title: `About Us | Kitchen Gurus` },
     { name: `description`, content: `About Kitchen Gurus` },
     {
       name: `keywords`,
-      content: `kitchens, kitchen designs, kitchen design ideas, kitchen design inspirations, modern kitchen design, traditional kitchen design, small kitchen design, small kitchen remodeling, small kitchen renovations, large kitchen design, large kitchen remodeling, large kitchen renovations, open kitchen design, closed kitchen design, modern kitchen, kitchen designer ${displayLocation(loaderData, true)}, kitchen remodeling ${displayLocation(loaderData, true)}, kitchen renovation ${displayLocation(loaderData, true)}`
+      content: `kitchens, kitchen designs, kitchen design ideas, kitchen design inspirations, modern kitchen design, traditional kitchen design, small kitchen design, small kitchen remodeling, small kitchen renovations, large kitchen design, large kitchen remodeling, large kitchen renovations, open kitchen design, closed kitchen design, modern kitchen, kitchen designer, kitchen remodeling, kitchen renovation`
     },
     { name: `og:title`, content: `About Us | Kitchen Gurus` },
     { name: `og:description`, content: `Kitchen Gurus are experts in precise kitchen remodeling and renovations` },
