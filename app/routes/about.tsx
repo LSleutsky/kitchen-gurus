@@ -13,7 +13,7 @@ import { aboutUsData, locationData, metaData } from '~/utils/constants';
 import type { Route } from "./+types/about";
 
 export function meta({ matches }: Route.MetaArgs): MetaData | object {
-  const loaderData = matches.find(match => match?.id === `layouts/layout`)?.data;
+  const loaderData: any = matches.find(match => match?.id === `layouts/layout`)?.data;
 
   return [
     { title: `About Us | Kitchen Gurus` },

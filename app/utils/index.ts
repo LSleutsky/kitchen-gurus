@@ -12,14 +12,12 @@ import type { UserLocationData } from "./constants";
  * 'Philadelphia, Pennsylvania'
  */
 export const displayLocation = (locationData: UserLocationData, showState: boolean = false): string => {
-  const formattedCity = locationData?.city?.split(`(`)[0].trim();
-
   switch (locationData?.state) {
     case `Delaware`:
     case `Maryland`:
     case `New Jersey`:
     case `Pennsylvania`:
-      return `${formattedCity}${showState ? `, ${locationData?.state}` : ``}`;
+      return `${locationData?.city}${showState ? `, ${locationData?.state}` : ``}`;
     default:
       return `your area`;
   }
