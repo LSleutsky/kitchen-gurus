@@ -12,34 +12,23 @@ import RatingSlider from "~/components/RatingSlider";
 import Strip from "~/components/svg/Strip";
 
 import type { SocialMediaOptions } from "~/utils/constants";
-import { googleMapsApiKey, socialMediaActions } from "~/utils/constants";
+import { socialMediaActions } from "~/utils/constants";
 
 import type { Route } from "./+types/layout";
 
-export async function clientLoader({}: Route.ClientLoaderArgs) {
-  return new Promise(resolve =>
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const { latitude, longitude } = position.coords;
+export async function loader({}: Route.LoaderArgs) {
+  try {
+    const response = await fetch(`https://ipinfo.io/json`);
 
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${googleMapsApiKey}`)
-          .then(response => response.json())
-          .then(data => {
-            let city = ``;
-            let state = ``;
+    if (!response.ok)
+      throw new Error(`Response status: ${response.status}`);
 
-            data.results[0].address_components.forEach((component: any) => {
-              if (component.types.includes(`locality`)) city = component.long_name;
+    const json = await response.json();
 
-              if (component.types.includes(`administrative_area_level_1`)) state = component.long_name;
-            });
-
-            resolve({ city, state });
-          })
-          .catch(error => console.error(`Error fetching location data: `, error));
-      },
-      error => console.error(`Error getting location: `, error)
-    ));
+    return json;
+  } catch (error: any) {
+    console.error(`Error fetching data:`, error);
+  }
 }
 
 export default function MainLayout() {
