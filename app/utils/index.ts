@@ -12,12 +12,12 @@ import type { UserLocationData } from "./constants";
  * 'Philadelphia, Pennsylvania'
  */
 export const displayLocation = (locationData: UserLocationData, showState: boolean = false): string => {
-  switch (locationData?.state) {
+  switch (locationData?.region) {
     case `Delaware`:
     case `Maryland`:
     case `New Jersey`:
     case `Pennsylvania`:
-      return `${locationData?.city}${showState ? `, ${locationData?.state}` : ``}`;
+      return `${locationData?.city}${showState ? `, ${locationData?.region}` : ``}`;
     default:
       return `your area`;
   }

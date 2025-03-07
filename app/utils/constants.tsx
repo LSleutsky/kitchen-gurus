@@ -112,7 +112,7 @@ export interface TestimonialsData {
 
 export interface UserLocationData {
   city: string;
-  state: string;
+  region: string;
 }
 
 export const aboutUsData: AboutUsData[] = [
@@ -233,8 +233,6 @@ export const formValidationRules = (key: string) => {
       };
   }
 };
-
-export const googleMapsApiKey = `AIzaSyCcEkCYpEEdEnnNg4irZpg7sFcXQ6ACqEE`;
 
 export const licensedInsuredData: QuickLinksData = {
   header: `At Kitchen Gurus, we strongly hiring licensed and insured experts for any services related to remodeling for several reasons.`,
