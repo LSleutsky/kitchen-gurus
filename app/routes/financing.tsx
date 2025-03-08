@@ -11,7 +11,7 @@ export function meta({}: Route.MetaArgs): MetaData | object {
     { name: `description`, content: `Financing with Kitchen Gurus` },
     {
       name: `keywords`,
-      content: `kitchen cost, kitchen remodeling cost, kitchen renovation cost, kitchen makeover cost, how much does it cost to remodel kitchen, kitchen design cost, kitchen redesign cost, cost to remodel kitchen, cost to upgrade kitchen, kitchen cabinet cost, how much does it cost to replace kitchen cabinets, average kitchen renovation cost, average cost of small kitchen remodel, kitchen refurbishment cost, kitchen facelift, kitchen makeovers on a budget, cost of kitchen remodel ${new Date().getFullYear()}`
+      content: `kitchen cost, kitchen remodeling cost, kitchen renovation cost, kitchen makeover cost, how much does it cost to remodel kitchen, kitchen design cost, kitchen redesign cost, cost to remodel kitchen, cost to upgrade kitchen, kitchen cabinet cost, how much does it cost to replace kitchen cabinets, average kitchen renovation cost, average cost of small kitchen remodel, kitchen refurbishment cost, kitchen facelift, kitchen makeovers on a budget, cost of kitchen remodel ${new Date().getFullYear()}, kitchen repairs Elizabethville, kitchen cabinet upgrades Halifax`
     },
     { name: `og:title`, content: `Financing Options | Kitchen Gurus` },
     { name: `og:description`, content: `Kitchen Gurus is your trusted kitchen renovation partner! Trust us to meet your every remodeling need` },

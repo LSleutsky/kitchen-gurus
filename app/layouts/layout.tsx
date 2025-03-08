@@ -34,9 +34,9 @@ export default function MainLayout() {
       async position => {
         const { latitude, longitude } = position.coords;
         const geolocationData = await fetch(`https://api.geocodify.com/v2/reverse?api_key=yuJYV8kdVQfxtwzr646iOUofhHqg0owi&lat=${latitude}&lng=${longitude}`)
-        const locationData = await geolocationData.json();
+        const clientLocationData = await geolocationData.json();
 
-        setClientLocation(locationData.response.features[0].properties);
+        setClientLocation(clientLocationData.response.features[0].properties);
       },
       error => console.error(`Error getting user location: `, error)
     )

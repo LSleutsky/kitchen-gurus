@@ -17,7 +17,7 @@ export function meta({}: Route.MetaArgs): MetaData | object {
     { name: `description`, content: `About Kitchen Gurus` },
     {
       name: `keywords`,
-      content: `kitchens, kitchen designs, kitchen design ideas, kitchen design inspirations, modern kitchen design, traditional kitchen design, small kitchen design, small kitchen remodeling, small kitchen renovations, large kitchen design, large kitchen remodeling, large kitchen renovations, open kitchen design, closed kitchen design, modern kitchen, kitchen designer, kitchen remodeling, kitchen renovation`
+      content: `kitchens, kitchen designs, kitchen design ideas, kitchen design inspirations, modern kitchen design, traditional kitchen design, small kitchen design, small kitchen remodeling, small kitchen renovations, large kitchen design, large kitchen remodeling, large kitchen renovations, open kitchen design, closed kitchen design, modern kitchen, kitchen designer Philadelphia, kitchen remodeling Wilmington, kitchen renovation Evesham, kitchen remodeling Red Lion, kitchen upgrades Mechanicsburg, kitchen renovations Carlisle`
     },
     { name: `og:title`, content: `About Us | Kitchen Gurus` },
     { name: `og:description`, content: `Kitchen Gurus are experts in precise kitchen remodeling and renovations` },

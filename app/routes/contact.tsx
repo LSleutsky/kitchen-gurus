@@ -25,7 +25,7 @@ export function meta({}: Route.MetaArgs): MetaData | object {
     { name: `description`, content: `Contact Kitchen Gurus` },
     {
       name: `keywords`,
-      content: `kitchen makeovers, contemporary kitchen, kitchen floor plan, cost to redo kitchen, renovate kitchen, remodeling contractor, average cost to renovate kitchen, kitchen makeover, kitchen redesign, kitchen cabinets, kitchen remodel, kitchen remodeling`
+      content: `kitchen makeovers, contemporary kitchen, kitchen floor plan, cost to redo kitchen, renovate kitchen, remodeling contractor, average cost to renovate kitchen, kitchen makeover, kitchen redesign, kitchen cabinets, kitchen cabinets Evesham, Elkton kitchen remodel, New Castle kitchen remodeling, Millersburg kitchen cabinets, Duncannon kitchen remodeling, Marysville kitchen renovation`
     },
     { name: `og:title`, content: `Contact Us | Kitchen Gurus` },
     { name: `og:description`, content: `Kitchen Gurus is your trusted kitchen renovation partner! Trust us to meet your every remodeling need` },

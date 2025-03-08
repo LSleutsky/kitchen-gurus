@@ -15,7 +15,7 @@ export function meta({}: Route.MetaArgs): MetaData | object {
     { name: `description`, content: `Additional Gurus Services` },
     {
       name: `keywords`,
-      content: `home services, essential home services, healthy home, keeping home healthy, modern updated home, home improvement, air quality, mold control, exterior repairs, landscaping, fencing`
+      content: `home services, essential home services, healthy home, keeping home healthy, modern updated home, home improvement, air quality, mold control, exterior repairs, landscaping, fencing, home services in York Haven, essential home services in Harrisburg, home improvement home services in Lebanon`
     },
     { name: `og:title`, content: `Other Services | Kitchen Gurus` },
     { name: `og:description`, content: `Essential Home Services provided by the Gurus family of contractors` },
