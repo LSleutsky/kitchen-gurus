@@ -24,6 +24,7 @@ export default function MainLayout() {
 
   const location = useLocation();
   const isHomePath = location.pathname === `/`;
+  const geocodifyApiKey = import.meta.env.VITE_GEOCODIFY_API_KEY;
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -33,7 +34,7 @@ export default function MainLayout() {
     navigator.geolocation.getCurrentPosition(
       async position => {
         const { latitude, longitude } = position.coords;
-        const geolocationData = await fetch(`https://api.geocodify.com/v2/reverse?api_key=yuJYV8kdVQfxtwzr646iOUofhHqg0owi&lat=${latitude}&lng=${longitude}`)
+        const geolocationData = await fetch(`https://api.geocodify.com/v2/reverse?api_key=${geocodifyApiKey}&lat=${latitude}&lng=${longitude}`)
         const clientLocationData = await geolocationData.json();
 
         setClientLocation(clientLocationData.response.features[0].properties);
