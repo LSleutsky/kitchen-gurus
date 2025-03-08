@@ -32,16 +32,21 @@ export default function MainLayout() {
     }
 
     navigator.geolocation.getCurrentPosition(
-      async position => {
+      position => {
         const { latitude, longitude } = position.coords;
-        const geolocationData = await fetch(`https://api.geocodify.com/v2/reverse?api_key=${geocodifyApiKey}&lat=${latitude}&lng=${longitude}`)
-        const clientLocationData = await geolocationData.json();
 
-        setClientLocation(clientLocationData.response.features[0].properties);
+        fetch(`https://api.geocodify.com/v2/reverse?api_key=${geocodifyApiKey}&lat=${latitude}&lng=${longitude}`)
+          .then(response => response.json())
+          .then(clientLocationData => setClientLocation(clientLocationData.response.features[0].properties))
       },
-      error => console.error(`Error getting user location: `, error)
+      error => console.error(`Error getting user location: `, error),
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      }
     )
-  }, []);
+  }, [geocodifyApiKey]);
 
   return (
     <div className="flex h-full min-h-full flex-col">
