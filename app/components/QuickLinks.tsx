@@ -18,7 +18,7 @@ export default function QuickLinks({ header, footer, image, reasons }: Props) {
           <img alt="" className="h-full w-full" src={getImageParameters(image)} />
         </figure>
         <section className=" flex w-full md:w-1/2">
-          <article className="flex flex-col justify-center text-xl text-white text-center bg-[#51A655] p-6 leading-10 md:text-left">
+          <article className="flex flex-col justify-center text-xl text-white text-left bg-[#51A655] p-6 leading-10">
           <p>{header}</p>
             <ul className="my-14 ml-5.5 list-disc">
               {reasons.map((reason: QuickLinksData, index: number) => (
